@@ -288,14 +288,12 @@ public class UserCenterActivity extends Activity {
 
     }
 
-
-//    List<XunheRecord> mXunhelists;
     List<RspCruiseBean.ResponseDataBean.VarListBean> mXunhelists;
     List<RspComplaintBean.ResponseDataBean.VarListBean> mReportLists;
     String startDate = "2017-08-01";
     String endDate = "2018-09-10";
-    int curXunHePage = 0;
-    int curReportPage = 0;
+    int curXunHePage = 1;
+    int curReportPage = 1;
     String userId;
 
     private void initData(){
@@ -319,7 +317,7 @@ public class UserCenterActivity extends Activity {
 //        String userId ="8490f2aa96dd4f72929a97e64031e53e";
 
         doGetCruise(userId,startDate,endDate, curXunHePage +"");
-        doGetComplaints(userId,"","","0","10");
+        doGetComplaints(userId,"","",curReportPage+"","10");
 
     }
 
@@ -366,13 +364,7 @@ public class UserCenterActivity extends Activity {
 
     @OnClick(R.id.main_personcenter)
     public void doUser(View v){
-//        if(AccoutLogic.getInstance().isLogin()){
-//            Intent intent =new Intent(TousuDealActivity.this,UserCenterActivity.class);
-//            startActivity(intent);
-//        } else {
-//            Intent intent =new Intent(TousuDealActivity.this,LoginActivity.class);
-//            startActivity(intent);
-//        }
+
     }
 
     private void goToTousuActivity(){
@@ -384,7 +376,9 @@ public class UserCenterActivity extends Activity {
     @OnClick(R.id.bank_content_do_req)
     public void doReqRecord(){
 
-        doGetCruiseDefault(userId);
+//        doGetCruiseDefault(userId);
+
+        doGetCruise(userId,startDate,endDate,curXunHePage+"");
     }
 
     @OnClick({R.id.title_btn_left})
@@ -404,17 +398,17 @@ public class UserCenterActivity extends Activity {
         String userId ="8490f2aa96dd4f72929a97e64031e53e";
         String startDate = "2017-08-01";
         String endDate = "2017-09-10";
-        doGetCruise(userId,startDate,endDate,"0");
+        doGetCruise(userId,startDate,endDate,curXunHePage+"");
     }
 
 
-    /**
-     * 默认首次下载
-     * @param userId
-     */
-    private void doGetCruiseDefault(String userId){
-        doGetCruise(userId,startDate,endDate,"0");
-    }
+//    /**
+//     * 默认首次下载
+//     * @param userId
+//     */
+//    private void doGetCruiseDefault(String userId){
+//        doGetCruise(userId,startDate,endDate,"0");
+//    }
 
     private void doGetComplaints(String userId,String status,String isAppraise,String pageIndex,String pageCount){
 

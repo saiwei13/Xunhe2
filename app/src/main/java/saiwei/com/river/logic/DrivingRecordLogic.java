@@ -139,8 +139,6 @@ public class DrivingRecordLogic {
 
     public long curFileName;
 
-
-
     public void writeYuanshiGpsLog(String str){
         String filename = curFileName+"_yuanshi";
 
@@ -202,13 +200,6 @@ public class DrivingRecordLogic {
     public ArrayList<LatLng>  readFromFile(String filename){
 
         Log.d(TAG,"readFromFile()  filename="+filename);
-//        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-//            String foldername = Environment.getExternalStorageDirectory().getPath()+ "/";
-//            File folder = new File(foldername);
-//            if (folder == null || !folder.exists()) {
-//                folder.mkdir();
-//            }
-//            File targetFile=new File("/sdcard/hechang/trace/1505970004248");
         File targetFile=new File("/sdcard/hechang/trace/"+filename);
             String readedStr="";
             try{
@@ -244,10 +235,6 @@ public class DrivingRecordLogic {
 //                return e.toString();
                 return null;
             }
-//        }else{
-//            Toast.makeText(context,"未发现SD卡！",Toast.LENGTH_LONG).show();
-//            return "SD Card error";
-//        }
     }
 
     ArrayList<ReqFeedbackBean> feedbackBeens = new ArrayList<>();
@@ -265,13 +252,6 @@ public class DrivingRecordLogic {
     public ArrayList<GpsInfo>  readFromFileGpsInfos(String filename){
 
         Log.d(TAG,"readFromFile()  filename="+filename);
-//        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-//            String foldername = Environment.getExternalStorageDirectory().getPath()+ "/";
-//            File folder = new File(foldername);
-//            if (folder == null || !folder.exists()) {
-//                folder.mkdir();
-//            }
-//            File targetFile=new File("/sdcard/hechang/trace/1505970004248");
         File targetFile=new File("/sdcard/hechang/trace/"+filename);
         String readedStr="";
         try{
@@ -307,16 +287,9 @@ public class DrivingRecordLogic {
             br.close();
             in.close();
             return list;
-//                     return tmp;
         } catch (Exception e) {
-//                Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
-//                return e.toString();
             return null;
         }
-//        }else{
-//            Toast.makeText(context,"未发现SD卡！",Toast.LENGTH_LONG).show();
-//            return "SD Card error";
-//        }
     }
 
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">河长检测</string>
+    <string name="app_name">河长制</string>
 
     <!-- 登录,注销界面 -->
     <string name="gdaccount_login">登录</string>

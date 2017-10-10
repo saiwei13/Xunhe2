@@ -88,7 +88,7 @@ public class TousuRepeatActivity extends Activity {
 
     private String taskId,publicReportId;
 
-    int curXunHePage = 0;
+    int curXunHePage = 1;
     String userId;
     private String mKeyword="";
     private int total ;
@@ -224,7 +224,7 @@ public class TousuRepeatActivity extends Activity {
 
         } else {
             mKeyword = str;
-            curXunHePage = 0;
+            curXunHePage = 1;
             mDataList.clear();
             mXunheRefreshView.setLoadComplete(false);
             doGetSimilarComplaintList(userId,mKeyword,curXunHePage+"","10");

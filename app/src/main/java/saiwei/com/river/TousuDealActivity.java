@@ -265,8 +265,8 @@ public class TousuDealActivity extends Activity {
 
     List<RspTousuBean.ResponseDataBean.DataListBean> mXunhelists;
     List<RspTousuBean.ResponseDataBean.DataListBean> mReportLists;
-    int curXunHePage = 0;
-    int curReportPage = 0;
+    int curXunHePage = 1;
+    int curReportPage = 1;
     String userId;
 
     private void initData(){
@@ -278,9 +278,9 @@ public class TousuDealActivity extends Activity {
 //        String userId ="8490f2aa96dd4f72929a97e64031e53e";
 
 //        doGetCruise(userId,startDate,endDate, curXunHePage +"");
-        doGetComplaints(userId,"","uncompleted","0","10");
+        doGetComplaints(userId,"","uncompleted",curXunHePage+"","10");
 
-        doGetComplaints(userId,"","completed","0","10");
+        doGetComplaints(userId,"","completed",curReportPage+"","10");
 
     }
 
@@ -332,7 +332,7 @@ public class TousuDealActivity extends Activity {
 
     @OnClick(R.id.main_complain)
     public void doTousuBottom(View v){
-//        goToTousuActivity();
+
     }
 
     @OnClick(R.id.main_personcenter)
@@ -344,11 +344,6 @@ public class TousuDealActivity extends Activity {
             Intent intent =new Intent(TousuDealActivity.this,LoginActivity.class);
             startActivity(intent);
         }
-    }
-
-    private void goToTousuActivity(){
-        Intent intent =new Intent(TousuDealActivity.this,TousuDealActivity.class);
-        startActivity(intent);
     }
 
 
@@ -373,8 +368,6 @@ public class TousuDealActivity extends Activity {
 
 
                     AccoutLogic.getInstance().setRspTousuDetailBeanCache(bean);
-//                    AccoutLogic.getInstance().setPublicReportBeanCache(publicReportBean);
-//                    AccoutLogic.getInstance().setFinishProcessListCache(bean.getResponseData().getFinishProcess());
 
                     if(queryType.equals("uncompleted")){
                         intent.putExtra(Constant.query_type,Constant.QUERY_TYPE_UNCOMPLETED);

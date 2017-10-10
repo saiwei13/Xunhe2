@@ -33,6 +33,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import saiwei.com.river.entity.ReqFeedbackBean;
 import saiwei.com.river.entity.ResponseBean;
+import saiwei.com.river.entity.RspTousuDetailBean;
 import saiwei.com.river.logic.AccoutLogic;
 import saiwei.com.river.logic.DrivingRecordLogic;
 import saiwei.com.river.logic.RetrofitLogic;
@@ -396,9 +397,17 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
             public void onResponse(Call<ResponseBean> call, Response<ResponseBean> response) {
                 Log.d(TAG,"onResponse()  "+response.body());
 //                XunheRecordBean bean = response.body();
-                Toast.makeText(CompleteXunheActivity.this,"提交成功",Toast.LENGTH_SHORT).show();
-                DrivingRecordLogic.getInstance().stopRecord(xunheRecord);
-                startActivity(new Intent(CompleteXunheActivity.this,CommitSuccessActivity.class));
+
+                ResponseBean bean = response.body();
+
+                if(bean.getRtnCode().equals("000000")){
+                    Toast.makeText(CompleteXunheActivity.this,"提交成功",Toast.LENGTH_SHORT).show();
+                    DrivingRecordLogic.getInstance().stopRecord(xunheRecord);
+                    startActivity(new Intent(CompleteXunheActivity.this,CommitSuccessActivity.class));
+
+                } else {
+                    Toast.makeText(CompleteXunheActivity.this,"获取失败 "+bean.getRtnMsg(),Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

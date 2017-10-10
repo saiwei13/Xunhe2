@@ -115,11 +115,7 @@ public class MyApp extends Application {
                 .imageDecoder(new BaseImageDecoder(true)) // default
                 .defaultDisplayImageOptions(DisplayImageOptions.createSimple()) // default
                 .writeDebugLogs().build();
-
-
         ImageLoader.getInstance().init(config);
     }
-
-
 
 }

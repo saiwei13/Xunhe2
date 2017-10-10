@@ -41,6 +41,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import saiwei.com.river.logic.AccoutLogic;
 import saiwei.com.river.logic.DrivingRecordLogic;
+import saiwei.com.river.logic.LocationLogic;
 import saiwei.com.river.model.River;
 import saiwei.com.river.model.XunheRecord;
 import saiwei.com.river.util.DrivingRecordTool;
@@ -49,7 +50,7 @@ import saiwei.com.river.util.DrivingRecordTool;
  * Created by saiwei on 9/21/17.
  */
 
-public class MapActivity extends Activity implements AMap.OnMyLocationChangeListener ,GpsStatus.Listener{
+public class MapActivity extends Activity implements AMap.OnMyLocationChangeListener{
 
     private static final String TAG = "chenwei.MapActivity";
 
@@ -122,6 +123,8 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
         mapView.onCreate(savedInstanceState);// 此方法必须重写
 
         init();
+
+        LocationLogic.getInstance().startLocation();
     }
 
     List<River> mRivers;
@@ -248,7 +251,6 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
 
         findViewById(R.id.title_btn_right).setVisibility(View.GONE);
 
-
         if (aMap == null) {
             aMap = mapView.getMap();
             mUiSettings = aMap.getUiSettings();
@@ -321,9 +323,7 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
      * 根据动画按钮状态，调用函数animateCamera或moveCamera来改变可视区域
      */
     private void changeCamera(CameraUpdate update, AMap.CancelableCallback callback) {
-
         aMap.moveCamera(update);
-
     }
 
     /**
@@ -354,7 +354,6 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
 
         // 定位回调监听
         if(location != null) {
-
 //            Log.e("amap", "onMyLocationChange 定位成功， lat: " + location.getLatitude() + " lon: " + location.getLongitude());
             Bundle bundle = location.getExtras();
             if(bundle != null) {
@@ -434,14 +433,10 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
                     }
                 }
             } else {
-
                 updateGspStatusView(false);
-
                 Log.e("amap", "定位信息， bundle is null ");
             }
-
         } else {
-
             updateGspStatusView(false);
             Log.e("amap", "定位失败");
         }
@@ -459,13 +454,10 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
     private void drawLine(LatLng latLng){
 
         if(linepoints!=null && latLng!=null){
-
             linepoints.add(latLng);
-
             if(linepoints.size()>1){
                 LatLng[] array =new LatLng[linepoints.size()];
                 linepoints.toArray(array);
-
                 aMap.addPolyline((new PolylineOptions()).add(array).color(
                         Color.RED));
             }
@@ -578,7 +570,6 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
         doBack(null);
     }
 
-
     public  boolean isOPen() {
         LocationManager locationManager
                 = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -592,37 +583,7 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
 
         return false;
     }
-
-
     private void updateTimerView(String str){
         mTimer.setText(str);
-    }
-
-    @Override
-    public void onGpsStatusChanged(int event) {
-//        mStatus = mService.getGpsStatus(mStatus);
-        switch (event) {
-            case GpsStatus.GPS_EVENT_STARTED:
-                // Do Something with mStatus info
-
-                Log.d(TAG,"onGpsStatusChanged() GPS_EVENT_STARTED()");
-
-                break;
-
-            case GpsStatus.GPS_EVENT_STOPPED:
-                // Do Something with mStatus info
-                Log.d(TAG,"onGpsStatusChanged() GPS_EVENT_STOPPED()");
-                break;
-
-            case GpsStatus.GPS_EVENT_FIRST_FIX:
-                // Do Something with mStatus info
-                Log.d(TAG,"onGpsStatusChanged() GPS_EVENT_FIRST_FIX()");
-                break;
-
-            case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
-                // Do Something with mStatus info
-                Log.d(TAG,"onGpsStatusChanged() GPS_EVENT_SATELLITE_STATUS()");
-                break;
-        }
     }
 }
