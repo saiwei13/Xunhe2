@@ -1,0 +1,102 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "25.0.3"
+
+//    buildToolsVersion "23.0.1"
+    defaultConfig {
+//        applicationId "river.saiwei.com.myapplication"
+
+        applicationId "saiwei.com.river"
+        minSdkVersion 11
+        targetSdkVersion 23
+        versionCode 2
+        versionName "1.0.2"
+//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+//设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm
+        }
+    }
+
+
+    //签名
+    signingConfigs {
+//        debug {
+//            storeFile file("/home/lippi/.android/debug.keystore")
+//        }
+        relealse {
+
+            print "chenwei  relealse  sssss "
+
+            //这样写就得把demo.jk文件放在项目目录
+            storeFile file("/Users/saiwei/program/saiwei_svn_mac/release_zk.jks")
+            storePassword "zk123456)"
+            keyAlias "zk"
+            keyPassword "zk123456)"
+
+            //4760828d9b397cdbaa7c029f6938aa49
+            //正式签名
+//            MD5:  47:60:82:8D:9B:39:7C:DB:AA:7C:02:9F:69:38:AA:49
+//            SHA1: 15:D0:B5:20:92:89:9C:D2:C1:F8:F4:94:15:AC:F3:4A:A1:0E:74:BD
+        }
+    }
+
+    buildTypes {
+
+        release {
+
+//            manifestPlaceholders.put("com.amap.api.v2.apikey",'1bbb1c2850b66a91689db70b9b47d88a')
+
+
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.relealse
+        }
+    }
+
+    greendao {
+        schemaVersion 3 //数据库版本号
+        daoPackage 'saiwei.com.river.db'// 设置DaoMaster、DaoSession、Dao 包名
+        targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    //        exclude group: 'com.android.support', module: 'support-annotations'
+    //    })
+    //    compile 'com.android.support:appcompat-v7:26.+'
+    //    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
+    testCompile 'junit:junit:4.12'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.google.code.gson:gson:2.3'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'org.greenrobot:greendao:3.2.2'
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+//    compile 'com.tencent.bugly:crashreport:latest.release'
+    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    compile 'com.tencent.bugly:nativecrashreport:latest.release' //
+
+    compile project(':library')
+
+//    compile 'com.android.support:recyclerview-v7:23.0.1'
+//    compile 'com.android.support:support-v4:23.0.1'
+//    compile 'com.android.support:cardview-v7:23.1.1'
+
+    configurations { all*.exclude group: 'com.android.support', module: 'support-compat' }
+}

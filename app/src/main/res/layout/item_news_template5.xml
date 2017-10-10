@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginLeft="@dimen/four"
+    android:layout_marginRight="@dimen/four"
+    android:orientation="vertical">
+
+    <View style="@style/line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/eight"
+        android:paddingRight="@dimen/eight"
+        android:paddingTop="@dimen/four">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="投诉编号："/>
+
+        <TextView
+            android:id="@+id/tousu_item_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LY2017092800314"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/tousu_item_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="待认领"/>
+
+    </LinearLayout>
+
+    <View style="@style/line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/four"
+        android:paddingLeft="@dimen/eight"
+        android:paddingRight="@dimen/eight"
+        android:paddingTop="@dimen/four">
+
+        <ImageView
+            android:id="@+id/iv_thumb"
+            android:layout_width="@dimen/auto_dimen2_160"
+            android:layout_height="@dimen/auto_dimen2_130"
+            android:layout_marginRight="16dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/zanwu_img"
+            />
+
+        <!--android:layout_width="100dp"
+            android:layout_height="80dp"-->
+
+        <!--android:src="@drawable/shape_placeholder"-->
+
+
+        <TextView
+            android:id="@+id/tousu_item_content"
+            style="@style/TextViewDarkWrapContent_16"
+            android:layout_marginBottom="8dp"
+            android:layout_toRightOf="@id/iv_thumb"
+            android:ellipsize="end"
+            android:maxLines="2"
+            tools:text="文章的标题文章的标题文章的标题文章的标题文章的标题"/>
+
+        <TextView
+            android:id="@+id/tousu_item_time"
+            style="@style/TextViewDarkWrapContent_13"
+            android:layout_alignBottom="@id/iv_thumb"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="@dimen/auto_dimen_5"
+            android:layout_toRightOf="@id/iv_thumb"
+            tools:text="2017-9-28 22:49:49"/>
+
+        <!--android:layout_toLeftOf="@id/tv_sourceName"-->
+
+        <TextView
+            android:id="@+id/tousu_item_river"
+            style="@style/TextViewDarkWrapContent_13"
+            android:layout_alignBottom="@id/iv_thumb"
+            android:layout_marginBottom="@dimen/auto_dimen_5"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/tousu_item_time"
+            android:singleLine="true"
+            tools:text="来源：游戏头条ddddddd"/>
+
+    </RelativeLayout>
+
+    <View style="@style/line" />
+
+
+</LinearLayout>

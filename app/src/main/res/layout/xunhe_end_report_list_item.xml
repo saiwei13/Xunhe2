@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/auto_dimen_5"
+        android:text="报"
+        android:textColor="@color/red"/>
+
+    <TextView
+        android:id="@+id/xunhe_end_report_item_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/auto_dimen_5"
+        android:text="巡河内容"
+        android:paddingLeft="13dp"
+        android:textColor="#333333"
+        android:textSize="15dp"
+        android:singleLine="true"
+        />
+
+</LinearLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/deal_item_people"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/auto_dimen2_20"
+        android:layout_marginTop="@dimen/auto_dimen2_5"
+        android:layout_marginBottom="@dimen/auto_dimen2_5"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_666666"
+        android:text="处理人: "
+        android:textSize="@dimen/auto_font_size_24" />
+
+    <TextView
+        android:id="@+id/deal_item_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/auto_dimen2_20"
+        android:layout_marginTop="@dimen/auto_dimen2_5"
+        android:layout_marginBottom="@dimen/auto_dimen2_5"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_666666"
+        android:text="处理时间: "
+        android:textSize="@dimen/auto_font_size_24" />
+
+    <TextView
+        android:id="@+id/deal_item_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/auto_dimen2_20"
+        android:layout_marginTop="@dimen/auto_dimen2_5"
+        android:layout_marginBottom="@dimen/auto_dimen2_5"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_666666"
+        android:text="处理内容: "
+        android:textSize="@dimen/auto_font_size_24" />
+
+</LinearLayout>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/auto_dimen2_180"
+    android:id="@+id/save_list_item_container"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:id="@+id/search_list_item_right"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/auto_dimen2_4"
+        android:layout_marginRight="10dp"
+        >
+        <ImageView
+            android:id="@+id/search_list_item_look"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow"
+            />
+
+    </LinearLayout>
+
+    <!--android:background="@drawable/title_btn_right"-->
+
+    <!-- 左边部分，包含poi名和地址 -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/search_list_item_right"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:id="@+id/search_list_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:paddingLeft="13dp"
+            android:textColor="#333333"
+            android:text="ssss"
+            android:textSize="@dimen/auto_font_size_26" />
+
+        <TextView
+            android:id="@+id/search_list_item_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="right"
+            android:layout_weight="1"
+            android:paddingLeft="13dp"
+            android:text="ssss"
+            android:textColor="#999999"
+            android:textSize="@dimen/auto_font_size_24" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

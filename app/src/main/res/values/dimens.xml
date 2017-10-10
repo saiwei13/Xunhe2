@@ -1,0 +1,383 @@
+<resources>
+
+    <!-- 框体距离左右边界 -->
+    <dimen name="input_updown">10dp</dimen>
+    <!-- 框体距离上下边界 -->
+    <dimen name="input_font_updown">11dp</dimen>
+
+    <dimen name="input_left">10dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="navdrawer_width">240dp</dimen>
+
+    <dimen name="title_bar_height">50dp</dimen>
+    <!-- Jolene UI -->
+    <dimen name="font_40">20dp</dimen>
+    <!-- 天气大字 导航上方街道文字 -->
+    <dimen name="font_38">19dp</dimen>
+    <!-- 整页titlebar 文字  导航下方文字 -->
+    <dimen name="font_34">17dp</dimen>
+    <!-- btn文字 单行大字 路线标题大字 左抽屉开关文字 -->
+    <dimen name="font_30">15dp</dimen>
+    <!-- 两行列表大字 搜索和输入框文字 筛选btn类文字 -->
+    <dimen name="font_32">14dp</dimen>
+    <dimen name="font_28">14dp</dimen>
+
+    <dimen name="fast_launch_icon_dimen">48dp</dimen>
+
+    <!-- 弹出窗的标题 -->
+    <dimen name="font_26">13dp</dimen>
+    <!-- 两行列表小字 常配合30_34号一起出现 路线小字 天气小字 左抽屉通知文字 导航上方小文字 -->
+    <dimen name="font_20">10dp</dimen>
+    <!-- 右抽屉文字 -->
+    <dimen name="font_18">9dp</dimen>
+    <dimen name="tip_view_pager_margin">3dp</dimen>
+
+    <dimen name="auto_poi_foot_tip_height">67dip</dimen>
+    <dimen name="auto_poi_foot_tip_width">467dip</dimen>
+    <dimen name="auto_poi_foot_tip_margin">7dip</dimen>
+    <dimen name="auto_poi_foot_tip_btn_width">67dip</dimen>
+    <dimen name="auto_result_list_item_height">67dip</dimen>
+    <dimen name="auto_result_list_margin">20dip</dimen>
+
+    <dimen name="search_default_text_size">20dp</dimen>
+    <dimen name="search_default_second_text_size">14dp</dimen>
+    <dimen name="search_default_title_height">52dip</dimen>
+    <dimen name="search_default_title_btn_width">67dip</dimen>
+
+
+    <!-- 用户注册界面第一二三四个界面中“验证手机”字体大小 -->
+    <dimen name="gdaccount_register_head_textsize">18sp</dimen>
+    <!-- 用户注册界面第一个界面中，“请阅读并勾选服务条款和协议”字体大小 -->
+    <dimen name="user_register_1_service_terms_textsize">15sp</dimen>
+    <!-- 用户注册第二个界面中“手机号：xxxx”字体大小 -->
+    <dimen name="user_register_2_phone_number_textsize">18sp</dimen>
+    <!-- 用户注册界面第三个界面，设置密码编辑框字体大小 -->
+    <dimen name="gdaccount_input_password_tip_tv_textsize">15sp</dimen>
+    <!-- 用户注册第四个界面，“注册成功”字体大小 -->
+    <dimen name="gdaccount_register_success_tv_textsize">30sp</dimen>
+
+    <!-- 找回密码 界面界面二界面三，“手机号：xxxxx”字体大小 -->
+    <dimen name="gdaccount_textview_textsize">15sp</dimen>
+    <!-- 找回密码 界面界面三，“显示密码”字体大小 -->
+    <dimen name="gdaccount_show_password_tv_textsize">15sp</dimen>
+    <!-- 找回密码 界面界面四“重置密码成功”字体大小 -->
+    <dimen name="gdaccount_reset_password_success_textview_textsize">30sp</dimen>
+
+    <!-- PullRefresh -->
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
+    <dimen name="search_dialog_hot_words">14dp</dimen>
+
+    <dimen name="toast_horizontal_padding">21dp</dimen>
+    <dimen name="toast_vertical_padding">14dp</dimen>
+    <dimen name="toast_max_width">232dp</dimen>
+    <dimen name="toast_line_space">4dp</dimen>
+
+
+    <dimen name="left">12dp</dimen>
+    <dimen name="top">12dp</dimen>
+    <dimen name="right">12dp</dimen>
+    <dimen name="bottom">12dp</dimen>
+    <dimen name="phone_edit_width">44dp</dimen>
+    <dimen name="edit_height">44dp</dimen>
+    <dimen name="authcode_top">20dp</dimen>
+    <dimen name="button_top">20dp</dimen>
+
+    <dimen name="font_98">49sp</dimen>
+    <dimen name="font_62">31sp</dimen>
+    <!-- 帐号系统 -->
+
+    <dimen name="line_devide">0.5dp</dimen>
+
+
+    <!-- 输入框文字 -->
+    <dimen name="vertical_divider_margin_top">4dp</dimen>
+    <dimen name="vertical_divider_margin_bottom">4dp</dimen>
+    <dimen name="check_treaty_margin_top">25dp</dimen>
+    <dimen name="btn_get_authcode_width">120dp</dimen>
+    <dimen name="person_info_divide_left">8dp</dimen>
+
+
+    <dimen name="progressdialog_height">72dp</dimen>
+    <dimen name="progressdialog_vertical_margin">22dp</dimen>
+
+    <dimen name="timepicker_selected_text_size">18dp</dimen>
+    <dimen name="timepicker_selected_size">44dp</dimen>
+    <dimen name="timepicker_item_text_size">16dp</dimen>
+    <dimen name="timepicker_title_text_size">14dp</dimen>
+    <dimen name="timepicker_title_height">46dp</dimen>
+    <dimen name="timepicker_item_margin">5dp</dimen>
+
+    <dimen name="auto_dlg_searching_textsize">20sp</dimen>
+    <dimen name="auto_dlg_searching_additional_textsize">16sp</dimen>
+
+
+    <!-- 关于  相关-->
+    <dimen name="auto_about_padding_bottom">20dp</dimen>
+    <dimen name="auto_about_padding_top">20dp</dimen>
+    <dimen name="auto_about_checkupdate_text_size">17dp</dimen>
+    <dimen name="auto_about_10dp">10dp</dimen>
+    <dimen name="auto_about_12dp">12dp</dimen>
+    <dimen name="auto_about_15dp">15dp</dimen>
+    <dimen name="auto_about_16dp">16dp</dimen>
+    <dimen name="auto_about_20dp">20dp</dimen>
+    <dimen name="auto_about_50dp">50dp</dimen>
+
+
+
+
+        <!-- ****************************** 通用资源*********************************** -->
+        <dimen name="textSizeSmall">14sp</dimen>
+        <dimen name="textSizeMedium">16sp</dimen>
+        <dimen name="textSizeLarge">17sp</dimen>
+        <!-- 通用编辑框字体大小 -->
+        <dimen name="edittext_text_size">15sp</dimen>
+        <!-- 通用按钮字体大小 -->
+        <dimen name="button_text_size">15sp</dimen>
+        <!-- "收藏夹"“历史目的地”“我添加的摄像头”“我的轨迹”界面下方提示的字体大小 -->
+        <dimen name="bottom_tip_textSize">14sp</dimen>
+        <!-- 通用扩展列表poi名称字体大小 -->
+        <dimen name="groupitem_poiinfo_name_textsize">20sp</dimen>
+        <!-- 通用扩展列表区域名称字体大小（距离字体大小） -->
+        <dimen name="groupitem_poiinfo_extra_textsize">16sp</dimen>
+        <!-- 通用TAB列表项名称字体大小（如“导航”界面中“设置目的地”“规划路线”字体大小） -->
+        <dimen name="viewpager_textsize">15sp</dimen>
+        <!-- 通用TAB列表项名称高度大小（如“导航”界面中“设置目的地”“规划路线”高度大小） -->
+        <dimen name="viewpager_height">40dip</dimen>
+        <!-- 通用清空历史记录字体颜色，如“导航”界面“清空历史目的地”字体大小 -->
+        <dimen name="listview_footer_textview_textsize">18sp</dimen>
+        <!-- 通用搜索无结果时文本字体大小 -->
+        <dimen name="search_result_nodata_textsize">14sp</dimen>
+        <!-- *************************"附近"界面(AroundSearch)************************ -->
+        <!-- “附近”界面   在....附近搜索   高亮显示字体大小 使用textSizeLarge -->
+        <!-- “附近”界面   在....附近搜索   非高亮显示字体大小 textSizeLarge -->
+        <!-- “附近”界面   周边类别字体大小 textSizeMedium -->
+        <!-- "附近"界面编辑框字体大小edittext_text_size -->
+        <!-- ************************"城市选择"界面(CitySelect)*********************** -->
+        <!-- "选择城市"界面编辑框字体大小edittext_text_size -->
+        <!-- "选择城市"界面列表字体大小textSizeLarge -->
+        <!-- ************************"数据反馈"界面(DataFeedback)*********************** -->
+        <!-- 数据反馈界面中，错误类型下拉菜单的标题的字体大小 -->
+        <dimen name="datafeedback_simple_spinner_title_textsize">14sp</dimen>
+        <!-- ************************"我添加的摄像头"界面(Dsp)*********************** -->
+        <!-- 我添加的摄像头界面中，“共有x个结果”的字体大小 -->
+        <dimen name="dsp_total_textview_textsize">14sp</dimen>
+        <!-- 我添加的摄像头界面中，“清空列表”的字体大小 -->
+        <dimen name="dsp_clearlist_textview_textsize">14sp</dimen>
+        <!-- ************************"收藏夹"界面(Favorite)*********************** -->
+        <!-- 收藏夹界面中，“共有x个结果”的字体大小 -->
+        <dimen name="favorite_total_textview_textsize">14sp</dimen>
+        <!-- 收藏夹界面中，“清空列表”的字体大小 -->
+        <dimen name="favorite_clearlist_textview_textsize">14sp</dimen>
+        <!-- 收藏夹界面中，“我的家”“我的公司”的字体大小 -->
+        <dimen name="favorite_myhome_mycompany_textsize">20sp</dimen>
+        <!-- ************************"历史目的地"界面(History)*********************** -->
+        <!-- 历史目的地界面中，“共有x个结果”的字体大小 -->
+        <dimen name="history_total_textview_textsize">14sp</dimen>
+        <!-- 历史目的地界面中，“清空列表”的字体大小 -->
+        <dimen name="history_clearlist_textview_textsize">14sp</dimen>
+        <!-- ************************"历史规划路线"界面(History)*********************** -->
+        <!-- 历史规划路线界面中，“共有x个结果”的字体大小 -->
+        <dimen name="route_total_textview_textsize">14sp</dimen>
+        <!-- 历史规划路线界面中，“清空列表”的字体大小 -->
+        <dimen name="route_clearlist_textview_textsize">14sp</dimen>
+        <!-- ************************"我的"界面(MainMenu)*********************** -->
+        <!-- "我的"界面 “登录/注册”字体大小 -->
+        <dimen name="mainmenu_login_or_register_tv_textsize">20sp</dimen>
+        <!-- “我的”界面  “登录后可将个人数据云同步”字体大小 -->
+        <dimen name="mainmenu_data_cloud_tip_tv_textsize">15sp</dimen>
+        <!-- ************************"详情"界面(PoiDetail)*********************** -->
+        <!-- "详情"界面poi电话、区域。距离字体大小 -->
+        <!--
+              "设置为起点"“设置为终点”“设置为中途岛”“查看地图”“设为家”“设为公司"
+                   "添加至收藏夹”“添加摄像头”“在桌面添加导航快捷方式”“编辑”的字体大小
+
+
+        -->
+        <dimen name="poidetail_item_textsize">15sp</dimen>
+        <!-- "详情"界面poi名称字体颜色 -->
+        <dimen name="poidetail_title_textsize">20sp</dimen>
+        <!-- ************************新"导航"界面(NavigatorEx)*********************** -->
+        <!-- "导航"界面规划路线，起点、途经点、终点的字体大小 -->
+        <dimen name="navigatorex_routesset_name_textcolor">15sp</dimen>
+        <!-- "导航"界面规划路线，最近规划过的路线的列表项的字体大小 -->
+        <dimen name="routerecordadapter_name_textsize">17sp</dimen>
+        <!-- ************************************"搜索"界面(SearchActivity)******************************************** -->
+        <!-- “搜索”界面搜索历史记录列表项文本字体大小 -->
+        <dimen name="search_history_record_item_textsize">18sp</dimen>
+        <!-- *************************************"搜索结果"界面(SearchResult)****************************************** -->
+        <!-- “搜索结果列表”界面（SearchResultActivity）底部按钮“联网搜索更多结果”字体大小 -->
+        <dimen name="searchresult_btn_searchbynet_textsize">15sp</dimen>
+        <!-- “搜索结果列表”界面（SearchResultActivity）底部按钮“搜索全国更多结果”字体大小 -->
+        <dimen name="searchresult_btn_searchbylocal_textsize">15sp</dimen>
+        <!-- 当搜索无结果时，提示框“抱歉，在xxx未能找到与 xxx相关的搜索结果，您可以尝试在以下地区找找看”提示框列表项字体颜色值 -->
+        <dimen name="dialog_listview_item_text_size">15sp</dimen>
+        <!-- ********************************"数据存储路径"界面(SelectPathAvailable)************************************ -->
+        <!-- "数据存储路径"界面"取消"按钮字体大小 -->
+        <dimen name="sapath_btn_cancel_textsize">15sp</dimen>
+        <!-- "数据存储路径"界面"确定"按钮字体大小 -->
+        <dimen name="sapath_btn_ok_textsize">15sp</dimen>
+        <!-- "数据存储路径"界面顶部提示语“抱歉xxxx”字体大小 -->
+        <dimen name="sapath_top_tip_textsize">15sp</dimen>
+        <!-- "数据存储路径"界面 “内置存储卡”文本字体大小 -->
+        <dimen name="sapath_inner_text_name_textsize">18sp</dimen>
+        <!-- "数据存储路径"界面 “内置存储卡”文本下方“可用空间：xxG”字体大小 -->
+        <dimen name="sapath_inner_text_size_textsize">15sp</dimen>
+        <!-- "数据存储路径"界面 “外置存储卡”文本字体大小 -->
+        <dimen name="sapath_ext_text_name_textsize">18sp</dimen>
+        <!-- "数据存储路径"界面 “外置存储卡”文本下方“可用空间：xxG”字体大小 -->
+        <dimen name="sapath_ext_text_size_textsize">15sp</dimen>
+        <!-- "数据存储路径"界面 "如果您已通过其他方式将数据存储xx......"字体大小 -->
+        <dimen name="sapath_autosearch_tip_textsize">16sp</dimen>
+        <!-- "数据存储路径"界面 "自动搜索导航数据"字体大小 -->
+        <dimen name="sapath_autosearch_tv_textsize">18sp</dimen>
+        <!-- ************************"警告"界面(Warn)*********************** -->
+        <!-- "警告"界面"特别提示"字体大小 -->
+        <dimen name="warn_main_title_textsize">30sp</dimen>
+        <!-- "警告"界面1-4点内容字体大小 -->
+        <dimen name="warn_text_textsize">16sp</dimen>
+        <!-- "警告"界面"欢迎使用高德导航"字体大小 -->
+        <dimen name="warn_title_textsize">18sp</dimen>
+        <dimen name="warn_text_padding">8dip</dimen>
+        <!-- "警告"界面按钮字体大小 -->
+        <dimen name="warn_btn_textsize">15sp</dimen>
+        <dimen name="warn_bottom_btn_height">65dip</dimen>
+        <!-- ************************"找回密码"界面(ForgetPassword)*********************** -->
+
+        <!-- ************************"高德账号"界面(GDAccount)*********************** -->
+        <!-- 高德账号界面“忘记密码？”字体大小 -->
+        <dimen name="gdaccout_bt_forget_password_textsize">18sp</dimen>
+        <!-- 高德账号界面“Debug板背面”字体大小 -->
+        <dimen name="gdaccout_show_debug_textsize">15sp</dimen>
+        <!-- ************************"用户注册"界面(UserRegister)*********************** -->
+        <!-- 用户注册界面第一二三四个界面中“验证手机”字体大小 -->
+
+        <!-- ****************************"高德标题(GDTitle)********************************** -->
+        <!-- 高德标题文本高度 -->
+        <dimen name="gdtitle_height">48dip</dimen>
+        <!-- 高德标题文本上下左右填充距离 -->
+        <dimen name="gdtitle_padding">6dip</dimen>
+        <!-- 高德标题文本字体大小 -->
+        <dimen name="gdtitle_text_size">20sp</dimen>
+        <!-- ************************"服务详情"界面(CarOwnerDetail)*********************** -->
+        <!-- 服务详情界面字体大小 -->
+        <dimen name="caronwer_detail_textsize">17sp</dimen>
+        <!-- ************************"数据下载"界面(DataUpdate)*********************** -->
+        <!-- "正在下载"界面开始按钮字体大小 -->
+        <dimen name="dataupdate_datadowing_btn_start_textsize">15sp</dimen>
+        <!-- "已下载"界面“下载x个选项，约xMB”按钮字体大小 -->
+        <dimen name="dataupdate_datadowload_btn_sure_textsize">15sp</dimen>
+        <!-- "地图下载"界面“删除x个选项，约x MB”按钮字体大小 -->
+        <dimen name="dataupdate_datanodowload_btn_sure_textsize">15sp</dimen>
+        <!-- "地图下载"网络错误界面字体大小 -->
+        <dimen name="dataupdate_neterror_textsize">15sp</dimen>
+        <!-- "地图下载"网络错误界面字体大小 -->
+        <dimen name="dataupdate_neterror_errortext_textsize">14sp</dimen>
+        <!-- ***********************************************"个性主题推荐进入之后的下载界面(NaviSkin)****************************************************** -->
+        <!-- 个性主题推荐进入之后的下载界面 viewpager 第一个界面的文字颜色 -->
+        <dimen name="naviskindetail_detail_text_size">14sp</dimen>
+        <!-- 地图界面图层对话框2014.03.06 -->
+        <dimen name="maplayer_item_textsize">15sp</dimen>
+        <dimen name="maplayer_item_paddingLeft">10sp</dimen>
+        <dimen name="maplayer_item_paddingTop">8dip</dimen>
+        <dimen name="maplayer_item_paddingBottom">8dip</dimen>
+        <dimen name="maplayer_title_textsize">15sp</dimen>
+        <dimen name="maplayer_title_height">40dip</dimen>
+        <dimen name="maplayer_content_width">344dip</dimen>
+        <dimen name="maplayer_content_height">260dip</dimen>
+        <dimen name="maplayer_viewmode_margin">10dip</dimen>
+        <dimen name="maplayer_viewmode_textsize">15sp</dimen>
+        <dimen name="maplayer_gridview_margin">10dip</dimen>
+        <dimen name="maplayer_btn_textsize">15sp</dimen>
+        <dimen name="maplayer_btn_margin">10dip</dimen>
+        <dimen name="maplayer_btn_height">40dip</dimen>
+        <!-- 图层管理界面 -->
+        <dimen name="maplayer_manage_item_right_marginRight">10dip</dimen>
+        <dimen name="maplayer_manage_item_text_margin">10dip</dimen>
+        <!-- 地图tip的文本大小 -->
+        <dimen name="mapview_tip_full_textsize">15sp</dimen>
+        <!-- 地图tip的padding -->
+        <dimen name="mapview_tip_full_paddingLeft">10dip</dimen>
+        <dimen name="mapview_tip_full_paddingTop">10dip</dimen>
+        <dimen name="mapview_tip_full_paddingRight">5dip</dimen>
+        <dimen name="mapview_tip_full_paddingBottom">27dip</dimen>
+        <!-- 里程相关 -->
+        <dimen name="mileage_ranking_no_textsize">15sp</dimen>
+        <dimen name="mileage_ranking_text_textsize">15sp</dimen>
+        <dimen name="mileage_title_textsize">15sp</dimen>
+        <dimen name="mileage_textsize">24sp</dimen>
+        <dimen name="mileage_button_margin">6dip</dimen>
+        <dimen name="mileage_button_textsize">15sp</dimen>
+        <dimen name="mileage_rank_textsize">24sp</dimen>
+        <dimen name="mileage_area_textsize">15sp</dimen>
+        <!-- 闪屏 -->
+        <dimen name="logo_mask_width">183dip</dimen>
+        <dimen name="logo_mask_height">129dip</dimen>
+        <dimen name="logo_background_height">108dip</dimen>
+        <dimen name="logo_anav_marginbottom">51dip</dimen>
+        <dimen name="logo_mask_text_size">10dip</dimen>
+        <!-- 车主服务 -->
+        <dimen name="carowner_percent_textsize">11sp</dimen>
+        <dimen name="carowner_warn_textsize">12sp</dimen>
+        <dimen name="carowner_version_textsize">12sp</dimen>
+        <dimen name="caronwer_nonet_textsize">20sp</dimen>
+        <dimen name="caronwer_right_top_icon_margin_top">5sp</dimen>
+        <dimen name="caronwer_right_top_icon_margin_right">5sp</dimen>
+        <dimen name="guide_btn_end_margin_buttom">50dip</dimen>
+        <!-- net_loadfail.xml -->
+        <dimen name="netloadfail_button_width">45dip</dimen>
+        <dimen name="netloadfail_button_margin">3dip</dimen>
+        <dimen name="netloadfail_textview_textsizze">15sp</dimen>
+        <dimen name="netloadfail_textview_margin">3dip</dimen>
+        <!-- net_loading.xml -->
+        <dimen name="netloading_textview_textsizze">15sp</dimen>
+        <dimen name="netloading_textview_margin">3dip</dimen>
+        <dimen name="netloading_height">45dip</dimen>
+        <dimen name="netloading_progressbar_size">15dip</dimen>
+        <dimen name="netsuggestword_textview_textsizze">18sp</dimen>
+        <dimen name="netsuggestword_keyword_margin">10dip</dimen>
+
+
+        <dimen name="public_edit_padding_a">12dp</dimen>
+        <dimen name="public_edit_padding_b">9dp</dimen>
+        <dimen name="public_edit_high_a">42dp</dimen>
+        <dimen name="public_edit_high_b">36dp</dimen>
+        <dimen name="public_edit_high_c">54dp</dimen>
+        <dimen name="public_edit_textsize">15sp</dimen>
+        <dimen name="public_padding_a">12dp</dimen>
+        <dimen name="public_padding_b">9dp</dimen>
+
+    <!--<dimen name="activity_horizontal_margin">16dp</dimen>-->
+    <!--<dimen name="activity_vertical_margin">16dp</dimen>-->
+
+    <dimen name="zero">0dp</dimen>
+    <dimen name="four">4dp</dimen>
+    <dimen name="five">5dp</dimen>
+    <dimen name="six">6dp</dimen>
+    <dimen name="eight">8dp</dimen>
+    <dimen name="nine">9dp</dimen>
+    <dimen name="ten">10dp</dimen>
+    <dimen name="eleven">11dp</dimen>
+    <dimen name="twelve">12dp</dimen>
+    <dimen name="thirteen">13dp</dimen>
+    <dimen name="fourteen">14dp</dimen>
+    <dimen name="fifteen">15dp</dimen>
+    <dimen name="sixteen">16dp</dimen>
+    <dimen name="seventeen">17dp</dimen>
+    <dimen name="eighteen">18dp</dimen>
+    <dimen name="twenty">20dp</dimen>
+    <dimen name="twenty_four">24dp</dimen>
+    <dimen name="twenty_eight">28dp</dimen>
+    <dimen name="thirty_two">32dp</dimen>
+    <dimen name="thirty_eight">38dp</dimen>
+    <dimen name="forty">40dp</dimen>
+    <dimen name="forty_eight">48dp</dimen>
+    <dimen name="fifty_six">56dp</dimen>
+
+</resources>

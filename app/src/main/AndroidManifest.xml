@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="saiwei.com.river"
+    >
+
+    <!--package="river.saiwei.com.myapplication"-->
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <!--android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"-->
+    <application
+        android:name=".MyApp"
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+
+        android:theme="@android:style/Theme.Light">
+
+        <!--android:icon="@mipmap/ic_launcher"-->
+
+        <!--<meta-data-->
+            <!--android:name="com.amap.api.v2.apikey"-->
+            <!--android:value="1de5fe1d038a2fa2bf86b8cd83179279" />-->
+
+        <!--正式-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="1bbb1c2850b66a91689db70b9b47d88a" />
+
+        <!---->
+
+        <activity android:name=".StartActivity"
+            android:screenOrientation="portrait"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            >
+            <!--android:theme="@android:style/Theme.Black.NoTitleBar"-->
+
+        </activity>
+
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <activity android:name=".TousuRepeatActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
+            >
+        </activity>
+
+        <activity android:name=".ReGeocoderActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <activity android:name=".TousuCloseActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <activity android:name=".TousuDetailActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <activity android:name=".TousuDealActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <activity android:name=".ReportDetailActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <activity android:name=".FeedBackActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <activity android:name=".CommitSuccessActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <activity android:name=".CompleteXunheActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <activity android:name=".MapActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <activity android:name=".XunheDetailActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <activity android:name=".UserCenterActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+    </application>
+
+</manifest>

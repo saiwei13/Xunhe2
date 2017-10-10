@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <include
+        android:id="@+id/login_head"
+        layout="@layout/title_back_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="巡查情况"
+                    android:layout_margin="@dimen/auto_dimen_15"
+                    android:layout_marginLeft="@dimen/auto_dimen_5"
+                    android:textSize="@dimen/font_30"
+                    />
+
+            </LinearLayout>
+
+            <View
+                style="@style/line" />
+
+
+            <include
+                android:id="@+id/xunhe_end_item_1"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_2"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_3"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_4"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_5"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_6"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_7"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_8"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_9"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_10"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_11"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_12"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+
+            <View
+                style="@style/line"
+                android:layout_height="3dip"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上报问题乡镇处理"
+                    android:layout_margin="@dimen/auto_dimen_15"
+                    android:layout_marginLeft="@dimen/auto_dimen_5"
+                    android:textSize="@dimen/font_30"
+                    />
+
+            </LinearLayout>
+
+            <View
+                style="@style/line" />
+
+
+            <saiwei.com.river.view.MyListView
+                android:id="@+id/xunhe_end_report_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            
+            <!--<ListView-->
+                <!--android:id="@+id/xunhe_end_report_listview"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+            <View
+                style="@style/line"
+                android:layout_height="3dip"/>
+
+            <ImageView
+                android:id="@+id/xunhe_end_add_report"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/auto_dimen_15"
+                android:src="@drawable/gridview_addpic"/>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <!--<Button-->
+        <!--android:id="@+id/xunhe_end_bt"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="结束巡河"/>-->
+
+    <Button
+        android:id="@+id/xunhe_end_bt"
+        style="@style/gdaccount_button_style"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dip"
+        android:layout_marginTop="10dip"
+        android:text="结束巡河"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:background="#1c9d17"
+        />
+
+</LinearLayout>

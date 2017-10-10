@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+
+    android:background="#20b11d"
+    android:minHeight="@dimen/title_bar_height" >
+    <!--
+
+    android:background="@drawable/titlebg"-->
+
+    <ImageButton
+        android:id="@+id/title_btn_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+
+        android:background="@drawable/title_bar_back" />
+    <!--android:background="@drawable/title_back"-->
+    <!--android:contentDescription="@string/back_btn"-->
+
+    <Button
+        android:id="@+id/title_comm_btn_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="9dip"
+        android:background="@drawable/common_title_btn_selector"
+        android:textColor="@color/white"
+        android:textSize="13dp"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/title_btn_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+
+
+        />
+    <!--android:background="@drawable/v4_com_btn_bg_selector"
+        android:src="@drawable/v4_com_btn_close_selector"-->
+
+    <Button
+        android:id="@+id/title_comm_btn_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="9dip"
+        android:background="@drawable/common_title_btn_selector"
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/title_text_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:clickable="true"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="title "
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_38" />
+
+</RelativeLayout>

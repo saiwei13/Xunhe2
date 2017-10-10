@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <include
+        android:id="@+id/setting_head"
+        layout="@layout/title_back_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <!--投诉编号-->
+        <View style="@style/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/eight"
+            android:paddingRight="@dimen/eight"
+            android:paddingTop="@dimen/four">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="投诉编号：" />
+
+            <TextView
+                android:id="@+id/tousu_detail_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LY2017092800314"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/tousu_detail_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="待认领"/>
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/eight"
+            android:paddingRight="@dimen/eight"
+            android:paddingTop="@dimen/four">
+
+            <TextView
+                android:id="@+id/tousu_detail_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LY2017092800314"
+                android:layout_centerInParent="true"
+                />
+
+            <TextView
+                android:id="@+id/xunhe_detail_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="市民"
+                android:layout_alignParentLeft="true"
+                />
+
+            <TextView
+                android:id="@+id/tousu_detail_river"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="测试河道"/>
+        </RelativeLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/eight"
+            android:paddingRight="@dimen/eight"
+            android:paddingTop="@dimen/four"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minLines="2"
+                android:text="得到"/>
+
+            <View style="@style/line" />
+
+            <TextView
+                android:id="@+id/tousu_detail_realaddr"
+                style="@style/TextViewGrayWrapContent_9"
+
+                tools:text="来源：游戏头条ddddddd"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!--办事跟踪信息-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/eight"
+            android:paddingRight="@dimen/eight"
+            android:paddingTop="@dimen/four"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="办事跟踪信息：" />
+
+            <!--<View-->
+
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"/>-->
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/refresh_icon"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View style="@style/line" />
+
+    <saiwei.com.river.view.MyListView
+        android:id="@+id/tousu_detail_process_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#efefef"
+        android:dividerHeight="5dp"
+        android:background="@color/white"/>
+
+
+
+
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
+
+        <!--&lt;!&ndash;河道名称&ndash;&gt;-->
+        <!--<LinearLayout-->
+
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:visibility="visible"-->
+            <!--android:background="@color/white"-->
+            <!--&gt;-->
+
+            <!--&lt;!&ndash; Caption &ndash;&gt;-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:text="河道名称 : "-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="@dimen/font_30" />-->
+
+
+            <!--<TextView-->
+                <!--android:id="@+id/xunhe_detail_name"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="15dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:text="当前版"-->
+                <!--android:textSize="@dimen/font_30"-->
+                <!--android:gravity="right"/>-->
+
+        <!--</LinearLayout>-->
+
+        <!--<View-->
+            <!--style="@style/line" />-->
+
+
+        <!--&lt;!&ndash;巡河人员&ndash;&gt;-->
+        <!--<LinearLayout-->
+
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:visibility="visible"-->
+            <!--android:background="@color/white"-->
+            <!--&gt;-->
+
+            <!--&lt;!&ndash; Caption &ndash;&gt;-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:text="巡河人员 : "-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="@dimen/font_30" />-->
+
+
+            <!--<TextView-->
+                <!--android:id="@+id/xunhe_detail_people"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="15dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:text="当前版"-->
+                <!--android:textSize="@dimen/font_30"-->
+                <!--android:gravity="right"/>-->
+
+        <!--</LinearLayout>-->
+
+        <!--<View-->
+            <!--style="@style/line" />-->
+
+        <!--&lt;!&ndash;河道日期&ndash;&gt;-->
+        <!--<LinearLayout-->
+
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:visibility="visible"-->
+            <!--android:background="@color/white"-->
+            <!--&gt;-->
+            <!--&lt;!&ndash; Caption &ndash;&gt;-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:text="河道日期 : "-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="@dimen/font_30" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/xunhe_detail_date"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="15dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:text="当前版"-->
+                <!--android:textSize="@dimen/font_30"-->
+                <!--android:gravity="right"/>-->
+
+        <!--</LinearLayout>-->
+
+
+        <!--<View-->
+            <!--style="@style/line" />-->
+
+
+        <!--&lt;!&ndash;巡河用时&ndash;&gt;-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:visibility="visible"-->
+            <!--android:background="@color/white"-->
+            <!--&gt;-->
+            <!--&lt;!&ndash; Caption &ndash;&gt;-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:text="巡河用时 : "-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="@dimen/font_30" />-->
+
+
+            <!--<TextView-->
+                <!--android:id="@+id/xunhe_detail_totaltime"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="15dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:text="当前版"-->
+                <!--android:textSize="@dimen/font_30"-->
+                <!--android:gravity="right"/>-->
+        <!--</LinearLayout>-->
+        <!--<View-->
+            <!--style="@style/line" />-->
+    <!--</LinearLayout>-->
+
+</LinearLayout>

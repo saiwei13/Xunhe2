@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+    <!--reportcontent-->
+    <LinearLayout
+        android:id="@+id/xunhe_detail_report_item_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/auto_dimen2_30"
+                android:layout_height="@dimen/auto_dimen2_30"
+                android:layout_margin="@dimen/auto_dimen2_5"
+                android:src="@drawable/icon_question"/>
+
+            <TextView
+                android:id="@+id/xunhe_detail_report_item_reportcontent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/auto_dimen2_10"
+                android:layout_marginTop="@dimen/auto_dimen2_5"
+                android:layout_marginBottom="@dimen/auto_dimen2_5"
+                android:gravity="center_vertical"
+                android:textColor="@color/color_666666"
+                android:text="处理人: "
+                android:textSize="@dimen/auto_font_size_24" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/xunhe_detail_report_item_reportimg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/line" />
+
+    <!--processcontent-->
+
+    <LinearLayout
+        android:id="@+id/xunhe_detail_report_item_process"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/auto_dimen2_30"
+                android:layout_height="@dimen/auto_dimen2_30"
+                android:layout_margin="@dimen/auto_dimen2_5"
+                android:src="@drawable/icon_ask"/>
+
+            <TextView
+                android:id="@+id/xunhe_detail_report_item_processcontent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/auto_dimen2_10"
+                android:layout_marginTop="@dimen/auto_dimen2_5"
+                android:layout_marginBottom="@dimen/auto_dimen2_5"
+                android:gravity="center_vertical"
+                android:textColor="@color/color_666666"
+                android:text="处理人: "
+                android:textSize="@dimen/auto_font_size_24" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/xunhe_detail_report_item_processimg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

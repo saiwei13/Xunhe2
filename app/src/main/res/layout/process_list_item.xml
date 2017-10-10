@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/save_list_item_container"
+    android:background="@color/white"
+    >
+
+    <!--<ImageView-->
+        <!--android:layout_width="@dimen/auto_dimen2_25"-->
+        <!--android:layout_height="@dimen/auto_dimen2_25"-->
+        <!--android:src="@drawable/gps_point"-->
+        <!--android:layout_marginRight="@dimen/auto_dimen2_20"-->
+        <!--android:layout_marginLeft="@dimen/auto_dimen2_20"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:visibility="visible"/>-->
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cicle"
+        android:layout_marginRight="@dimen/auto_dimen2_20"
+        android:layout_marginLeft="@dimen/auto_dimen2_20"
+        android:layout_gravity="center_vertical"
+        android:visibility="visible"/>
+
+
+
+    <!--android:background="@drawable/title_btn_right"-->
+
+    <!-- 左边部分，包含poi名和地址 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:layout_gravity="center_vertical"
+        >
+
+
+        <TextView
+            android:id="@+id/process_item_descriptionInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:textColor="@color/color_3785b8"
+            android:text="ssss"
+            android:textSize="@dimen/auto_font_size_24" />
+
+        <TextView
+            android:id="@+id/process_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/color_999999"
+            android:text="ssss"
+            android:textSize="@dimen/auto_font_size_24"
+           />
+
+        <TextView
+            android:id="@+id/process_item_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+
+            android:textColor="@color/color_999999"
+            android:text="ssss"
+            android:textSize="@dimen/auto_font_size_24" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

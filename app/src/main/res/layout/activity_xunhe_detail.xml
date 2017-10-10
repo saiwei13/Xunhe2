@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/login_head"
+        layout="@layout/title_back_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <com.amap.api.maps2d.MapView
+        android:id="@+id/mapview"
+        android:layout_marginTop="@dimen/auto_dimen_10"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/auto_dimen_250"
+        />
+
+
+    <ScrollView
+        android:id="@+id/xunhe_detail_sroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--河道名称-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/auto_dimen2_80"
+            android:background="@color/white"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/auto_dimen2_20"
+                android:text="河道名称 : "
+                android:textColor="@color/color_999999"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/auto_font_size_29" />
+
+            <TextView
+                android:id="@+id/xunhe_detail_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/auto_dimen2_20"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/color_333333"
+                android:text="当前版"
+                android:textSize="@dimen/auto_font_size_29"
+                android:gravity="right"/>
+
+        </LinearLayout>
+
+        <View
+            style="@style/line" />
+
+        <!--巡河人员-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/auto_dimen2_80"
+            android:background="@color/white"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/auto_dimen2_20"
+                android:text="巡河人员 : "
+                android:textColor="@color/color_999999"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/auto_font_size_29" />
+
+            <TextView
+                android:id="@+id/xunhe_detail_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/auto_dimen2_20"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/color_333333"
+                android:text="当前版"
+                android:textSize="@dimen/auto_font_size_29"
+                android:gravity="right"/>
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/auto_dimen2_80"
+            android:background="@color/white"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/auto_dimen2_20"
+                android:text="巡河日期 : "
+                android:textColor="@color/color_999999"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/auto_font_size_29" />
+
+            <TextView
+                android:id="@+id/xunhe_detail_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/auto_dimen2_20"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/color_333333"
+                android:text="当前版"
+                android:textSize="@dimen/auto_font_size_29"
+                android:gravity="right"/>
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+
+        <!--巡河用时-->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/auto_dimen2_80"
+            android:background="@color/white"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/auto_dimen2_20"
+                android:text="巡河用时 : "
+                android:textColor="@color/color_999999"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/auto_font_size_29" />
+
+            <TextView
+                android:id="@+id/xunhe_detail_totaltime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/auto_dimen2_20"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/color_333333"
+                android:text="当前版"
+                android:textSize="@dimen/auto_font_size_29"
+                android:gravity="right"/>
+
+        </LinearLayout>
+
+        <!--android:layout_weight="1"-->
+
+        <View style="@style/line"
+            android:layout_height="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/auto_dimen2_60"
+            android:background="@color/white"
+            >
+            <View
+                android:layout_width="3dp"
+                android:layout_height="@dimen/auto_dimen2_30"
+                android:layout_marginLeft="@dimen/auto_dimen2_20"
+                android:layout_marginRight="@dimen/auto_dimen2_20"
+                android:layout_gravity="center_vertical"
+                android:background="#20b11d"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="巡查情况："
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/auto_font_size_26"
+                />
+
+        </LinearLayout>
+
+
+            <View
+                style="@style/line" />
+
+
+            <include
+                android:id="@+id/xunhe_end_item_1"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_2"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_3"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_4"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_5"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_6"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_7"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_8"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_9"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_10"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_11"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+            <View
+                style="@style/line" />
+
+            <include
+                android:id="@+id/xunhe_end_item_12"
+                layout="@layout/activity_xunhe_end_item"
+                />
+
+        <View style="@style/line"
+            android:layout_height="5dp"/>
+
+        <!--处理事件信息-->
+
+        <LinearLayout
+            android:id="@+id/tousu_detail_deal_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/auto_dimen2_60"
+                android:background="@color/white"
+                >
+                <View
+                    android:layout_width="3dp"
+                    android:layout_height="@dimen/auto_dimen2_30"
+                    android:layout_marginLeft="@dimen/auto_dimen2_20"
+                    android:layout_marginRight="@dimen/auto_dimen2_20"
+                    android:layout_gravity="center_vertical"
+                    android:background="#20b11d"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="上报问题乡镇处理："
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/auto_font_size_26"
+                    />
+
+                <TextView
+                    android:id="@+id/xunhe_detail_report_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/auto_dimen2_20"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/auto_font_size_26"
+                    android:text="暂无上报问题"
+                    android:gravity="right"/>
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <saiwei.com.river.view.MyListView
+                android:id="@+id/xunhe_detail_report_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="#efefef"
+                android:dividerHeight="@dimen/auto_dimen2_1"
+                android:background="@color/white"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

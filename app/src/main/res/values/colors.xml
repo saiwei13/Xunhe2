@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="transparent">#00000000</color>
+
+
+    <color name="ios_line">#a6a6a6</color>
+
+    <color name="red">#d34e3b</color>
+    <color name="v4_btn_layout_bg">#fafafa</color>
+
+    <!--<color name="title">#000000</color>-->
+    <color name="title">#ffffff</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black_1">#000000</color>
+    <color name="black">#494949</color>
+    <color name="black_3">#333333</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_289603">#289603</color>
+    <!-- 全白 表格颜色 -->
+
+    <drawable name="transparent">#00000000</drawable>
+
+    <color name="search_default_text_color">#ffffff</color>
+    <color name="search_default_text_gray_color">#858f9f</color>
+    <color name="search_default_title_bg">#2c3039</color>
+    <color name="search_default_title_divider">#454a57</color>
+    <color name="search_default_bg">#1d2028</color>
+
+    <color name="blue_white">#b8caeb</color>
+    <color name="dark_blue_white">#bfd9ff</color>
+
+
+    <!-- "找回密码"界面界面二，“手机号：xxxxx”字体颜色 -->
+    <color name="gdaccount_textview_textcolor">#656c6f</color>
+    <!-- "找回密码"界面界面三，“显示密码”字体颜色 -->
+    <color name="gdaccount_show_password_tv_textcolor">#5e5e5e</color>
+    <!-- "高德账号"界面 “忘记密码？”字体颜色 -->
+    <color name="gdaccout_bt_forget_password_textcolor">#36a8ef</color>
+    <!-- 高德账号界面“Debug版本”字体颜色 -->
+    <color name="gdaccout_show_debug_textcolor">#FF0000</color>
+
+
+
+    <!-- ***********************************************"用户注册界面(UserRegster)****************************************************** -->
+    <!-- "用户注册"界面“验证手机”">"“设置密码”">"“完成注册”选中字体颜色 -->
+    <color name="gdaccount_register_head_check_textcolor">#0090fd</color>
+    <!-- "用户注册"界面“验证手机”">"“设置密码”">"“完成注册”未选中字体颜色 -->
+    <color name="gdaccount_register_head_nocheck_textcolor">#5e5e5e</color>
+    <!-- "用户注册"第一个界面“服务条款和协议”字体颜色 -->
+    <color name="user_register_1_service_terms_textcolor">#5e5e5e</color>
+    <!-- "用户注册"第三个界面，"密码为：6-12位数字或字母，区分大小写"字体颜色 -->
+    <color name="gdaccount_input_password_tip_tv_textcolor">#FF0000</color>
+
+    <!-- 通用背景颜色值 -->
+    <color name="general_back_color">#ECECEC</color>
+
+
+    <color name="v4_list_item_bg_hl">#edf4fe</color>
+   \
+    <color name="divider_color">#c5c5c5</color>
+    <color name="tab_down_txt_color_off">#797979</color>
+    <color name="tab_down_txt_color_on">#c5c5c5</color>
+    <color name="line_detail_content_bg">#eceefa</color>
+    <color name="v4_navi_text_color">#e8e8e8</color>
+
+    <color name="blue">#4c90f9</color>
+
+    <!-- 编辑框公用颜色 -->
+    <color name="public_edit_textcolor_hint">#b3b3b3</color>
+    <color name="public_edit_textcolor">#000000</color>
+
+    <!--<color name="colorPrimary">#161212</color>-->
+    <!--<color name="colorPrimaryDark">#161212</color>-->
+    <!--<color name="colorAccent">#FF4081</color>-->
+
+
+    <color name="red_ff141b">#ff141b</color>
+    <color name="white_bg">#ffffff</color>
+    <color name="black_161212">#161212</color>
+    <color name="group_bg">#184878</color>
+    <color name="gray_dfdfdf">#dfdfdf</color>
+    <color name="gray_b2b2b2">#b2b2b2</color>
+    <color name="placeholder">#737373</color>
+    <color name="count_bg">#ae707070</color>
+    <color name="count_bg_guideactivity">#ae707070</color>
+    <color name="game_title_bg">#aa000000</color>
+
+
+    <color name="color_1c9d17">#1c9d17</color>
+
+    <color name="color_333333">#333333</color>
+    <color name="color_3785b8">#333333</color>
+
+
+
+</resources>
+
+

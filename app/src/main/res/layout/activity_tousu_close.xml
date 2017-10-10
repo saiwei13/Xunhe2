@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/public_edit_padding_a">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/public_edit_padding_b"
+                    android:text="关闭投诉件的原因：" />
+
+                <LinearLayout
+                    android:id="@+id/feedback_detail_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/public_edit_padding_a"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/feedback_tousu_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="110dip"
+                        android:gravity="top"
+                        android:hint="请输入投诉内容，限制300字"
+                        android:maxLength="300"
+                        android:textColorHint="@color/public_edit_textcolor_hint"
+                        android:textCursorDrawable="@null" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/public_edit_padding_a"
+                    android:paddingLeft="@dimen/public_edit_padding_b"
+                    android:paddingTop="@dimen/public_edit_padding_a"
+                    android:text="温馨提示：\n 1、请您上传关闭投诉图片 \n 2、最多上传9张"
+                    android:textColor="@color/red" />
+
+                <saiwei.com.river.view.MyGridView
+                    android:id="@+id/feedback_gridView1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/auto_dimen2_20"
+                    android:columnWidth="90dp"
+                    android:gravity="center"
+                    android:numColumns="4"
+                    android:background="@color/white"
+                    />
+
+
+                <!--<saiwei.com.river.view.MyGridView-->
+                    <!--android:id="@+id/feedback_gridView1"-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="120dp"-->
+                    <!--android:layout_margin="10dp"-->
+                    <!--android:columnWidth="90dp"-->
+                    <!--android:gravity="center"-->
+                    <!--android:horizontalSpacing="5dp"-->
+                    <!--android:numColumns="4"-->
+                    <!--android:stretchMode="columnWidth"-->
+                    <!--android:verticalSpacing="5dp" />-->
+                <!--android:background="#EFDFDF"-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/feedback_submit"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:text="提交" />-->
+
+                <Button
+                    android:id="@+id/feedback_submit"
+                    style="@style/gdaccount_button_style"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="10dip"
+                    android:layout_marginTop="10dip"
+                    android:layout_weight="1"
+                    android:text="提交"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
+                    android:background="#1c9d17"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <include
+        android:id="@+id/login_head"
+        layout="@layout/title_back_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

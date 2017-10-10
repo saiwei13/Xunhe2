@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">河长检测</string>
+
+    <!-- 登录,注销界面 -->
+    <string name="gdaccount_login">登录</string>
+    <string name="gdaccount_register">注册</string>
+    <string name="gdaccount_login_out">注销</string>
+    <string name="gdaccount_forget_password">忘记密码？</string>
+    <string name="gdaccount_hint_phone_number">请输入您的手机号码</string>
+
+    <string name="gdaccount_phone">手机号码</string>
+
+    <string name="gdaccount_hint_password">密码</string>
+    <string name="gdaccount_show_password">显示密码</string>
+    <string name="gdaccount_next_step">下一步</string>
+    <!--<string name="gdaccount_service_terms">请阅读并勾选<a href="http://anav.com/club/common/protocal.html"><font color="#36a8ef">服务条款和协议</font></a></string>-->
+    <!--<string name="gdaccount_service_terms">我已阅读并统一《xxx协议》</string>-->
+
+    <string name="gdaccount_service_terms">我已阅读并同意<a href="http://xtcetc.com/website/protocol"><font color="#36a8ef">《服务条款和协议》</font></a></string>
+
+    <string name="gdaccount_login_success">登录成功！</string>
+    <string name="gdaccount_login_fail_unknown">登录失败！</string>
+    <string name="gdaccount_login_fail">用户名不存在或密码错误.</string>
+    <string name="gdaccount_phone_less_than_11">手机号不足11位 ，请重新输入！</string>
+    <string name="gdaccount_password_is_not_empty">密码不能为空！</string>
+    <string name="gdaccount_title">高德帐号</string>
+    <string name="gdaccount_dialog_logining">帐号登录中...</string>
+    <string name="gdaccount_dialog_logining_out">帐号注销中...</string>
+    <string name="gdaccount_other_device_login_please_again_login">帐号已在其他地方登录,是否要重新登录帐号？</string>
+    <string name="gdaccount_has_not_loing_please_login">帐号未登录,是否要登录帐号？</string>
+    <string name="gdaccount_login_out_success">帐号注销成功 ！</string>
+    <string name="gdaccount_login_out_fail">帐号注销失败 ！</string>
+
+    <!-- poi反馈 -->
+    <string name="feedback_poi_not_exist">地点不存在</string>
+    <string name="feedback_poi_location_error">位置错误</string>
+    <string name="feedback_poi_message_error">信息错误</string>
+    <string name="feedback_poi_other_error">其他错误</string>
+    <string name="feedback_poi_submit">报错</string>
+    <string name="feedback_poi_add_pic">上传图片</string>
+    <string name="feedback_poi_title">问题描述</string>
+    <string name="feedback_poi_camera">拍照</string>
+    <string name="feedback_poi_album">相册</string>
+    <string name="feedback_poi_name">名称:</string>
+    <string name="feedback_poi_address">地址:</string>
+    <string name="feedback_poi_phone">电话:</string>
+    <string name="feedback_poi_other">其他:</string>
+    <string name="feedback_poi_phone_num_empty">电话号码为空！</string>
+</resources>

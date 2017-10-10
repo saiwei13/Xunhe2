@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <include
+        android:id="@+id/setting_head"
+        layout="@layout/title_back_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <com.amap.api.maps2d.MapView
+        android:id="@+id/mapview"
+        android:layout_below="@id/setting_head"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </com.amap.api.maps2d.MapView>
+
+
+    <Button
+        android:id="@+id/map_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="开始"
+        android:visibility="visible"
+        android:background="@drawable/circle_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/auto_dimen_18"/>
+
+    <Button
+        android:id="@+id/map_center_tmp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="invisible"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="t"/>
+
+    <Button
+        android:id="@+id/map_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/circle_btn"
+        android:visibility="gone"
+        android:layout_toLeftOf="@id/map_center_tmp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/auto_dimen_18"
+        android:text="结束"/>
+
+    <Button
+        android:id="@+id/map_report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/circle_btn"
+        android:visibility="gone"
+        android:layout_toRightOf="@id/map_center_tmp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/auto_dimen_18"
+        android:text="上报"/>
+    
+    <LinearLayout
+        android:id="@+id/map_xunhe_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/auto_dimen_20"
+        android:layout_below="@id/setting_head"
+        android:background="@drawable/titlebg"
+        android:visibility="gone"
+        android:padding="@dimen/auto_dimen_20">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/auto_dimen_5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时长   "/>
+
+            <TextView
+                android:id="@+id/map_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="巡检河道："/>
+
+            <TextView
+                android:id="@+id/map_revier_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="朋口河新泉段"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/map_gps_statuss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_above="@id/map_start"
+        android:text="GPS 未定位"
+        android:textSize="@dimen/auto_font_size_30"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/red"/>
+
+
+</RelativeLayout>

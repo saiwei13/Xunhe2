@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/auto_dimen2_80"
+    android:background="@color/white" >
+
+    <ImageView
+        android:id="@+id/item_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/auto_dimen2_15"
+        android:layout_marginRight="@dimen/auto_dimen2_15"
+        android:src="@drawable/arrow"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        />
+
+    <TextView
+        android:id="@+id/xunhe_end_item_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_289603"
+        android:text="当前版"
+        android:layout_toLeftOf="@id/item_arrow"
+        android:layout_marginLeft="@dimen/auto_dimen2_25"
+        android:textSize="@dimen/auto_font_size_26"
+        android:layout_gravity="center_vertical"
+        android:layout_centerVertical="true"
+        android:gravity="right"/>
+
+    <TextView
+
+        android:id="@+id/xunhe_end_item_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_toLeftOf="@id/xunhe_end_item_result"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/auto_dimen2_10"
+        android:layout_marginBottom="@dimen/auto_dimen2_10"
+        android:layout_marginLeft="@dimen/auto_dimen2_20"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:text="5.入河排污口排放废水"
+        android:textColor="@color/color_666666"
+        android:textSize="@dimen/auto_font_size_26" />
+
+    <!--<TextView-->
+
+        <!--android:id="@+id/xunhe_end_item_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="5.入河排污口排放废水"-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="center"-->
+        <!--android:textColor="@color/color_666666"-->
+        <!--android:textSize="@dimen/auto_font_size_26"-->
+        <!--android:background="@color/blue"/>-->
+    <!--android:layout_margin="5dp"-->
+    <!--        android:layout_gravity="center_vertical"-->
+
+    <!--的颜色、气味是否异常，雨水排放口晴天有无污水排放 -->
+
+
+
+    <!--android:textColor="@color/black"-->
+
+
+
+</RelativeLayout>

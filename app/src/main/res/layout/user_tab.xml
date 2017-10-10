@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/auto_dimen2_70"
+    android:background="@color/white"
+    >
+
+        <RelativeLayout
+            android:id="@+id/usercenter_xunhe_tab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/personpark_wanted_tab_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:gravity="center"
+                android:text="巡检记录"
+                android:textColor="#1c9d17"
+                android:textSize="@dimen/auto_font_size_26"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+            <View
+                android:id="@+id/personpark_wanted_tab_bot_line"
+                android:layout_width="74dp"
+                android:layout_height="@dimen/auto_dimen2_4"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="#1c9d17" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/usercenter_report_tab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/personpark_rent_tab_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@color/transparent"
+                android:gravity="center"
+                android:text="上报问题"
+                android:textColor="#0091ff"
+                android:textSize="@dimen/auto_font_size_26"
+                />
+
+
+            <View
+                android:id="@+id/personpark_rent_tab_bot_line"
+                android:layout_width="74dp"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="#1c9d17" />
+        </RelativeLayout>
+
+</LinearLayout>

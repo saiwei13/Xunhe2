@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--字号-->
+    <dimen name="auto_font_size_10">@dimen/auto_dimen2_10</dimen>
+    <dimen name="auto_font_size_14">@dimen/auto_dimen2_14</dimen>
+    <dimen name="auto_font_size_15">@dimen/auto_dimen2_15</dimen>
+    <dimen name="auto_font_size_16">@dimen/auto_dimen2_16</dimen>
+    <dimen name="auto_font_size_17">@dimen/auto_dimen2_17</dimen>
+    <dimen name="auto_font_size_18">@dimen/auto_dimen2_18</dimen>
+    <dimen name="auto_font_size_19">@dimen/auto_dimen2_19</dimen>
+    <dimen name="auto_font_size_20">@dimen/auto_dimen2_20</dimen>
+    <dimen name="auto_font_size_21">@dimen/auto_dimen2_21</dimen>
+    <dimen name="auto_font_size_22">@dimen/auto_dimen2_22</dimen>
+    <dimen name="auto_font_size_23">@dimen/auto_dimen2_23</dimen>
+    <dimen name="auto_font_size_24">@dimen/auto_dimen2_24</dimen>
+    <dimen name="auto_font_size_25">@dimen/auto_dimen2_25</dimen>
+    <dimen name="auto_font_size_26">@dimen/auto_dimen2_26</dimen>
+    <dimen name="auto_font_size_27">@dimen/auto_dimen2_27</dimen>
+    <dimen name="auto_font_size_28">@dimen/auto_dimen2_28</dimen>
+    <dimen name="auto_font_size_29">@dimen/auto_dimen2_29</dimen>
+    <dimen name="auto_font_size_30">@dimen/auto_dimen2_30</dimen>
+    <dimen name="auto_font_size_32">@dimen/auto_dimen2_33</dimen>
+    <dimen name="auto_font_size_34">@dimen/auto_dimen2_34</dimen>
+    <dimen name="auto_font_size_35">@dimen/auto_dimen2_35</dimen>
+    <dimen name="auto_font_size_36">@dimen/auto_dimen2_36</dimen>
+    <dimen name="auto_font_size_38">@dimen/auto_dimen2_38</dimen>
+    <dimen name="auto_font_size_40">@dimen/auto_dimen2_40</dimen>
+    <dimen name="auto_font_size_42">@dimen/auto_dimen2_42</dimen>
+    <dimen name="auto_font_size_44">@dimen/auto_dimen2_44</dimen>
+    <dimen name="auto_font_size_45">@dimen/auto_dimen2_45</dimen>
+    <dimen name="auto_font_size_46">@dimen/auto_dimen2_44</dimen>
+    <dimen name="auto_font_size_48">@dimen/auto_dimen2_46</dimen>
+    <dimen name="auto_font_size_50">@dimen/auto_dimen2_50</dimen>
+    <dimen name="auto_font_size_60">@dimen/auto_dimen2_60</dimen>
+    <dimen name="auto_font_size_80">@dimen/auto_dimen2_80</dimen>
+</resources>

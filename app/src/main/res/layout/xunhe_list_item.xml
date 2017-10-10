@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/auto_dimen2_80"
+    android:id="@+id/save_list_item_container"
+    android:padding="5dp"
+    android:minHeight="@dimen/auto_dimen2_80">
+
+    <TextView
+        android:id="@+id/search_list_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:paddingLeft="13dp"
+        android:textColor="#333333"
+        android:text="ssss"
+        android:textSize="@dimen/auto_font_size_26" />
+    <!--android:textColor="#333333"-->
+
+    <TextView
+        android:id="@+id/search_list_item_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="right"
+        android:layout_weight="1"
+        android:paddingLeft="13dp"
+        android:text="ssss"
+        android:textColor="#999999"
+        android:textSize="@dimen/auto_font_size_24" />
+
+    <ImageView
+        android:id="@+id/search_list_item_look"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/auto_dimen_5"
+        android:layout_marginLeft="@dimen/auto_dimen2_9"
+        android:src="@drawable/arrow"
+        />
+
+
+
+</LinearLayout>

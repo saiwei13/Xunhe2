@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/commit_success_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="恭喜您，提交成功！"
+        android:textSize="@dimen/auto_dimen_30"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/commit_success_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@id/commit_success_1"
+        android:layout_margin="@dimen/auto_dimen_10"
+        android:text="您可在个人中心“我的巡河记录”中查看巡河记录。"
+        android:textSize="@dimen/auto_dimen_25"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@id/commit_success_2"
+        android:layout_margin="@dimen/auto_dimen_10"
+        android:text="提示：1s后回到首页"
+        android:textSize="@dimen/auto_dimen_25"
+        android:textColor="@color/red"
+        android:layout_centerVertical="true"/>
+
+
+
+</RelativeLayout>

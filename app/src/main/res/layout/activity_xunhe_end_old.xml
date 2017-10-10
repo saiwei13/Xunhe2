@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <!--1 -->
+            <LinearLayout
+                android:id="@+id/item_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:visibility="visible"
+                android:background="@color/white"
+                >
+
+                <!-- Caption -->
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="1.河面、河岸保洁是否到位"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_30" />
+
+
+                <TextView
+                    android:id="@+id/item_1_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="到位"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_30" />
+
+
+                <!-- 右侧button -->
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:src="@drawable/more_setting"
+                    />
+
+            </LinearLayout>
+
+            <View
+                style="@style/line" />
+
+
+            <!--2-->
+            <LinearLayout
+                android:id="@+id/item_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:visibility="visible"
+                android:background="@color/white"
+                >
+
+                <!-- Caption -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="2.河道水体有无异味，颜色是否异常（如发黑、发黄、发白等）"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_30" />
+
+
+                <TextView
+                    android:id="@+id/item_2_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="无"
+                    android:textSize="@dimen/font_30"
+                    android:gravity="right"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:src="@drawable/more_setting"
+                    />
+
+            </LinearLayout>
+
+            <View
+                style="@style/line" />
+
+            <!--3-->
+            <LinearLayout
+                android:id="@+id/item_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:visibility="visible"
+                android:background="@color/white"
+                >
+                <!-- Caption -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="河道日期 : "
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_30" />
+
+                <TextView
+                    android:id="@+id/xunhe_detail_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="当前版"
+                    android:textSize="@dimen/font_30"
+                    android:gravity="right"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:src="@drawable/more_setting"
+                    />
+
+            </LinearLayout>
+
+
+            <View
+                style="@style/line" />
+
+
+            <!--巡河用时-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:visibility="visible"
+                android:background="@color/white"
+                >
+                <!-- Caption -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="巡河用时 : "
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_30" />
+
+
+                <TextView
+                    android:id="@+id/xunhe_detail_totaltime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="当前版"
+                    android:textSize="@dimen/font_30"
+                    android:gravity="right"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:src="@drawable/more_setting"
+                    />
+            </LinearLayout>
+            <View
+                style="@style/line" />
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

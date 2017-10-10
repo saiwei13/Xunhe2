@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <include
+        android:id="@+id/login_head"
+        layout="@layout/title_back_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <!--<GridView-->
+        <!--android:id="@+id/feedback_gridView1"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="@dimen/auto_dimen2_20"-->
+        <!--android:columnWidth="@dimen/auto_dimen2_110"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:numColumns="4"-->
+        <!--android:background="@color/blue"-->
+        <!--/>-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/feedback_river_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/auto_dimen2_80"
+                    android:background="@color/white"
+                    android:visibility="visible">
+                    <!-- Caption -->
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="@dimen/auto_dimen2_20"
+                        android:text="投诉河道： "
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/black_3"
+                        android:textSize="@dimen/auto_font_size_26" />
+
+                    <TextView
+                        android:id="@+id/feedback_river_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/auto_dimen_5"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="right"
+                        android:hint="请选择"
+                        android:textColor="@color/black_3"
+                        android:textSize="@dimen/auto_font_size_26"
+                        />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/auto_dimen2_15"
+                        android:layout_marginRight="@dimen/auto_dimen2_15"
+                        android:src="@drawable/arrow" />
+                </LinearLayout>
+
+                <View style="@style/line" />
+
+
+            <LinearLayout
+                android:id="@+id/feedback_tousu_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/auto_dimen2_80"
+                android:background="@color/white"
+                android:visibility="visible">
+                <!-- Caption -->
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/auto_dimen2_20"
+                    android:text="投诉类型： "
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black_3"
+                    android:textSize="@dimen/auto_font_size_26" />
+
+                <TextView
+                    android:id="@+id/feedback_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/auto_dimen_5"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right"
+                    android:hint="请选择"
+                    android:textColor="@color/black_3"
+                    android:textSize="@dimen/auto_font_size_26"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/auto_dimen2_15"
+                    android:layout_marginRight="@dimen/auto_dimen2_15"
+                    android:src="@drawable/arrow" />
+            </LinearLayout>
+
+                <View style="@style/line" />
+
+            <LinearLayout
+                android:id="@+id/feedback_addr_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/auto_dimen2_80"
+                android:background="@color/white"
+                android:visibility="visible">
+                <!-- Caption -->
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/auto_dimen2_20"
+                    android:text="具体地点： "
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black_3"
+                    android:textSize="@dimen/auto_font_size_26" />
+
+                <TextView
+                    android:id="@+id/feedback_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/auto_dimen_5"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right"
+                    android:hint="请选择"
+                    android:singleLine="true"
+                    android:textColor="@color/black_3"
+                    android:textSize="@dimen/auto_font_size_26"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/auto_dimen2_15"
+                    android:layout_marginRight="@dimen/auto_dimen2_15"
+                    android:src="@drawable/arrow" />
+            </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/feedback_poi_address_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/auto_dimen2_80"
+                android:background="@color/white"
+                android:visibility="visible"
+                android:orientation="horizontal">
+                <!-- Caption -->
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/auto_dimen2_20"
+                    android:text="地点描述： "
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black_3"
+                    android:textSize="@dimen/auto_font_size_26" />
+
+                <EditText
+                android:id="@+id/feedback_address_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:maxLength="255"
+                android:hint="请填写"
+                android:textColor="@color/black_3"
+                android:textSize="@dimen/auto_font_size_26"
+                android:paddingBottom="@dimen/public_edit_padding_a"
+                android:paddingRight="@dimen/public_edit_padding_a"
+                android:paddingTop="@dimen/public_edit_padding_a"
+                android:textColorHint="@color/public_edit_textcolor_hint"
+                android:textCursorDrawable="@null" />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/auto_dimen2_15"
+                    android:layout_marginRight="@dimen/auto_dimen2_15"
+                    android:src="@drawable/arrow"
+                    android:visibility="invisible"/>
+            </LinearLayout>
+
+
+            <View style="@style/line"
+                android:layout_height="@dimen/auto_dimen2_10"/>
+
+                <LinearLayout
+                    android:id="@+id/feedback_detail_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/auto_dimen2_5"
+                    android:layout_marginBottom="@dimen/public_edit_padding_a"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/feedback_tousu_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="110dip"
+                        android:gravity="top"
+                        android:textColor="@color/black_3"
+                        android:textSize="@dimen/auto_font_size_26"
+                        android:hint="请输入投诉内容，限制300字"
+                        android:maxLength="300"
+                        android:textColorHint="@color/public_edit_textcolor_hint"
+                        android:textCursorDrawable="@null" />
+                </LinearLayout>
+
+            <View style="@style/line"
+                android:layout_height="@dimen/auto_dimen2_10"/>
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="温馨提示: "
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/auto_dimen2_20"
+                android:paddingTop="@dimen/auto_dimen2_15"
+                android:textColor="@color/red"
+                android:textSize="@dimen/auto_font_size_22"
+                android:background="@color/white"/>
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1、请尽量上传河道照片，方便工作人员定点发现问题"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/auto_dimen2_20"
+                android:paddingTop="@dimen/auto_dimen2_15"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/auto_font_size_22"
+                android:background="@color/white"/>
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2、最多上传9张"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/auto_dimen2_20"
+                android:paddingTop="@dimen/auto_dimen2_15"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/auto_font_size_22"
+                android:background="@color/white"/>
+
+
+                <!--<GridView-->
+                    <!--android:id="@+id/feedback_gridView1"-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="200dp"-->
+                    <!--android:padding="@dimen/auto_dimen2_20"-->
+                    <!--android:columnWidth="@dimen/auto_dimen2_110"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:numColumns="4"-->
+                    <!--android:background="@color/blue"-->
+                <!--/>-->
+
+            <!--android:stretchMode="columnWidth"
+                    android:horizontalSpacing="5dp"
+                    android:verticalSpacing="5dp"-->
+
+            <saiwei.com.river.view.MyGridView
+                android:id="@+id/feedback_gridView1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/auto_dimen2_20"
+                android:columnWidth="90dp"
+                android:gravity="center"
+                android:numColumns="4"
+                android:background="@color/white"
+                />
+
+            <!--android:horizontalSpacing="5dp"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="5dp"-->
+
+                <!--android:layout_height="230dp"-->
+                <!--android:background="#EFDFDF"-->
+
+
+                <!--<Button-->
+                    <!--android:id="@+id/feedback_submit"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:text="提交" />-->
+
+            <View style="@style/line"
+                android:layout_height="@dimen/auto_dimen2_10"/>
+
+                <Button
+                    android:id="@+id/feedback_submit"
+                    style="@style/gdaccount_button_style"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="10dip"
+                    android:layout_marginTop="10dip"
+                    android:layout_weight="1"
+                    android:text="提交"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
+                    android:background="#1c9d17"
+                    />
+
+            </LinearLayout>
+
+
+
+    </ScrollView>
+
+</LinearLayout>
