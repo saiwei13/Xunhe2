@@ -54,7 +54,6 @@ import saiwei.com.river.util.HttpAssist;
 /**
  * Created by saiwei on 9/23/17.
  */
-
 public class TousuCloseActivity extends Activity {
 
     private final String TAG = "chenwei.TousuCloseAct";

@@ -96,6 +96,8 @@ public class TousuDealActivity extends Activity {
     private ImageButton mTitleLeft;
     private TextView mTitleName;
 
+    private int total_uncompleted,total_completed ;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -202,7 +204,19 @@ public class TousuDealActivity extends Activity {
             public void onLoadMore(boolean isSilence) {
 
                 Log.d(TAG,"onLoadMore()");
-                doGetComplaints(userId,"","uncompleted",curXunHePage+"","10");
+//                doGetComplaints(userId,"","uncompleted",curXunHePage+"","10");
+
+                if(mXunhelists!=null){
+                    if(mXunhelists.size()>= total_uncompleted){
+                        Log.d(TAG,"setPullLoadEnable(false)");
+                        mXunheRefreshView.setLoadComplete(true);
+                        doGetComplaints(userId,"","uncompleted",curXunHePage+"","10");
+                    } else {
+                        Log.d(TAG,"setPullLoadEnable(true)");
+                        mXunheRefreshView.setLoadComplete(false);
+                        doGetComplaints(userId,"","uncompleted",curXunHePage+"","10");
+                    }
+                }
             }
 
             @Override
@@ -210,12 +224,6 @@ public class TousuDealActivity extends Activity {
                 super.onRelease(direction);
 
                 Log.d(TAG,"onRelease()  direction ="+direction);
-
-                if (direction > 0) {
-                    toast("下拉");
-                } else {
-                    toast("上拉");
-                }
             }
         });
 
@@ -244,6 +252,19 @@ public class TousuDealActivity extends Activity {
 
                 Log.d(TAG,"onLoadMore()");
                 doGetComplaints(userId,"","completed",curReportPage+"","10");
+
+
+                if(mReportLists!=null){
+                    if(mReportLists.size()>= total_completed){
+                        Log.d(TAG,"setPullLoadEnable(false)");
+                        mReportRefreshView.setLoadComplete(true);
+                        doGetComplaints(userId,"","uncompleted",curXunHePage+"","10");
+                    } else {
+                        Log.d(TAG,"setPullLoadEnable(true)");
+                        mReportRefreshView.setLoadComplete(false);
+                        doGetComplaints(userId,"","uncompleted",curXunHePage+"","10");
+                    }
+                }
             }
 
             @Override
@@ -251,12 +272,6 @@ public class TousuDealActivity extends Activity {
                 super.onRelease(direction);
 
                 Log.d(TAG,"onRelease()  direction ="+direction);
-
-                if (direction > 0) {
-                    toast("下拉");
-                } else {
-                    toast("上拉");
-                }
             }
         });
 
@@ -410,16 +425,18 @@ public class TousuDealActivity extends Activity {
 
                         List<RspTousuBean.ResponseDataBean.DataListBean>  tmp_list=bean.getResponseData().getDataList();
 
-
                     if(queryType.equals("uncompleted")){
 
+                        total_uncompleted = bean.getResponseData().getTotal();
 
                         if(tmp_list!=null && tmp_list.size()>0){
                             mXunhelists.addAll(tmp_list);
                         }
                         curXunHePage++;
-
                     } else {
+
+                        total_uncompleted = bean.getResponseData().getTotal();
+
                         if(tmp_list!=null && tmp_list.size()>0){
                             mReportLists.addAll(tmp_list);
                         }
@@ -429,7 +446,6 @@ public class TousuDealActivity extends Activity {
 
                 } else {
                     Toast.makeText(TousuDealActivity.this,"提交失败 "+bean.getRtnMsg(),Toast.LENGTH_SHORT).show();
-
                 }
 
                 mXunheRefreshView.stopLoadMore();

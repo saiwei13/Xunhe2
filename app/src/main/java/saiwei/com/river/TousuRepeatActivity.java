@@ -356,44 +356,6 @@ public class TousuRepeatActivity extends Activity {
         dialog.show();
     }
 
-//    private void spiltData(String data)
-//    {
-//
-//        Log.d(TAG,"spiltData() data="+data);
-////        mXunhelists
-////        mCachelists
-//
-//        if(mXunhelists!=null){
-//
-//            mCachelists.clear();
-//
-//            mLastSearchKeyword=data;
-//
-//            int length = mXunhelists.size();
-//
-//            for(int i = 0; i < length; ++i){
-//
-//                RspTousuBean.ResponseDataBean.DataListBean tmp = mXunhelists.get(i);
-//                if(tmp.getReport_Content().contains(data)){
-//                    mCachelists.add(tmp);
-//                }
-//            }
-//
-//            if(TextUtils.isEmpty(data)){
-//                mXunheRefreshView.setPullLoadEnable(true);
-//
-//                mXunHeAdapter.setList(mXunhelists);
-//            } else {
-//                mXunheRefreshView.setMoveHeadWhenDisablePullRefresh(false);
-//
-//                mXunheRefreshView.setPullLoadEnable(false);
-//                mXunHeAdapter.setList(mCachelists);
-//            }
-//        }
-//    }
-
-
-
     /**
      * 自定义适配器
      *
@@ -463,7 +425,7 @@ public class TousuRepeatActivity extends Activity {
 
             holder.no.setText(mList.get(position).getBussiness_No());
             holder.status.setText(mList.get(position).getBusiness_State());
-//            holder.status.setText(mList.get(position).getBusiness_StateDescription());
+            holder.status.setText(mList.get(position).getBusiness_StateDescription());
             holder.content.setText(mList.get(position).getReport_Content());
             holder.time.setText(mList.get(position).getCreate_Time());
             holder.river.setText(mList.get(position).getReport_River());

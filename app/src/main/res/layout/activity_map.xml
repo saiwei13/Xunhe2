@@ -126,7 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_above="@id/map_start"
-        android:text="GPS 未定位"
+        android:text="GPS未定位，请避开高楼大厦"
         android:textSize="@dimen/auto_font_size_30"
         android:layout_centerHorizontal="true"
         android:textColor="@color/red"/>

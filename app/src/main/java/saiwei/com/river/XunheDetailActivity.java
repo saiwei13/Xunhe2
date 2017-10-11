@@ -200,8 +200,6 @@ public class XunheDetailActivity extends Activity {
         mXunheTotalTime.setText(totalTime);
     }
 
-
-
     /**
      * 初始化AMap对象
      */
@@ -211,7 +209,6 @@ public class XunheDetailActivity extends Activity {
         mTitleName = (TextView) findViewById(R.id.title_text_name);
         mTitleName.setText("巡河详情");
         findViewById(R.id.title_btn_right).setVisibility(View.GONE);
-
 
         if (aMap == null) {
             aMap = mapView.getMap();
@@ -277,18 +274,18 @@ public class XunheDetailActivity extends Activity {
             int result_11 = Integer.parseInt(tourriverBean.getIsYXSZ());
             int result_12 = Integer.parseInt(tourriverBean.getIsHDZZ());
 
-            tv1_result.setText(item1_array[result_1]);
-            tv2_result.setText(item2_array[result_2]);
-            tv3_result.setText(item3_array[result_3]);
-            tv4_result.setText(item4_array[result_4]);
-            tv5_result.setText(item5_array[result_5]);
-            tv6_result.setText(item6_array[result_6]);
-            tv7_result.setText(item7_array[result_7]);
-            tv8_result.setText(item8_array[result_8]);
-            tv9_result.setText(item9_array[result_9]);
-            tv10_result.setText(item10_array[result_10]);
-            tv11_result.setText(item11_array[result_11]);
-            tv12_result.setText(item12_array[result_12]);
+            tv1_result.setText(item1_array[result_1-1]);
+            tv2_result.setText(item2_array[result_2-1]);
+            tv3_result.setText(item3_array[result_3-1]);
+            tv4_result.setText(item4_array[result_4-1]);
+            tv5_result.setText(item5_array[result_5-1]);
+            tv6_result.setText(item6_array[result_6-1]);
+            tv7_result.setText(item7_array[result_7-1]);
+            tv8_result.setText(item8_array[result_8-1]);
+            tv9_result.setText(item9_array[result_9-1]);
+            tv10_result.setText(item10_array[result_10-1]);
+            tv11_result.setText(item11_array[result_11-1]);
+            tv12_result.setText(item12_array[result_12-1]);
         }
     }
 
@@ -312,6 +309,11 @@ public class XunheDetailActivity extends Activity {
     }
 
     private void setUpMap() {
+
+        //        coordinateX": "25.075158",
+//        "coordinateY": "117.025956",
+        aMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(25.075158,117.025956)));
+
         aMap.moveCamera(CameraUpdateFactory.zoomTo(17));
 
 //        ArrayList<LatLng> latLngs = DrivingRecordLogic.getInstance().readFromFile(xunheRecord.getRecordId()+"");

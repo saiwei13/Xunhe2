@@ -685,7 +685,7 @@ public class TousuDetailActivity extends Activity {
             mContext = context;
             mInflater = LayoutInflater.from(context);
             widgt = (int) getResources().getDimension(R.dimen.auto_dimen2_160);
-            height = (int) getResources().getDimension(R.dimen.auto_dimen2_130);
+            height = (int) getResources().getDimension(R.dimen.auto_dimen2_140);
             targetSize = new ImageSize(widgt, height);
         }
 
@@ -727,7 +727,7 @@ public class TousuDetailActivity extends Activity {
 
             if (convertView == null) {
 //                convertView = mInflater.inflate(R.layout.search_list_item, null);
-                convertView = mInflater.inflate(R.layout.griditem_addpic, null);
+                convertView = mInflater.inflate(R.layout.griditem_three, null);
                 holder = new ViewHolder();
                 holder.img = (ImageView) convertView.findViewById(R.id.imageView1);
                 holder.img.setImageDrawable(getResources().getDrawable(R.drawable.zanwu_img));

@@ -16,8 +16,8 @@
          >
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="@dimen/auto_dimen2_110"
-            android:layout_height="@dimen/auto_dimen2_110"
+            android:layout_width="@dimen/auto_dimen2_160"
+            android:layout_height="@dimen/auto_dimen2_140"
             android:layout_centerInParent="true"
             android:scaleType="fitXY"
 

@@ -186,26 +186,6 @@ public class ReGeocoderActivity extends Activity implements
 		finish();
 	}
 
-//	/**
-//	 * 显示进度条对话框
-//	 */
-//	public void showDialog() {
-//		progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//		progDialog.setIndeterminate(false);
-//		progDialog.setCancelable(true);
-//		progDialog.setMessage("正在获取地址");
-//		progDialog.show();
-//	}
-//
-//	/**
-//	 * 隐藏进度条对话框
-//	 */
-//	public void dismissDialog() {
-//		if (progDialog != null) {
-//			progDialog.dismiss();
-//		}
-//	}
-
 	/**
 	 * 响应逆地理编码
 	 */
@@ -241,22 +221,22 @@ public class ReGeocoderActivity extends Activity implements
 
 				Log.d(TAG,"onRegeocodeSearched() curLat="+curLat+" , "+curLon);
 
+				Log.d(TAG,""+result.getRegeocodeAddress().getProvince());
 				Log.d(TAG,""+result.getRegeocodeAddress().getCity());
 				Log.d(TAG,""+result.getRegeocodeAddress().getDistrict());
 				Log.d(TAG,""+result.getRegeocodeAddress().getBuilding());
 				Log.d(TAG,""+result.getRegeocodeAddress().getNeighborhood());
-
 				Log.d(TAG,""+result.getRegeocodeAddress().getTowncode());
+
+				String province = result.getRegeocodeAddress().getProvince();
+				String city = result.getRegeocodeAddress().getCity();
 
 				addressName = result.getRegeocodeAddress().getFormatAddress()
 						+ "附近";
 
-				curAddr = addressName;
+				addressName = addressName.replace(province,"").replace(city,"");
 
-//				aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-//						AMapUtil.convertToLatLng(latLonPoint), 15));
-//				regeoMarker.setPosition(AMapUtil.convertToLatLng(latLonPoint));
-//				ToastUtil.show(ReGeocoderActivity.this, addressName);
+				curAddr = addressName;
 				mTVAddr.setText(addressName);
 			} else {
 				ToastUtil.show(ReGeocoderActivity.this, "对不起，没有搜索到相关数据！");
@@ -267,12 +247,6 @@ public class ReGeocoderActivity extends Activity implements
 			ToastUtil.showerror(this, rCode);
 		}
 	}
-
-//	@Override
-//	public boolean onMarkerClick(Marker marker) {
-//		marker.showInfoWindow();
-//		return false;
-//	}
 
 	@Override
 	public void onCameraChange(CameraPosition cameraPosition) {
@@ -289,9 +263,5 @@ public class ReGeocoderActivity extends Activity implements
 			getAddress(latLonPoint);
 		}
 		Log.d(TAG,"onCameraChangeFinish():" + cameraPosition.toString());
-
-
-//		geomap_addr
-
 	}
 }

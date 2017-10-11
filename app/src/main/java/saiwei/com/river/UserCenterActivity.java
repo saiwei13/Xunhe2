@@ -119,6 +119,9 @@ public class UserCenterActivity extends Activity {
     @BindView(R.id.usercenter_photo)
     ImageView mPhotoView;
 
+
+    private int total_complaints ,total_cruises;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -225,20 +228,23 @@ public class UserCenterActivity extends Activity {
             public void onLoadMore(boolean isSilence) {
 
                 Log.d(TAG,"onLoadMore()");
-                doGetCruise(userId,startDate,endDate, curXunHePage +"");
+//                doGetCruise(userId,startDate,endDate, curXunHePage +"");
+
+                if(mXunhelists!=null){
+                    if(mXunhelists.size()>= total_cruises){
+                        Log.d(TAG,"setPullLoadEnable(false)");
+                        mXunheRefreshView.setLoadComplete(true);
+                    } else {
+                        Log.d(TAG,"setPullLoadEnable(true)");
+                        mXunheRefreshView.setLoadComplete(false);
+                        doGetCruise(userId,startDate,endDate, curXunHePage +"");
+                    }
+                }
             }
 
             @Override
             public void onRelease(float direction) {
                 super.onRelease(direction);
-
-                Log.d(TAG,"onRelease()  direction ="+direction);
-
-                if (direction > 0) {
-                    toast("下拉");
-                } else {
-                    toast("上拉");
-                }
             }
         });
 
@@ -266,23 +272,24 @@ public class UserCenterActivity extends Activity {
             public void onLoadMore(boolean isSilence) {
 
                 Log.d(TAG,"onLoadMore()");
-//                doGetCruise(userId,startDate,endDate,curXunHePage+"");
-//                doGetComplaints();
+//                doGetComplaints(userId,"","", curReportPage +"","10");
 
-                doGetComplaints(userId,"","", curReportPage +"","10");
+
+                if(mReportLists!=null){
+                    if(mReportLists.size()>= total_complaints){
+                        Log.d(TAG,"setPullLoadEnable(false)");
+                        mReportRefreshView.setLoadComplete(true);
+                    } else {
+                        Log.d(TAG,"setPullLoadEnable(true)");
+                        mReportRefreshView.setLoadComplete(false);
+                        doGetComplaints(userId,"","", curReportPage +"","10");
+                    }
+                }
             }
 
             @Override
             public void onRelease(float direction) {
                 super.onRelease(direction);
-
-                Log.d(TAG,"onRelease()  direction ="+direction);
-
-                if (direction > 0) {
-                    toast("下拉");
-                } else {
-                    toast("上拉");
-                }
             }
         });
 
@@ -427,6 +434,8 @@ public class UserCenterActivity extends Activity {
 
                 if(bean.getRtnCode().equals("000000")){
 
+                    total_complaints = bean.getResponseData().getCount();
+
                     RspComplaintBean.ResponseDataBean  responseDataBean = bean.getResponseData();
 
                     if(responseDataBean!=null){
@@ -451,6 +460,8 @@ public class UserCenterActivity extends Activity {
             public void onFailure(Call<RspComplaintBean> call, Throwable t) {
                 Log.d(TAG,"onFailure() "+t.toString());
                 Toast.makeText(UserCenterActivity.this,"提交失败",Toast.LENGTH_SHORT).show();
+                mReportRefreshView.stopLoadMore();
+                mReportRefreshView.stopRefresh();
             }
         });
     }
@@ -506,21 +517,28 @@ public class UserCenterActivity extends Activity {
                 Log.d(TAG,"onResponse()  "+response.body());
                 RspCruiseBean bean = response.body();
 
-                RspCruiseBean.ResponseDataBean  responseDataBean = bean.getResponseData();
+                if(bean.getRtnCode().equals("000000")){
 
-                if(responseDataBean!=null){
-                    List<RspCruiseBean.ResponseDataBean.VarListBean>  tmp_list=responseDataBean.getVarList();
-                    if(tmp_list!=null && tmp_list.size()>0){
-                        mXunhelists.addAll(tmp_list);
+                    total_cruises = bean.getResponseData().getCount();
+
+                    RspCruiseBean.ResponseDataBean  responseDataBean = bean.getResponseData();
+
+                    if(responseDataBean!=null){
+                        List<RspCruiseBean.ResponseDataBean.VarListBean>  tmp_list=responseDataBean.getVarList();
+                        if(tmp_list!=null && tmp_list.size()>0){
+                            mXunhelists.addAll(tmp_list);
+                        }
+                        curXunHePage++;
+                        updateListView();
                     }
-                    curXunHePage++;
-                    updateListView();
+                }else {
+                    Toast.makeText(UserCenterActivity.this,"提交失败 "+bean.getRtnMsg(),Toast.LENGTH_SHORT).show();
                 }
 
                 mXunheRefreshView.stopLoadMore();
                 mXunheRefreshView.stopRefresh();
-//                lastRefreshTime = mXunheRefreshView.getLastRefreshTime();
-//                Toast.makeText(UserCenterActivity.this,"提交成功",Toast.LENGTH_SHORT).show();
+
+
             }
 
             @Override
@@ -530,7 +548,6 @@ public class UserCenterActivity extends Activity {
 
                 mXunheRefreshView.stopLoadMore();
                 mXunheRefreshView.stopRefresh();
-//                lastRefreshTime = mXunheRefreshView.getLastRefreshTime();
             }
         });
     }
@@ -764,8 +781,8 @@ public class UserCenterActivity extends Activity {
             }
 
             holder.no.setText(mList.get(position).getBussinessNo());
-//            holder.status.setText(mList.getStr(position).getBusiness_StateDescription());
-            holder.status.setText(mList.get(position).getBusinessState());
+            holder.status.setText(mList.get(position).getBusinessStateDescription());
+//            holder.status.setText(mList.get(position).getBusinessState());
             holder.content.setText(mList.get(position).getReportContent());
             holder.time.setText(mList.get(position).getCreateTime()+"");
             holder.river.setText(mList.get(position).getReportRiver());

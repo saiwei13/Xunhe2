@@ -159,10 +159,10 @@
             android:id="@+id/tousu_detail_gridView1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/auto_dimen2_20"
+            android:padding="@dimen/auto_dimen2_10"
             android:columnWidth="90dp"
             android:gravity="center"
-            android:numColumns="4"
+            android:numColumns="3"
             android:background="@color/white">
 
         </saiwei.com.river.view.MyGridView>

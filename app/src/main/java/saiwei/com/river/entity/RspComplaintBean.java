@@ -93,6 +93,7 @@ public class RspComplaintBean {
              * publicReportId : 9fab8b0b69f5481fad69143b795ea6ff
              * complaintsType : 03
              * locationAddress : 福建省龙岩市新罗区西陂街道龙岩大道260号太古广场附近
+             *
              */
 
             private String createTime;

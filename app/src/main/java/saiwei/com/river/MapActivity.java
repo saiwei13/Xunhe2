@@ -441,7 +441,7 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
         if(isGspSuccess){
             mGpsStatus.setText("GPS 已定位");
         } else {
-            mGpsStatus.setText("GPS 未定位");
+            mGpsStatus.setText("GPS未定位，请避开高楼大厦");
         }
     }
 

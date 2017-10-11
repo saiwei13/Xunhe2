@@ -2,6 +2,7 @@ package saiwei.com.river;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -301,7 +302,6 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
                 e.printStackTrace();
             }
         }
-
         return jsonArray.toString();
     }
 
@@ -350,6 +350,9 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
     @OnClick({R.id.xunhe_end_bt})
     public  void doCommit(View v){
 
+
+        showWaitingDialog();
+
         String xyJsonInfos= createXyJsonInfos();
         String complaintInfos= createComplaintInfos();
 
@@ -392,11 +395,11 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
         );
         call.enqueue(new Callback<ResponseBean>() {
 
-
             @Override
             public void onResponse(Call<ResponseBean> call, Response<ResponseBean> response) {
                 Log.d(TAG,"onResponse()  "+response.body());
 //                XunheRecordBean bean = response.body();
+                dismissWaitingDialog();
 
                 ResponseBean bean = response.body();
 
@@ -404,15 +407,16 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
                     Toast.makeText(CompleteXunheActivity.this,"提交成功",Toast.LENGTH_SHORT).show();
                     DrivingRecordLogic.getInstance().stopRecord(xunheRecord);
                     startActivity(new Intent(CompleteXunheActivity.this,CommitSuccessActivity.class));
-
                 } else {
                     Toast.makeText(CompleteXunheActivity.this,"获取失败 "+bean.getRtnMsg(),Toast.LENGTH_SHORT).show();
                 }
+
             }
 
             @Override
             public void onFailure(Call<ResponseBean> call, Throwable t) {
                 Log.d(TAG,"onFailure() "+t.toString());
+                dismissWaitingDialog();
                 Toast.makeText(CompleteXunheActivity.this,"提交失败",Toast.LENGTH_SHORT).show();
             }
         });
@@ -567,6 +571,25 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
 
         feedbackBeens = DrivingRecordLogic.getInstance().getFeedbackBeans();
         mReportAdapter.setList(feedbackBeens);
+    }
+
+    private ProgressDialog waitingDialog;
+
+    private void showWaitingDialog() {
+        waitingDialog=
+                new ProgressDialog(this);
+        waitingDialog.setIcon(R.drawable.bulb);
+        waitingDialog.setTitle("提示");
+        waitingDialog.setMessage("提交中...");
+        waitingDialog.setIndeterminate(true);
+        waitingDialog.setCancelable(false);
+        waitingDialog.show();
+    }
+
+    private void dismissWaitingDialog(){
+        if(waitingDialog!= null && waitingDialog.isShowing()){
+            waitingDialog.dismiss();
+        }
     }
 
     /**

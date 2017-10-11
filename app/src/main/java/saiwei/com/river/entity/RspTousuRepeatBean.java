@@ -120,6 +120,17 @@ public class RspTousuRepeatBean {
             private String latitude;
             private String report_Name;
             private String report_Content;
+            private String business_StateDescription;
+
+            public String getBusiness_StateDescription() {
+                return business_StateDescription;
+            }
+
+            public void setBusiness_StateDescription(String business_StateDescription) {
+                this.business_StateDescription = business_StateDescription;
+            }
+
+
 
             public String getRiver_baseinfo_id() {
                 return river_baseinfo_id;

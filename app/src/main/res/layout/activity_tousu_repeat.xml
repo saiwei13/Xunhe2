@@ -36,8 +36,7 @@
             android:paddingLeft="32dp"
             android:textSize="12sp"
             android:layout_gravity="center_vertical"
-
-            android:hint="Searching..."/>
+            android:hint="搜索"/>
 
         <!--android:background="@drawable/search_frame"-->
 

@@ -103,13 +103,12 @@ public class MainActivity extends Activity {
                             uncompleteCounts
                     );
                     SharePreferenceUtil.getInstance().putInt(
-                            SharePreferenceUtil.SHARE_PREFERENCE_PASSWORD,
+                            SharePreferenceUtil.SHARE_PREFERENCE_CRUISECOUNTS,
                             cruiseCounts
                     );
 
                     updateView(cruiseCounts,uncompleteCounts);
                 }
-
             }
 
             @Override
@@ -124,8 +123,6 @@ public class MainActivity extends Activity {
         if(cruiseCounts == 0){
             mTVToday.setText("您今日尚未巡河");
         } else {
-
-
             String str = "您今日已巡河"+cruiseCounts+"次";
             SpannableString spannableString = new SpannableString(str);
             spannableString.setSpan(
@@ -276,6 +273,9 @@ public class MainActivity extends Activity {
         super.onResume();
         mWantedView.setPressed(true);
         mWantedView.setClickable(false);
+
+        doGetCommonInfo();
+
     }
 
     @Override
