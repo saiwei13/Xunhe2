@@ -110,7 +110,9 @@ public class FeedBackActivity extends Activity {
     String longitude;
     String locationAddress;
 
-    String reportimg ="";
+//    String reportimg ="";
+
+    List<String> imglist = new ArrayList<>();
 
     List<River> mRivers;
 
@@ -175,7 +177,6 @@ public class FeedBackActivity extends Activity {
                 }
             }
         });
-        setListViewHeightBasedOnChildren(gridView1);
     }
 
     private void initData(){
@@ -284,9 +285,7 @@ public class FeedBackActivity extends Activity {
         }else if(TextUtils.isEmpty(reportContent)){
             Toast.makeText(this,"请填写反馈内容",Toast.LENGTH_SHORT).show();
         }else {
-            if(reportimg.length()>0){
-                reportimg = (String) reportimg.subSequence(0,reportimg.length()-1);
-            }
+
 
             mFeedbackBean.setUserId(userid);
 //            mFeedbackBean.setCountyCode("350802000000");  //TODO
@@ -317,6 +316,19 @@ public class FeedBackActivity extends Activity {
             int positon =  DrivingRecordTool.findPosition(mTVType.getText().toString().trim());
 
             mFeedbackBean.setComplaintsType(Constant.type_array_int[positon]);
+
+            String reportimg = "";
+
+            for(int i=0;i<imglist.size();i++){
+                if(i== imglist.size()-1){
+                    reportimg += imglist.get(i);
+                }else {
+                    reportimg += imglist.get(i)+",";
+                }
+            }
+
+            Log.d(TAG,"reportimg = "+reportimg);
+
             mFeedbackBean.setReportImg(reportimg);
 
             if(fromType == AccoutLogic.FROM_MAINACTIVITY){
@@ -596,8 +608,15 @@ public class FeedBackActivity extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                imageItem.remove(position);
-                simpleAdapter.notifyDataSetChanged();
+
+
+                if(position>0){
+                    imageItem.remove(position);
+                    simpleAdapter.notifyDataSetChanged();
+
+                    Log.d(TAG,"remove img position="+position);
+                    imglist.remove(position-1);
+                }
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -607,26 +626,6 @@ public class FeedBackActivity extends Activity {
             }
         });
         builder.create().show();
-    }
-
-    private void uploadImage(){
-
-        Log.d(TAG,"uploadImage()");
-
-        final File file = new File("/sdcard/hechang/feedback/image.jpg");
-        if(!file.exists()){
-            Toast.makeText(FeedBackActivity.this,"文件不存在",Toast.LENGTH_SHORT);
-            return ;
-        }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String str = HttpAssist.uploadSpotFile(file);
-                reportimg += str+",";
-
-                Log.d(TAG,"uploadImage()  str="+str);
-            }
-        }).start();
     }
 
     private void uploadImage(final File file){
@@ -642,8 +641,8 @@ public class FeedBackActivity extends Activity {
             @Override
             public void run() {
                 String str = HttpAssist.uploadSpotFile(file);
-                reportimg += str+",";
-
+//                reportimg += str+",";
+                imglist.add(0,str);
                 Log.d(TAG,"uploadImage()  str="+str);
             }
         }).start();
@@ -692,37 +691,5 @@ public class FeedBackActivity extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-
-
-
-    public static void setListViewHeightBasedOnChildren(GridView listView) {
-//        // 获取listview的adapter
-//        SimpleAdapter listAdapter = (SimpleAdapter) listView.getAdapter();
-//        if (listAdapter == null) {
-//            return;
-//        }
-//        // 固定列宽，有多少列
-//        int col = 4;// listView.getNumColumns();
-//        int totalHeight = 0;
-//        // i每次加4，相当于listAdapter.getCount()小于等于4时 循环一次，计算一次item的高度，
-//        // listAdapter.getCount()小于等于8时计算两次高度相加
-//        for (int i = 0; i < listAdapter.getCount(); i += col) {
-//            // 获取listview的每一个item
-//            View listItem = listAdapter.getView(i, null, listView);
-//            listItem.measure(0, 0);
-//            // 获取item的高度和
-//            totalHeight += listItem.getMeasuredHeight();
-//        }
-//
-//        // 获取listview的布局参数
-//        ViewGroup.LayoutParams params = listView.getLayoutParams();
-//        // 设置高度
-//        params.height = totalHeight;
-//        // 设置margin
-//        ((ViewGroup.MarginLayoutParams) params).setMargins(10, 10, 10, 10);
-//        // 设置参数
-//        listView.setLayoutParams(params);
     }
 }

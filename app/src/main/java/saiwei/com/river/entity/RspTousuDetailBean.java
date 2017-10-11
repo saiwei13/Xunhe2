@@ -124,6 +124,7 @@ public class RspTousuDetailBean {
              * complaintsType : 02
              * villageName : 下寮村委会
              * locationAddress : 灭了
+             * "reportImg": "/upload/system/2017/10/a82860d100da9137cf2de2e1b2c1b881.jpg",
              */
 
             private String createTime;
@@ -150,6 +151,15 @@ public class RspTousuDetailBean {
             private String complaintsType;
             private String villageName;
             private String locationAddress;
+            private String reportImg;
+
+            public String getReportImg() {
+                return reportImg;
+            }
+
+            public void setReportImg(String reportImg) {
+                this.reportImg = reportImg;
+            }
 
             public String getCreateTime() {
                 return createTime;
@@ -545,6 +555,7 @@ public class RspTousuDetailBean {
              * processTime : 2017-09-30 18:51:09
              * businessState : 91
              * processMan : lytest001
+             * "processImg": "/upload/system/2017/10/326a23dd79cf178fdaa50e5b5e564721.jpg",
              */
 
             private String taskId;
@@ -560,6 +571,15 @@ public class RspTousuDetailBean {
             private String processTime;
             private String businessState;
             private String processMan;
+            private String processImg;
+
+            public String getProcessImg() {
+                return processImg;
+            }
+
+            public void setProcessImg(String processImg) {
+                this.processImg = processImg;
+            }
 
             public String getTaskId() {
                 return taskId;

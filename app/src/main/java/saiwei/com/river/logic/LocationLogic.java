@@ -124,11 +124,17 @@ public class LocationLogic {
                 }
                 //定位之后的回调时间
 //                sb.append("回调时间: " + Utils.formatUTC(System.currentTimeMillis(), "yyyy-MM-dd HH:mm:ss") + "\n");
-
                 //解析定位结果，
                 String result = sb.toString();
 
-                Log.d(TAG,"onLocationChanged() result="+result);
+//                Log.d(TAG,"onLocationChanged() result="+result);
+
+                String location_gps = location.getTime()+","+location.getLatitude()+", "+location.getLongitude()+","+location.getAltitude()+","+location.getBearing()+" , "+location.getAccuracy()+" ,"+location.getSpeed()+","+location.getProvider()+","+location.getLocationType()+" , "+location.getSatellites();
+
+                Log.d(TAG,location_gps);
+
+                DrivingRecordLogic.getInstance().writeLocationGpsLog(location_gps);
+
 
 //                tvResult.setText(result);
             } else {

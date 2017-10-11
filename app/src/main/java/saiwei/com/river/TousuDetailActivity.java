@@ -15,10 +15,16 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -107,12 +113,15 @@ public class TousuDetailActivity extends Activity {
 //    private ListView mProcessListView ;
     private MyProcessAdapter myProcessAdapter;
     private MyDealAdapter myDealAdapter;
+    private MyGridAdapter1 myGridAdapter1;
 
     private String DEFAULT_TIP="请点击选择";
 
     private int curQueryType = Constant.QUERY_TYPE_UNCOMPLETED;
 
     private String taskId,publicReportId;
+
+    private GridView gridView1;
 
 //    List<RspComplaintHandleInfo.ResponseDataBean> mProcessInfos;
     List<RspTousuDetailBean.ResponseDataBean.FinishProcessBean> finishProcessList;
@@ -135,6 +144,9 @@ public class TousuDetailActivity extends Activity {
         initListView();
     }
 
+    private List<String> mImgList;
+    private String reportimgs;
+
     private RspTousuDetailBean.ResponseDataBean.PublicReportBean publicReportBean;
     private void initData(){
 
@@ -143,6 +155,13 @@ public class TousuDetailActivity extends Activity {
             publicReportBean = bean.getResponseData().getPublicReport();
             finishProcessList = bean.getResponseData().getFinishProcess();
             mProcessInfos = bean.getResponseData().getHistoriclist();
+
+            String imgs = publicReportBean.getReportImg();
+
+            if(!TextUtils.isEmpty(imgs)){
+                String[] imgs_array=imgs.split(",");
+                mImgList = Arrays.asList(imgs_array);
+            }
         }
 
 //        publicReportBean = AccoutLogic.getInstance().getPublicReportBeanCache();
@@ -195,11 +214,22 @@ public class TousuDetailActivity extends Activity {
 
     private void initListView(){
 
+
+        gridView1 = (GridView) findViewById(R.id.tousu_detail_gridView1);
+        myGridAdapter1 = new MyGridAdapter1(this);
+        gridView1.setAdapter(myGridAdapter1);
+        myGridAdapter1.setList(mImgList);
+
+        if(mImgList!=null && mImgList.size()>0){
+            gridView1.setVisibility(View.VISIBLE);
+        }else {
+            gridView1.setVisibility(View.GONE);
+        }
+
         mProcessListView = (MyListView) findViewById(R.id.tousu_detail_process_listview);
         myProcessAdapter = new MyProcessAdapter(this);
         mProcessListView.setAdapter(myProcessAdapter);
         myProcessAdapter.setList(mProcessInfos);
-
 
         mDealListView = (MyListView) findViewById(R.id.tousu_detail_deal_listview);
         myDealAdapter = new MyDealAdapter(this);
@@ -348,7 +378,6 @@ public class TousuDetailActivity extends Activity {
          */
 //        final String[] items={"Items_one","Items_two","Items_three"};
 
-
         final String[] items =  new String[mRivers.size()];
 
         for(int i=0;i<items.length;i++){
@@ -441,11 +470,6 @@ public class TousuDetailActivity extends Activity {
         });
     }
 
-
-
-
-
-
     /**
      * 自定义适配器
      *
@@ -524,7 +548,7 @@ public class TousuDetailActivity extends Activity {
                 holder.content.setVisibility(View.GONE);
             } else {
                 holder.content.setVisibility(View.VISIBLE);
-                holder.content.setText(des);
+                holder.content.setText(content_str);
             }
 
             return convertView;
@@ -550,6 +574,7 @@ public class TousuDetailActivity extends Activity {
         private LayoutInflater mInflater;
         private List<RspTousuDetailBean.ResponseDataBean.FinishProcessBean> mList = null;
         private Context mContext;
+//        private MyGridAdapter1 myGridAdapter2;
 
         public MyDealAdapter(Context context) {
             mContext = context;
@@ -599,6 +624,14 @@ public class TousuDetailActivity extends Activity {
                 holder.name =  (TextView) convertView.findViewById(R.id.deal_item_people);
                 holder.time = (TextView) convertView.findViewById(R.id.deal_item_time);
                 holder.content = (TextView) convertView.findViewById(R.id.deal_item_content);
+
+                holder.gridView = (GridView) convertView.findViewById(R.id.deal_item_gridView);
+                holder.myGridAdapter2 = new MyGridAdapter1(mContext);
+
+                holder.imglist= new ArrayList<String>();
+
+                holder.gridView.setAdapter(holder.myGridAdapter2);
+
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -608,6 +641,19 @@ public class TousuDetailActivity extends Activity {
             holder.time.setText("处理时间: "+mList.get(position).getProcessTime());
             holder.content.setText("处理内容: "+mList.get(position).getProcessContent());
 
+            String imgs = mList.get(position).getProcessImg();
+
+//            imgs  = "/user/default/2017/10/2d51134604ab3c1ce3de681052213130.jpg" +
+//                    ",/user/default/2017/10/2d51134604ab3c1ce3de681052213130.jpg,/user/default/2017/10/2d51134604ab3c1ce3de681052213130.jpg,/user/default/2017/10/2d51134604ab3c1ce3de681052213130.jpg,/user/default/2017/10/2d51134604ab3c1ce3de681052213130.jpg,/user/default/2017/10/2d51134604ab3c1ce3de681052213130.jpg,/user/default/2017/10/2d51134604ab3c1ce3de681052213130.jpg";
+
+            if(!TextUtils.isEmpty(imgs)){
+                String[] imgs_array=imgs.split(",");
+                holder.imglist = Arrays.asList(imgs_array);
+                holder.myGridAdapter2.setList(holder.imglist);
+            } else {
+                holder.gridView.setVisibility(View.GONE);
+            }
+
             return convertView;
         }
 
@@ -616,6 +662,96 @@ public class TousuDetailActivity extends Activity {
             TextView name;
             TextView time;
             TextView content;
+            GridView gridView;
+            List imglist;
+            MyGridAdapter1 myGridAdapter2;
+        }
+    }
+
+    /**
+     * 自定义适配器
+     *
+     * @author wei.chen
+     */
+    private class MyGridAdapter1 extends BaseAdapter {
+
+        private LayoutInflater mInflater;
+        private List<String> mList = null;
+        private Context mContext;
+        int widgt,height;
+        ImageSize targetSize;
+
+        public MyGridAdapter1(Context context) {
+            mContext = context;
+            mInflater = LayoutInflater.from(context);
+            widgt = (int) getResources().getDimension(R.dimen.auto_dimen2_160);
+            height = (int) getResources().getDimension(R.dimen.auto_dimen2_130);
+            targetSize = new ImageSize(widgt, height);
+        }
+
+        public void setList(List<String> list) {
+            this.mList = list;
+            notifyDataSetChanged();
+        }
+
+        public List<String> getList() {
+            return mList;
+        }
+
+        @Override
+        public int getCount() {
+            if (mList != null) {
+                return mList.size();
+            }
+            return 0;
+        }
+
+        @Override
+        public Object getItem(int position) {
+
+            if (mList != null) {
+                return mList.get(position);
+            }
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+
+            ViewHolder holder;
+
+            if (convertView == null) {
+//                convertView = mInflater.inflate(R.layout.search_list_item, null);
+                convertView = mInflater.inflate(R.layout.griditem_addpic, null);
+                holder = new ViewHolder();
+                holder.img = (ImageView) convertView.findViewById(R.id.imageView1);
+                holder.img.setImageDrawable(getResources().getDrawable(R.drawable.zanwu_img));
+//                holder.img.setBackground(getResources().getDrawable(R.drawable.zanwu_img));
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            String img_url =  mList.get(position);
+
+//            Log.d(TAG,"getView() img_url="+img_url);
+            if(!TextUtils.isEmpty(img_url)){
+                String url = RetrofitLogic.IMAGE_BASE_GET_URL+img_url;
+
+                Log.d(TAG,"getView() load img url ="+url);
+                ImageLoader.getInstance().displayImage(url,holder.img,targetSize);
+            }
+//            holder.img.setText("处理人: "+mList.get(position).getProcessMan());
+            return convertView;
+        }
+
+        class ViewHolder {
+            ImageView img;
         }
     }
 }

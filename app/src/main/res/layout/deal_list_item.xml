@@ -42,4 +42,17 @@
         android:text="处理内容: "
         android:textSize="@dimen/auto_font_size_24" />
 
+    <saiwei.com.river.view.MyGridView
+        android:id="@+id/deal_item_gridView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/auto_dimen2_20"
+        android:columnWidth="90dp"
+        android:gravity="center"
+        android:numColumns="4"
+        android:background="@color/white">
+
+    </saiwei.com.river.view.MyGridView>
+
+
 </LinearLayout>

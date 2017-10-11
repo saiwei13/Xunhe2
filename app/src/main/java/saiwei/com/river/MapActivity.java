@@ -12,6 +12,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -124,7 +125,9 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
 
         init();
 
-        LocationLogic.getInstance().startLocation();
+//        LocationLogic.getInstance().startLocation();
+        acquireWakeLock();
+
     }
 
     List<River> mRivers;
@@ -214,19 +217,9 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
             mBtStart.setVisibility(View.VISIBLE);
             mBtStop.setVisibility(View.GONE);
             mBtReport.setVisibility(View.GONE);
-
-
-//            mHandler.sendEmptyMessageDelayed(1, 1000);
             mHandler.removeMessages(1);
 
         }
-
-//        Toast.makeText(this,"结束巡河",Toast.LENGTH_SHORT).show();
-//        startActivity(new Intent(this,CompleteXunheActivity.class));
-//        XunheRecord xunheRecord = DrivingRecordLogic.getInstance().getCurXunheRecord();
-//        DrivingRecordLogic.getInstance().stopRecord(xunheRecord);
-//        mBtStart.setVisibility(View.VISIBLE);
-//        mBtStop.setVisibility(View.GONE);
 
     }
 
@@ -234,9 +227,6 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
     public void doBack(View v) {
         showSimpleDialog(v);
     }
-
-    private AMapLocationClient locationClient = null;
-    private AMapLocationClientOption locationOption = null;
 
     /**
      * 初始化
@@ -343,6 +333,10 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
         if(DrivingRecordLogic.getInstance().isRecord()){
             DrivingRecordLogic.getInstance().stopRecord();
         }
+//        LocationLogic.getInstance().stopLocation();
+
+
+        releaseWakeLock();
     }
 
     int i = 0;
@@ -586,4 +580,37 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
     private void updateTimerView(String str){
         mTimer.setText(str);
     }
+
+
+
+    private PowerManager.WakeLock wakeLock = null;
+    /** * 获取电源锁，保持该服务在屏幕熄灭时仍然获取CPU时，保持运行 */
+
+    private void acquireWakeLock() {
+        if (null == wakeLock) {
+            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK
+                    | PowerManager.ON_AFTER_RELEASE, getClass()
+                    .getCanonicalName());
+            if (null != wakeLock) {
+//                Log.i(TAG, “call acquireWakeLock”);
+                wakeLock.acquire();
+            }
+        }
+    }
+
+
+    // 释放设备电源锁
+    private void releaseWakeLock() {
+        if (null != wakeLock && wakeLock.isHeld()) {
+//            Log.i(TAG, “call releaseWakeLock”);
+            wakeLock.release();
+            wakeLock = null;
+        }
+    }
+
 }
+
+
+
+

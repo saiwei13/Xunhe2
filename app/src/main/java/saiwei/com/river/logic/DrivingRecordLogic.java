@@ -27,7 +27,6 @@ import saiwei.com.river.model.XunheRecord;
 
 public class DrivingRecordLogic {
 
-
     private static final String TAG = "chenwei.DrivingLogic";
 
     /** 当前gps信息目录 */
@@ -138,6 +137,24 @@ public class DrivingRecordLogic {
     }
 
     public long curFileName;
+
+
+    public void writeLocationGpsLog(String str){
+
+        String filename;
+        if(curFileName<1){
+            filename = System.currentTimeMillis()+"_loc";
+        } else{
+            filename = curFileName+"_loc";
+        }
+
+        if(!TextUtils.isEmpty(filename)){
+            writeGpsLog(filename,str);
+        }  else {
+            Log.d(TAG,"writeGpsLog  filenname is  null")   ;
+        }
+    }
+
 
     public void writeYuanshiGpsLog(String str){
         String filename = curFileName+"_yuanshi";

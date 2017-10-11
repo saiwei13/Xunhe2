@@ -53,8 +53,6 @@ public class RetrofitLogic {
     public static final String IMAGE_BASE_GET_URL = "http://www.longyan.cn/file/get";
 
 
-
-
 //    http://www.longyan.cn/image/upload/user/default
 
     /**

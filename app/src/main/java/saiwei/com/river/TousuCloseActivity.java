@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,6 +75,8 @@ public class TousuCloseActivity extends Activity {
 
 
     private String taskId,publicReportId;
+
+    List<String> imglist = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -131,6 +134,8 @@ public class TousuCloseActivity extends Activity {
                 }
                 else if(position == 0) {
                     doAddPic(null);
+                }else {
+                    dialog(position);
                 }
             }
         });
@@ -184,7 +189,7 @@ public class TousuCloseActivity extends Activity {
             Bitmap addbmp=BitmapTool.getBitmapFormUri(getApplicationContext(), mImageUri, false);
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("itemImage", addbmp);
-            imageItem.add(map);
+            imageItem.add(1,map);
             simpleAdapter = new SimpleAdapter(this,
                     imageItem, R.layout.griditem_addpic,
                     new String[] { "itemImage"}, new int[] { R.id.imageView1});
@@ -222,8 +227,15 @@ public class TousuCloseActivity extends Activity {
             return;
         }
 
-
-        doCommit(userid,publicReportId,taskId,content,"");
+        String reportimg = "";
+        for(int i=0;i<imglist.size();i++){
+            if(i== imglist.size()-1){
+                reportimg += imglist.get(i);
+            }else {
+                reportimg += imglist.get(i)+",";
+            }
+        }
+        doCommit(userid,publicReportId,taskId,content,reportimg);
     }
 
     public  void doCommit(String userId, String publicReportId, String taskId, String content, String processImg){
@@ -356,25 +368,6 @@ public class TousuCloseActivity extends Activity {
         builder.create().show();
     }
 
-    private void uploadImage(){
-
-        Log.d(TAG,"uploadImage()");
-
-        final File file = new File("/sdcard/hechang/feedback/image.jpg");
-        if(!file.exists()){
-            Toast.makeText(TousuCloseActivity.this,"文件不存在",Toast.LENGTH_SHORT);
-            return ;
-        }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String str = HttpAssist.uploadSpotFile(file);
-
-                Log.d(TAG,"uploadImage()  str="+str);
-            }
-        }).start();
-    }
-
     private void uploadImage(final File file){
 
         Log.d(TAG,"uploadImage()");
@@ -388,9 +381,7 @@ public class TousuCloseActivity extends Activity {
             @Override
             public void run() {
                 String str = HttpAssist.uploadSpotFile(file);
-//                String str = HttpAssist.uploadSpotFile(file);
-//                reportimg += str+",";
-
+                imglist.add(0,str);
                 Log.d(TAG,"uploadImage()  str="+str);
             }
         }).start();
@@ -469,5 +460,33 @@ public class TousuCloseActivity extends Activity {
         ((ViewGroup.MarginLayoutParams) params).setMargins(10, 10, 10, 10);
         // 设置参数
         listView.setLayoutParams(params);
+    }
+
+    protected void dialog(final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(TousuCloseActivity.this);
+        builder.setMessage("提示");
+        builder.setTitle("删除该图片");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+
+                if(position>0){
+                    imageItem.remove(position);
+                    simpleAdapter.notifyDataSetChanged();
+
+                    Log.d(TAG,"remove img position="+position);
+                    imglist.remove(position-1);
+                }
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
     }
 }

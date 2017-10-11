@@ -143,10 +143,7 @@
 
         </RelativeLayout>
 
-
-            <View style="@style/line" />
-
-
+        <View style="@style/line" />
 
         <TextView
             android:id="@+id/tousu_detail_content"
@@ -158,6 +155,17 @@
             android:background="@color/white"
             android:text="得得到得到得到得到得到得到得到得到得到得到得到得到得到得到得到得到得到得到得到得到得到得到得到得到得到得到得到到"/>
 
+        <saiwei.com.river.view.MyGridView
+            android:id="@+id/tousu_detail_gridView1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/auto_dimen2_20"
+            android:columnWidth="90dp"
+            android:gravity="center"
+            android:numColumns="4"
+            android:background="@color/white">
+
+        </saiwei.com.river.view.MyGridView>
 
         <LinearLayout
             android:layout_width="match_parent"
