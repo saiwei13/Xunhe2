@@ -332,6 +332,7 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
                 tmp.put("latitude",bean.getLatitude());
                 tmp.put("locationAddress",bean.getLocationAddress());
                 tmp.put("reportContent",bean.getReportContent());
+                tmp.put("reportImg",bean.getReportImg());
 
                 jsonArray.put(tmp);
 
@@ -446,23 +447,12 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-//                Toast.makeText(getApplicationContext(), "You clicked "+items[i], Toast.LENGTH_SHORT).show();
                 view.setText(item_array[i]);
 
-                xunheRecord.setIsHDBJ("1");     //1
-                xunheRecord.setIsHDWN("1"); //2
-                xunheRecord.setIsWSPK("1"); //3
-                xunheRecord.setIsSSWF("1"); //4
-                xunheRecord.setIsHALJ("1"); //5
-                xunheRecord.setIsHDSZ("1"); //6
-                xunheRecord.setIsRHWK("1"); //7
-                xunheRecord.setIsPHSS("1"); //8
-                xunheRecord.setIsFFBY("1"); //9
-                xunheRecord.setIsHZTS("1"); //10
-                xunheRecord.setIsYXSZ("1"); //11
-                xunheRecord.setIsHDZZ("1"); //12
-
                 String tmp = (i+1)+"";
+
+                Log.d(TAG,"setSingleChoiceItems()  type="+type+" , tmp="+tmp+" , txt"+item_array[i]);
+
                 if(type == 1){
                     xunheRecord.setIsHDBJ(tmp);
                 }

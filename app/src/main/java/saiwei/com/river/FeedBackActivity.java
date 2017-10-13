@@ -25,6 +25,9 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zxy.tiny.Tiny;
+import com.zxy.tiny.callback.BitmapCallback;
+
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -489,58 +492,6 @@ public class FeedBackActivity extends Activity {
         builder.create().show();
     }
 
-    /**
-     * 裁剪图片
-     *
-     * @param uri
-     */
-    public void startPhotoZoom(Uri uri) {
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, "image/*");
-        intent.putExtra("crop", "true");// crop=true 有这句才能出来最后的裁剪页面.
-        intent.putExtra("aspectX", 1);// 这两项为裁剪框的比例.
-        intent.putExtra("aspectY", 1);// x:y=1:1
-        intent.putExtra("outputX", 200);//图片输出大小
-        intent.putExtra("outputY", 200);
-        intent.putExtra("output", uri);
-        intent.putExtra("outputFormat", "JPEG");// 返回格式
-        startActivityForResult(intent, 3);
-    }
-
-    /**
-     * 将图片image压缩成大小为 size的图片（size表示图片大小，单位是KB）
-     *
-     * @param image
-     *            图片资源
-     * @param size
-     *            图片大小
-     * @return Bitmap
-     */
-    private Bitmap compressImage(Bitmap image, int size) {
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        // 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        int options = 100;
-        // 循环判断如果压缩后图片是否大于100kb,大于继续压缩
-        while (baos.toByteArray().length / 1024 > size) {
-            // 重置baos即清空baos
-            baos.reset();
-            // 每次都减少10
-            options -= 10;
-            // 这里压缩options%，把压缩后的数据存放到baos中
-            image.compress(Bitmap.CompressFormat.JPEG, options, baos);
-
-        }
-        // 把压缩后的数据baos存放到ByteArrayInputStream中
-        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());
-        // 把ByteArrayInputStream数据生成图片
-        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);
-        return bitmap;
-    }
-
-
-
     //声明一个AlertDialog构造器
     private AlertDialog.Builder builder;
 
@@ -676,6 +627,18 @@ public class FeedBackActivity extends Activity {
         }
     }
 
+    private void test(){
+        Tiny.BitmapCompressOptions options = new Tiny.BitmapCompressOptions();
+
+        //options.height = xxx;//some compression configuration.
+        Tiny.getInstance().source("").asBitmap().withOptions(options).compress(new BitmapCallback() {
+            @Override
+            public void callback(boolean isSuccess, Bitmap bitmap, Throwable t) {
+                //return the compressed bitmap object
+            }
+        });
+    }
+
     private void saveBitmap(Bitmap map) {
 //        File file = new File(getExternalCacheDir(), System.currentTimeMillis() + ".jpg");
 
@@ -683,7 +646,8 @@ public class FeedBackActivity extends Activity {
 
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-            map.compress(Bitmap.CompressFormat.JPEG, 80, bos);
+//            map.compress(Bitmap.CompressFormat.JPEG, 80, bos);
+            map.compress(Bitmap.CompressFormat.JPEG, 50, bos);
             bos.flush();
             bos.close();
 //            updateImg(file);//上传图片接口

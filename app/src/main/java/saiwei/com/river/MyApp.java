@@ -3,6 +3,8 @@ package saiwei.com.river;
 import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
@@ -10,12 +12,14 @@ import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.zxy.tiny.Tiny;
 
 import java.io.File;
 
@@ -27,6 +31,8 @@ import saiwei.com.river.db.DaoSession;
  */
 
 public class MyApp extends Application {
+
+    private static final String TAG = "chenwei.MyApp";
 
     private DaoSession daoSession;
 
@@ -49,6 +55,9 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Log.d(TAG,"onCreate()");
+
         initGreenDao();
         initImageLoader();
 
@@ -56,6 +65,7 @@ public class MyApp extends Application {
 
 //        CrashReport.initCrashReport(getApplicationContext(), "d1eb097298", true);
         Bugly.init(getApplicationContext(), "d1eb097298", true);
+        Tiny.getInstance().init(this);
     }
 
     private void initGreenDao(){
@@ -77,11 +87,20 @@ public class MyApp extends Application {
 //.memoryCacheExtraOptions(480, 800)
 
         // 获取默认的路径
-        File cacheDir = StorageUtils.getCacheDirectory(getApplicationContext());
+//        File cacheDir = StorageUtils.getCacheDirectory(getApplicationContext());
+
+        File cacheDir = new File("/sdcard/hechang/cache");
+        if (!cacheDir.exists()) {
+            cacheDir.mkdirs();
+        }
+
+        Log.d(TAG,"initImageLoader()  cacheDir="+cacheDir);
+
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
                 getApplicationContext())
                 // 设置内存图片的宽高
-                .memoryCacheExtraOptions((int)widgt, (int)height)
+//                .memoryCacheExtraOptions((int)widgt, (int)height)
+                .memoryCacheExtraOptions(480, 800)
                 // default = device screen dimensions
                 // 缓存到磁盘中的图片宽高
                 .diskCacheExtraOptions((int)widgt, (int)height, null)
@@ -113,9 +132,48 @@ public class MyApp extends Application {
                         new BaseImageDownloader(getApplicationContext())) // default
                 // 使用默认的图片解析器
                 .imageDecoder(new BaseImageDecoder(true)) // default
-                .defaultDisplayImageOptions(DisplayImageOptions.createSimple()) // default
+//                .defaultDisplayImageOptions(DisplayImageOptions.createSimple()) // default
+                .defaultDisplayImageOptions(getDisplayOptions())
                 .writeDebugLogs().build();
         ImageLoader.getInstance().init(config);
+    }
+
+    private DisplayImageOptions getDisplayOptions() {
+        DisplayImageOptions options;
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.zanwu_img)// 设置图片在下载期间显示的图片
+                .showImageForEmptyUri(R.drawable.zanwu_img)// 设置图片Uri为空或是错误的时候显示的图片
+                .showImageOnFail(R.drawable.zanwu_img) // 设置图片加载/解码过程中错误时候显示的图片
+
+                .cacheInMemory(true)// 设置下载的图片是否缓存在内存中
+                .cacheOnDisc(true)// 设置下载的图片是否缓存在SD卡中
+
+//                .considerExifParams(true) // 是否考虑JPEG图像EXIF参数（旋转，翻转）
+                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)// 设置图片以如何的编码方式显示
+                .bitmapConfig(Bitmap.Config.RGB_565)// 设置图片的解码类型//
+                // .delayBeforeLoading(int delayInMillis)//int
+                // delayInMillis为你设置的下载前的延迟时间
+                // 设置图片加入缓存前，对bitmap进行设置
+                // .preProcessor(BitmapProcessor preProcessor)
+                .resetViewBeforeLoading(true)// 设置图片在下载前是否重置，复位
+//                .displayer(new RoundedBitmapDisplayer(20))// 是否设置为圆角，弧度为多少
+//                .displayer(new FadeInBitmapDisplayer(100))// 是否图片加载好后渐入的动画时间
+                .build();// 构建完成
+        return options;
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+
+        Log.d(TAG,"onLowMemory()");
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+
+        Log.d(TAG,"onTerminate()");
     }
 
 }

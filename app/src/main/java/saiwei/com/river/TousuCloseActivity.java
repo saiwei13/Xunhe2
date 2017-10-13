@@ -422,7 +422,7 @@ public class TousuCloseActivity extends Activity {
 
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-            map.compress(Bitmap.CompressFormat.JPEG, 80, bos);
+            map.compress(Bitmap.CompressFormat.JPEG, 50, bos);
             bos.flush();
             bos.close();
 //            updateImg(file);//上传图片接口

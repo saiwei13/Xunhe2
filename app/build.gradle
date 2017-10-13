@@ -10,10 +10,10 @@ android {
 //        applicationId "river.saiwei.com.myapplication"
 
         applicationId "saiwei.com.river"
-        minSdkVersion 11
+        minSdkVersion 14
         targetSdkVersion 23
-        versionCode 6
-        versionName "1.0.6"
+        versionCode 7
+        versionName "1.0.7"
 //        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk {
@@ -21,7 +21,6 @@ android {
             abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm
         }
     }
-
 
     //签名
     signingConfigs {
@@ -94,6 +93,8 @@ dependencies {
 //    compile 'com.tencent.bugly:crashreport:latest.release'
     compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
     compile 'com.tencent.bugly:nativecrashreport:latest.release' //
+//    compile 'top.zibin:Luban:1.1.3'
+    compile 'com.zxy.android:tiny:0.1.0'
 
     compile project(':library')
 

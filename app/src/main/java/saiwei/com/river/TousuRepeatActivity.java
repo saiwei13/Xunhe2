@@ -32,6 +32,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andview.refreshview.XRefreshView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -366,12 +368,17 @@ public class TousuRepeatActivity extends Activity {
         private LayoutInflater mInflater;
         private List<RspTousuRepeatBean.ResponseDataBean.DataListBean> mList = null;
         private Context mContext;
+        int widgt,height;
+        ImageSize targetSize;
 
 //        private PoiInfo tmp;
 
         public XunHeAdapter(Context context) {
             mContext = context;
             mInflater = LayoutInflater.from(context);
+            widgt = (int) getResources().getDimension(R.dimen.auto_dimen2_160);
+            height = (int) getResources().getDimension(R.dimen.auto_dimen2_130);
+            targetSize = new ImageSize(widgt, height);
         }
 
         public void setList(List<RspTousuRepeatBean.ResponseDataBean.DataListBean> list) {
@@ -413,6 +420,7 @@ public class TousuRepeatActivity extends Activity {
             if (convertView == null) {
                 convertView = mInflater.inflate(R.layout.item_news_template5, null);
                 holder = new ViewHolder();
+                holder.img = (ImageView) convertView.findViewById(R.id.iv_thumb);
                 holder.no = (TextView) convertView.findViewById(R.id.tousu_item_no);
                 holder.status = (TextView) convertView.findViewById(R.id.tousu_item_status);
                 holder.content = (TextView) convertView.findViewById(R.id.tousu_item_content);
@@ -421,6 +429,23 @@ public class TousuRepeatActivity extends Activity {
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
+            }
+
+            String img_url =  mList.get(position).getReport_Img();
+            Log.d(TAG,"getView() position = "+position+" , img_url ="+img_url);
+
+            if(!TextUtils.isEmpty(img_url)){
+                String[] imgs = img_url.split(",");
+                if(imgs.length>0){
+
+                    String url = RetrofitLogic.IMAGE_BASE_GET_URL+imgs[0].trim();
+                    Log.d(TAG,"getView() load img url ="+url);
+
+                    ImageLoader.getInstance().displayImage(url,holder.img,targetSize);
+//                    imageLoader.displayImage(url,holder.img);
+                } else {
+                    Log.d(TAG,"getView() imgs.length  = 0 ");
+                }
             }
 
             holder.no.setText(mList.get(position).getBussiness_No());
@@ -434,6 +459,7 @@ public class TousuRepeatActivity extends Activity {
         }
 
         class ViewHolder {
+            ImageView img;
             TextView no;
             TextView status;
             TextView content;

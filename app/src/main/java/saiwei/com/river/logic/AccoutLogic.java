@@ -58,6 +58,20 @@ public class AccoutLogic {
         initTousuStatus();
     }
 
+
+    public int getTmp() {
+        return tmp;
+    }
+
+    public void setTmp(int tmp) {
+        this.tmp = tmp;
+    }
+
+    private int tmp ;
+
+    public static int tmp2 ;
+
+
     public String getTousuStatus(String key){
         String value = tousuStatus.get(key);
         return value;
@@ -122,27 +136,6 @@ public class AccoutLogic {
     }
 
     public RspTousuDetailBean rspTousuDetailBeanCache;
-
-
-//    public RspTousuDetailBean.ResponseDataBean.PublicReportBean publicReportBeanCache;
-//    public RspTousuDetailBean.ResponseDataBean.PublicReportBean getPublicReportBeanCache(){
-//        return publicReportBeanCache;
-//    }
-//
-//    public void setPublicReportBeanCache(RspTousuDetailBean.ResponseDataBean.PublicReportBean cache){
-//        publicReportBeanCache = cache;
-//    }
-//
-//    public List<RspTousuDetailBean.ResponseDataBean.FinishProcessBean> finishProcessListCache;
-//
-//    public List<RspTousuDetailBean.ResponseDataBean.FinishProcessBean> getFinishProcessListCache() {
-//        return finishProcessListCache;
-//    }
-//
-//    public void setFinishProcessListCache(List<RspTousuDetailBean.ResponseDataBean.FinishProcessBean>finishProcessListCache) {
-//        this.finishProcessListCache = finishProcessListCache;
-//    }
-
 
 
     /**

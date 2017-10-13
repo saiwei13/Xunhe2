@@ -262,7 +262,7 @@ public interface NetWorkService {
 
 
     //用户通用信息
-    @POST("user/ getUserCommonInfo")
+    @POST("user/getUserCommonInfo")
     @FormUrlEncoded
     Call<RspUserCommonInfo> doGetUserCommonInfo(
             @Field("userId") String userId

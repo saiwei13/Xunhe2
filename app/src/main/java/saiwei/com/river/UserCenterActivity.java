@@ -248,8 +248,6 @@ public class UserCenterActivity extends Activity {
             }
         });
 
-
-
         //上报问题刷新列表
         mReportRefreshView = (XRefreshView) findViewById(R.id.usercenter_report_refreshview);
         // 设置是否可以下拉刷新
@@ -390,6 +388,9 @@ public class UserCenterActivity extends Activity {
 
     @OnClick({R.id.title_btn_left})
     public void doBack(View v) {
+
+        Log.d(TAG,"doBack() tmp = "+AccoutLogic.getInstance().getTmp());
+
         finish();
     }
 
@@ -812,6 +813,15 @@ public class UserCenterActivity extends Activity {
 
         mCurTab = tabIndex;
 
+        int  i = AccoutLogic.getInstance().getTmp();
+        AccoutLogic.getInstance().setTmp((i+1));
+
+        AccoutLogic.tmp2 += 1;
+
+        Log.d(TAG,"switchTab () tmp = "+AccoutLogic.getInstance().getTmp());
+
+        Log.d(TAG,"switchTab () tmp2 = "+AccoutLogic.tmp2);
+
         switch(tabIndex){
             case TAB_XUNHE:
 
@@ -821,6 +831,7 @@ public class UserCenterActivity extends Activity {
                 mRentTabBotLine.setVisibility(View.GONE);
 
                 mXunheRefreshView.setVisibility(View.VISIBLE);
+                mXunHeAdapter.notifyDataSetChanged();
                 mReportRefreshView.setVisibility(View.GONE);
 
                 break;
@@ -833,6 +844,7 @@ public class UserCenterActivity extends Activity {
 
                 mXunheRefreshView.setVisibility(View.GONE);
                 mReportRefreshView.setVisibility(View.VISIBLE);
+                mReportAdapter.notifyDataSetChanged();
 
                 break;
         }
