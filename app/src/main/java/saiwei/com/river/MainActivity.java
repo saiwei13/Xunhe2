@@ -42,6 +42,8 @@ import saiwei.com.river.util.SharePreferenceUtil;
 
 public class MainActivity extends Activity {
 
+    private static final String TAG = "chenwei.MainActivity";
+
     @BindView(R.id.main_xunhe)
     Button mBtXunhe;
 
@@ -70,6 +72,24 @@ public class MainActivity extends Activity {
         initData();
 
         Beta.checkUpgrade(false,false);
+
+
+
+//        long diff = 500*1000;
+//
+//        long diffSeconds = diff / 1000 % 60;
+//        long diffMinutes = diff / (60 * 1000) % 60;
+//        long diffHours = diff / (60 * 60 * 1000) % 24;
+//        long diffDays = diff / (24 * 60 * 60 * 1000);
+//
+//        Log.d(TAG," 两个时间相差："+diffSeconds+" , "+diffMinutes+", "+diffHours+" , "+diffDays);
+
+//        System.out.print("两个时间相差：");
+//        System.out.print(diffDays + " 天, ");
+//        System.out.print(diffHours + " 小时, ");
+//        System.out.print(diffMinutes + " 分钟, ");
+//        System.out.print(diffSeconds + " 秒.");
+
     }
 
     private void initData() {

@@ -1,5 +1,6 @@
 package saiwei.com.river.logic;
 
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -15,6 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import saiwei.com.river.MyApp;
 import saiwei.com.river.util.DrivingRecordTool;
 import saiwei.com.river.entity.ReqFeedbackBean;
 import saiwei.com.river.model.GpsInfo;
@@ -30,7 +32,15 @@ public class DrivingRecordLogic {
     private static final String TAG = "chenwei.DrivingLogic";
 
     /** 当前gps信息目录 */
-    public static String CUR_GPS_DIR =   "/sdcard/hechang/trace";
+//    public static String CUR_GPS_DIR =   "/sdcard/hechang/trace";
+    public static String CUR_GPS_DIR ;//=Environment.getExternalStorageDirectory().getPath()+File.separator+"hechang/trace";
+
+    private void test(){
+        File tmp  = MyApp.getApp().getExternalFilesDir(null);
+        Log.d(TAG,"createFile2()  path = "+tmp.getPath());
+
+        String sf = tmp.getPath()+File.separator+"hechang_test2";
+    }
 
     /**
      * 单例，静态变量。请记得销毁
@@ -50,10 +60,12 @@ public class DrivingRecordLogic {
     private DrivingRecordLogic() {
         // mContext = context;
         // dealOldTraceData();
-
 //        Log.i(TAG2, "构造方法");
-
 //        requestLocation();
+        File tmp  = MyApp.getApp().getExternalFilesDir(null);
+//        Log.d(TAG,"createFile2()  path = "+tmp.getPath());
+        CUR_GPS_DIR =tmp.getPath()+File.separator+"hechang/trace";
+//        String sf = tmp.getPath()+File.separator+"hechang_test2";
     }
 
     private boolean isRecord;
@@ -269,7 +281,9 @@ public class DrivingRecordLogic {
     public ArrayList<GpsInfo>  readFromFileGpsInfos(String filename){
 
         Log.d(TAG,"readFromFile()  filename="+filename);
-        File targetFile=new File("/sdcard/hechang/trace/"+filename);
+
+//        File targetFile=new File("/sdcard/hechang/trace/"+filename);
+        File targetFile=new File(CUR_GPS_DIR+"/"+filename);
         String readedStr="";
         try{
             InputStream in = new BufferedInputStream(new FileInputStream(targetFile));

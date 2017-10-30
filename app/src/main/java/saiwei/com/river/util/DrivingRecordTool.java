@@ -50,7 +50,17 @@ public class DrivingRecordTool {
 			long hours = (diff-days*(1000 * 60 * 60 * 24))/(1000* 60 * 60);
 			long minutes = (diff-days*(1000 * 60 * 60 * 24)-hours*(1000* 60 * 60))/(1000* 60);
 //		System.out.println(""+days+"天"+hours+"小时"+minutes+"分");
-			diff_time  = +hours+"小时"+minutes+"分";
+//			diff_time  = +hours+"小时"+minutes+"分";
+
+
+			long diffSeconds = diff / 1000 % 60;
+			long diffMinutes = diff / (60 * 1000) % 60;
+			long diffHours = diff / (60 * 60 * 1000) % 24;
+			long diffDays = diff / (24 * 60 * 60 * 1000);
+
+
+			diff_time  = diffHours+"小时"+diffMinutes+"分"+diffSeconds+"秒";
+
 
 		} catch (ParseException e) {
 			e.printStackTrace();
