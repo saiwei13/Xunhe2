@@ -195,7 +195,12 @@ public class AccoutLogic {
 
         User user = userDao.loadByRowId(1);
 
-        return user.getUserid();
+        if(user!=null){
+            return user.getUserid();
+        }
+
+        return "";
+
     }
 
     public void delUser(String userid){

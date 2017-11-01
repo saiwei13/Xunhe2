@@ -25,6 +25,7 @@ import java.io.File;
 
 import saiwei.com.river.db.DaoMaster;
 import saiwei.com.river.db.DaoSession;
+import timber.log.Timber;
 
 /**
  * Created by saiwei on 9/22/17.
@@ -66,6 +67,18 @@ public class MyApp extends Application {
 //        CrashReport.initCrashReport(getApplicationContext(), "d1eb097298", true);
         Bugly.init(getApplicationContext(), "d1eb097298", true);
         Tiny.getInstance().init(this);
+
+//        if(BuildConfig.DEBUG){
+//            Timber.plant(new Timber.DebugTree());
+//        } else {
+////            Timber.plant(new CrashReportingTree());
+//        }
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new ThreadAwareDebugTree());
+        } else {
+            Timber.plant(new ReleaseTree());
+        }
     }
 
     private void initGreenDao(){
@@ -174,6 +187,39 @@ public class MyApp extends Application {
         super.onTerminate();
 
         Log.d(TAG,"onTerminate()");
+    }
+
+
+    public class ThreadAwareDebugTree extends Timber.DebugTree {
+        @Override
+        protected void log(int priority, String tag, String message, Throwable t) {
+            if (tag != null) {
+                String threadName = Thread.currentThread().getName();
+                tag = "<" + threadName + "> " + tag;
+            }
+            super.log(priority, tag, message, t);
+        }
+        @Override
+        protected String createStackElementTag(StackTraceElement element) {
+            return super.createStackElementTag(element) + "(Line " + element.getLineNumber() + ")";  //日志显示行号
+        }
+    }
+
+    public class ReleaseTree extends ThreadAwareDebugTree {
+        @Override
+        protected boolean isLoggable(String tag, int priority) {
+            if (priority == Log.VERBOSE || priority == Log.DEBUG || priority == Log.INFO) {
+                return false;
+            }
+            return true;
+        }
+        @Override
+        protected void log(int priority, String tag, String message, Throwable t) {
+            if (!isLoggable(tag, priority)) {
+                return;
+            }
+            super.log(priority, tag, message, t);
+        }
     }
 
 }

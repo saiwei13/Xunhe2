@@ -186,26 +186,28 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                             password
                     );
 
+                    LoginBean.ResponseDataBean.HzOrgCodeBean  hzOrgCode = bean.getResponseData().getHzOrgCode();
+                    if(hzOrgCode!=null){
+                        String town = hzOrgCode.getTown();
+                        String towncode = hzOrgCode.getTowncode();
+                        String countycode  = hzOrgCode.getCountycode();
 
-                    String town = bean.getResponseData().getHzOrgCode().getTown();
-                    String towncode = bean.getResponseData().getHzOrgCode().getTowncode();
-                    String countycode  = bean.getResponseData().getHzOrgCode().getCountycode();
 
+                        SharePreferenceUtil.getInstance().putStr(
+                                SharePreferenceUtil.SHARE_PREFERENCE_TOWN,
+                                town
+                        );
 
-                    SharePreferenceUtil.getInstance().putStr(
-                            SharePreferenceUtil.SHARE_PREFERENCE_TOWN,
-                            town
-                    );
+                        SharePreferenceUtil.getInstance().putStr(
+                                SharePreferenceUtil.SHARE_PREFERENCE_TOWNCODE,
+                                towncode
+                        );
 
-                    SharePreferenceUtil.getInstance().putStr(
-                            SharePreferenceUtil.SHARE_PREFERENCE_TOWNCODE,
-                            towncode
-                    );
-
-                    SharePreferenceUtil.getInstance().putStr(
-                            SharePreferenceUtil.SHARE_PREFERENCE_COUNTYCODE,
-                            countycode
-                    );
+                        SharePreferenceUtil.getInstance().putStr(
+                                SharePreferenceUtil.SHARE_PREFERENCE_COUNTYCODE,
+                                countycode
+                        );
+                    }
 
                     startActivity(new Intent(LoginActivity.this,MainActivity.class));
                     finish();

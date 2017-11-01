@@ -7,6 +7,12 @@ package saiwei.com.river;
 public class Constant {
 
 
+    public static String XUNHE_STATUE = "xunhe_statue";
+
+    public static String XUNHE_STATUE_START = "xunhe_start";
+    public static String XUNHE_STATUE_CONTINUE = "xunhe_continue";
+    public static String XUNHE_STATUE_END = "xunhe_end";
+
     public static int QUERY_TYPE_UNCOMPLETED = 0;
     public static int QUERY_TYPE_COMPLETED = 1;
 

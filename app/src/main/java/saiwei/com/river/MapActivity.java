@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -34,6 +35,9 @@ import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.MyLocationStyle;
 import com.amap.api.maps2d.model.PolylineOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +49,10 @@ import saiwei.com.river.logic.DrivingRecordLogic;
 import saiwei.com.river.logic.LocationLogic;
 import saiwei.com.river.model.River;
 import saiwei.com.river.model.XunheRecord;
+import saiwei.com.river.service.WhiteService;
 import saiwei.com.river.util.DrivingRecordTool;
+import saiwei.com.river.util.SharePreferenceUtil;
+import timber.log.Timber;
 
 /**
  * Created by saiwei on 9/21/17.
@@ -84,6 +91,11 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
     @BindView(R.id.map_gps_statuss)
     TextView mGpsStatus;
 
+    private String last_filename;
+
+    private String continue_reportRiverId;
+
+    private List<LatLng> linepoints;
 
     private int mTimerSecond = 0;
 
@@ -148,20 +160,30 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
             Toast.makeText(this, "请先登陆", Toast.LENGTH_SHORT).show();
         } else {
             mRivers = AccoutLogic.getInstance().getRiverInfoFromDB();
-
             if (mRivers != null && mRivers.size() > 0) {
                 showSingleChoiceDialog(v);
             } else {
                 showNotDataDialog(v);
             }
         }
-
 //        CameraUpdateFactory.
 //        changeCamera(CameraUpdateFactory.zoomIn(), null);
 //        changeCamera(CameraUpdateFactory.zoomTo(15), null);
     }
 
-    List<LatLng> linepoints;
+    public void doContitue(){
+        if (!isOPen()) {
+            Toast.makeText(this, "请先打开gps开关", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!AccoutLogic.getInstance().isLogin()) {
+            Toast.makeText(this, "请先登陆", Toast.LENGTH_SHORT).show();
+        } else {
+            River continueRiver = AccoutLogic.getInstance().getRiver(continue_reportRiverId);
+            continueXunHe(continueRiver);
+        }
+    }
 
     /**
      * 开始巡河
@@ -191,6 +213,69 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
             aMap.setMyLocationStyle(myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW));
         }
         linepoints = new ArrayList<>();
+
+        Intent whiteIntent = new Intent(getApplicationContext(), WhiteService.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.XUNHE_STATUE,Constant.XUNHE_STATUE_START);
+
+        whiteIntent.putExtras(bundle);
+        startService(whiteIntent);
+    }
+
+    /**
+     * 继续巡河
+     */
+    private void continueXunHe(River river) {
+
+        Timber.d("continueXunHe()");
+
+        if (river == null) {
+            Toast.makeText(this, "continueXunHe 异常", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Toast.makeText(this, "继续巡河", Toast.LENGTH_SHORT).show();
+//        DrivingRecordLogic.getInstance().startRecord(river);
+
+        mTVRiverName.setText(river.getRiverName());
+
+        mXunHeInfoLayout.setVisibility(View.VISIBLE);
+        mBtStart.setVisibility(View.INVISIBLE);
+        mBtStop.setVisibility(View.VISIBLE);
+        mBtReport.setVisibility(View.VISIBLE);
+
+
+
+
+
+        if (aMap != null) {
+            aMap.setMyLocationStyle(myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW));
+        }
+//        linepoints = new ArrayList<>();
+
+        linepoints = DrivingRecordLogic.getInstance().readFromFile(last_filename);
+        if(linepoints == null){
+            linepoints = new ArrayList<>();
+            mTimerSecond = 0;
+        } else {
+
+            Timber.d("continueXunHe() linepoints.size()=%d",linepoints.size());
+
+            if(linepoints.size()>=2){
+                mTimerSecond = DrivingRecordLogic.getInstance().getContinueTime();
+            }
+        }
+
+        mHandler.sendEmptyMessageDelayed(1, 1000);
+
+        Intent whiteIntent = new Intent(getApplicationContext(), WhiteService.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.XUNHE_STATUE,Constant.XUNHE_STATUE_START);
+
+        whiteIntent.putExtras(bundle);
+        startService(whiteIntent);
     }
 
     @OnClick({R.id.map_report})
@@ -219,8 +304,13 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
             mBtReport.setVisibility(View.GONE);
             mHandler.removeMessages(1);
 
+            Intent whiteIntent = new Intent(getApplicationContext(), WhiteService.class);
+            Bundle bundle = new Bundle();
+            bundle.putString(Constant.XUNHE_STATUE,Constant.XUNHE_STATUE_END);
+            whiteIntent.putExtras(bundle);
+//            startService(whiteIntent);
+            stopService(whiteIntent);
         }
-
     }
 
     @OnClick({R.id.title_btn_left})
@@ -231,7 +321,7 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
     /**
      * 初始化
      */
-    private void init() {
+    private void init(){
 
         mTitleLeft = (ImageButton) findViewById(R.id.title_btn_left);
 //        mTitleLeft.setOnClickListener(this);
@@ -256,6 +346,37 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
         aMap.setMyLocationStyle(myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW));
         mBtStart.setVisibility(View.VISIBLE);
         mBtStop.setVisibility(View.GONE);
+
+
+        last_filename  = SharePreferenceUtil.getInstance().getStr(SharePreferenceUtil.SHARE_PREFERENCE_LASTXUNHE);
+
+        if(!TextUtils.isEmpty(last_filename)){
+            showContinueXunheDialog(null);
+
+
+            String jsonstr = SharePreferenceUtil.getInstance().getStr(SharePreferenceUtil.SHARE_PREFERENCE_LASTXUNHE_RECORD);
+
+            if(!TextUtils.isEmpty(jsonstr)){
+                try {
+                    JSONObject jsonObject = new JSONObject(jsonstr);
+
+                    XunheRecord curXunheRecord = new XunheRecord();
+                    curXunheRecord.setRecordId((Long) jsonObject.get("recordId"));
+                    curXunheRecord.setUserid((String) jsonObject.get("userid"));
+                    curXunheRecord.setReportRiver((String) jsonObject.get("reportRiver"));
+
+                    continue_reportRiverId = (String) jsonObject.get("reportRiverId");
+
+                    curXunheRecord.setReportRiverId(continue_reportRiverId);
+                    curXunheRecord.setTourTime((String) jsonObject.get("tourTime"));
+
+                    DrivingRecordLogic.getInstance().setCurXunheRecord(curXunheRecord);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     /**
@@ -283,7 +404,6 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
     protected void onResume() {
         super.onResume();
         mapView.onResume();
-
 
         if(myLocationStyle!=null){
             myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW);
@@ -330,9 +450,9 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
 //            mService.removeGpsStatusListener(this);
 //        }
 
-        if(DrivingRecordLogic.getInstance().isRecord()){
-            DrivingRecordLogic.getInstance().stopRecord();
-        }
+//        if(DrivingRecordLogic.getInstance().isRecord()){
+//            DrivingRecordLogic.getInstance().stopRecord();
+//        }
 //        LocationLogic.getInstance().stopLocation();
 
 
@@ -515,6 +635,40 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
                 } else {
                     finish();
                 }
+            }
+        });
+
+        //设置对话框是可取消的
+        builder.setCancelable(true);
+        AlertDialog dialog=builder.create();
+        dialog.show();
+    }
+
+    /**
+     * 检测到上次有未完成的巡河记录 dialog
+     * @param view
+     */
+    private void showContinueXunheDialog(View view) {
+
+        builder=new AlertDialog.Builder(this);
+        builder.setIcon(R.drawable.bulb);
+        builder.setTitle("提示");
+        builder.setMessage("检测到上次有未完成的巡河记录，请选择操作！");
+
+        //监听下方button点击事件
+        builder.setPositiveButton("结束上次巡河任务", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                doStop(null);
+            }
+        });
+
+        builder.setNegativeButton("继续", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                DrivingRecordLogic.getInstance().continueRecord(Long.parseLong(last_filename));
+
+                doContitue();
             }
         });
 

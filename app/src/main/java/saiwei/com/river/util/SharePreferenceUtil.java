@@ -22,6 +22,17 @@ public class SharePreferenceUtil {
 
     public static final String CAR_PARKING = "hechang";
 
+
+    /**
+     * 查询上一次巡河记录
+     *
+     * 如果是空，就重新一条新的记录
+     * 如果不为空，就继续上一巡河记录
+     */
+    public static final String SHARE_PREFERENCE_LASTXUNHE = "last_xunhe";
+
+    public static final String SHARE_PREFERENCE_LASTXUNHE_RECORD = "last_xunhe_record";
+
     public static final String SHARE_PREFERENCE_USERNAME = "username";
     public static final String SHARE_PREFERENCE_PASSWORD = "password";
 

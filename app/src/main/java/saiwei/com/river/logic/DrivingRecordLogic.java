@@ -6,6 +6,9 @@ import android.util.Log;
 
 import com.amap.api.maps2d.model.LatLng;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,6 +25,8 @@ import saiwei.com.river.entity.ReqFeedbackBean;
 import saiwei.com.river.model.GpsInfo;
 import saiwei.com.river.model.River;
 import saiwei.com.river.model.XunheRecord;
+import saiwei.com.river.util.SharePreferenceUtil;
+import timber.log.Timber;
 
 /**
  * Created by saiwei on 9/21/17.
@@ -110,11 +115,10 @@ public class DrivingRecordLogic {
 //        curFileUrl = System.currentTimeMillis();
 //
 //        curFile = DrivingRecordTool.createGpsFileName(curFileUrl);
-
 //        Tool.LOG_I(TAG2, "startRecordGps()  curFileUrl=" + curFileUrl);
-
-
         curFileName = System.currentTimeMillis();
+
+        Timber.d("startRecord() curFileName=%d",curFileName);
 
         curXunheRecord = new XunheRecord();
         curXunheRecord.setRecordId(curFileName);
@@ -123,6 +127,31 @@ public class DrivingRecordLogic {
         curXunheRecord.setReportRiverId(river.getRiverBaseinfoId());
         String createtime = DrivingRecordTool.conversionTime(curFileName);
         curXunheRecord.setTourTime(createtime);
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("recordId",curFileName);
+            jsonObject.put("userid",AccoutLogic.getInstance().getUserId());
+            jsonObject.put("reportRiver",river.getRiverName());
+            jsonObject.put("reportRiverId",river.getRiverBaseinfoId());
+            jsonObject.put("tourTime",createtime);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        SharePreferenceUtil.getInstance().putStr(SharePreferenceUtil.SHARE_PREFERENCE_LASTXUNHE,curFileName+"");
+
+        SharePreferenceUtil.getInstance().putStr(SharePreferenceUtil.SHARE_PREFERENCE_LASTXUNHE_RECORD,jsonObject.toString());
+    }
+
+
+    public void continueRecord(long filename){
+
+        Timber.d("continueRecord()  filename=%d",filename);
+
+        curFileName = filename;
+
+        isRecord = true;
     }
 
     public boolean isRecord(){
@@ -131,13 +160,19 @@ public class DrivingRecordLogic {
 
     public void stopRecord(){
         isRecord = false;
+
+        SharePreferenceUtil.getInstance().putStr(SharePreferenceUtil.SHARE_PREFERENCE_LASTXUNHE,"");
     }
 
     public void stopRecord(XunheRecord xunheRecord){
+
+
+
         isRecord = false;
 
-
         AccoutLogic.getInstance().insertDBXunheRecord(xunheRecord);
+
+        SharePreferenceUtil.getInstance().putStr(SharePreferenceUtil.SHARE_PREFERENCE_LASTXUNHE,"");
 
         //清空投诉数组
         feedbackBeens.clear();
@@ -226,10 +261,36 @@ public class DrivingRecordLogic {
         }
     }
 
+    private long cache_starttime;
+    private long cache_endtime;
+
+    public int getContinueTime(){
+
+        Timber.d("getContinueTime() cache_starttime=%d   cache_endtime=%d",cache_starttime,cache_endtime);
+
+        int difftime = 0;
+
+        if(cache_starttime == 0 || cache_endtime == 0){
+            difftime = 0;
+        } else {
+            difftime = (int) ((cache_endtime-cache_starttime)/1000);
+        }
+
+        Timber.d("getContinueTime() cache_starttime=%d , cache_endtime=%d , difftime=%d",cache_starttime,cache_endtime,difftime);
+
+        return difftime;
+    }
+
     public ArrayList<LatLng>  readFromFile(String filename){
 
         Log.d(TAG,"readFromFile()  filename="+filename);
-        File targetFile=new File("/sdcard/hechang/trace/"+filename);
+//        File targetFile=new File("/sdcard/hechang/trace/"+filename);
+
+
+        File targetFile=new File(CUR_GPS_DIR+"/"+filename);
+
+        Timber.d("readFromFile()  targetFile=%s",targetFile.getPath());
+
             String readedStr="";
             try{
                 InputStream in = new BufferedInputStream(new FileInputStream(targetFile));
@@ -240,8 +301,13 @@ public class DrivingRecordLogic {
                 ArrayList<LatLng> list = new ArrayList<LatLng>();
                 while((tmp=br.readLine())!=null){
 
-
                     String[] strs = tmp.split(",");
+
+                    if(x==0){
+                        cache_starttime = Long.parseLong(strs[0].trim());
+                    } else {
+                        cache_endtime = Long.parseLong(strs[0].trim());
+                    }
 
                     double lat = Double.parseDouble(strs[1]);
                     double lon = Double.parseDouble(strs[2]);
@@ -253,7 +319,7 @@ public class DrivingRecordLogic {
 //                       arr[x] = tmp;
 //                    System.out.println("123+"+List);
 //                       System.out.println("123+"+arr[x]);
-//                    x++;
+                    x++;
                 }
                 br.close();
                 in.close();
@@ -262,6 +328,9 @@ public class DrivingRecordLogic {
             } catch (Exception e) {
 //                Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
 //                return e.toString();
+
+                Timber.e(e.toString());
+
                 return null;
             }
     }

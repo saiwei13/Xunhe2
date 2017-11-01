@@ -10,10 +10,10 @@ android {
 //        applicationId "river.saiwei.com.myapplication"
 
         applicationId "saiwei.com.river"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 23
-        versionCode 9
-        versionName "1.0.9"
+        versionCode 11
+        versionName "1.0.11"
 //        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk {
@@ -81,6 +81,7 @@ dependencies {
     //    })
     //    compile 'com.android.support:appcompat-v7:26.+'
     //    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
+    compile 'com.jakewharton.timber:timber:4.5.1'
     testCompile 'junit:junit:4.12'
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
@@ -95,6 +96,7 @@ dependencies {
     compile 'com.tencent.bugly:nativecrashreport:latest.release' //
 //    compile 'top.zibin:Luban:1.1.3'
     compile 'com.zxy.android:tiny:0.1.0'
+//    compile 'com.android.support:appcompat-v7:23.2.0'
 
     compile project(':library')
 
