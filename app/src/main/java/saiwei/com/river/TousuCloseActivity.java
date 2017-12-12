@@ -85,10 +85,8 @@ public class TousuCloseActivity extends Activity {
         setContentView(R.layout.activity_tousu_close);
         ButterKnife.bind(this);
 
-
         taskId = getIntent().getStringExtra(Constant.taskId);
         publicReportId = getIntent().getStringExtra(Constant.publicReportId);
-
 
         initView();
         initData();
@@ -148,7 +146,7 @@ public class TousuCloseActivity extends Activity {
 
     String userid ;
     String reportContent ;
-    String reportPhone= "13720823605";
+    String reportPhone= "";
     String reportName ;
     String reportRiverId ;
     String reportRiver ;

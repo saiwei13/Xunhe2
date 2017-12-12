@@ -207,6 +207,11 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                                 SharePreferenceUtil.SHARE_PREFERENCE_COUNTYCODE,
                                 countycode
                         );
+
+                        SharePreferenceUtil.getInstance().putStr(
+                                SharePreferenceUtil.SHARE_PREFERENCE_MOBIEL,
+                                countycode
+                        );
                     }
 
                     startActivity(new Intent(LoginActivity.this,MainActivity.class));

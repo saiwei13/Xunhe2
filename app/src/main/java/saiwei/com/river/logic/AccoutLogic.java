@@ -186,6 +186,13 @@ public class AccoutLogic {
         return countycode;
     }
 
+    public String getUserPhone(){
+        String phone = SharePreferenceUtil.getInstance().getStr(
+                SharePreferenceUtil.SHARE_PREFERENCE_MOBIEL
+        );
+
+        return phone;
+    }
 
     public String getUserId(){
 

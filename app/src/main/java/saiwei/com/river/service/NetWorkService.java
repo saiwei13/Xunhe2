@@ -25,6 +25,7 @@ import saiwei.com.river.entity.RspComplaintHandleInfo;
 import saiwei.com.river.entity.RspCruisDetailBean;
 import saiwei.com.river.entity.RspCruiseBean;
 import saiwei.com.river.entity.RspFeedBack;
+import saiwei.com.river.entity.RspMonitorInfo;
 import saiwei.com.river.entity.RspRepeatComplaint;
 import saiwei.com.river.entity.RspTousuBean;
 import saiwei.com.river.entity.RspTousuDetailBean;
@@ -99,6 +100,7 @@ public interface NetWorkService {
             @Field("reportRiverId") String reportRiverId,
             @Field("tourTime") String tourTime,
             @Field("totalTime") String totalTime,
+            @Field("tourImg") String tourImg,
             @Field("isHDZZ") String isHDZZ,
             @Field("isHDBJ") String isHDBJ,
             @Field("isWSPK") String isWSPK,
@@ -266,6 +268,18 @@ public interface NetWorkService {
     @FormUrlEncoded
     Call<RspUserCommonInfo> doGetUserCommonInfo(
             @Field("userId") String userId
+
+    );//实现json格式的传输
+
+
+    //监控
+    @POST("userMonitor/submitMonitorInfo")
+    @FormUrlEncoded
+    Call<RspMonitorInfo> doMonitorInfo(
+            @Field("userId") String userId,
+            @Field("longitude") String longitude,
+            @Field("latitude") String latitude,
+            @Field("riverBaseinfoId") String riverBaseinfoId
 
     );//实现json格式的传输
 

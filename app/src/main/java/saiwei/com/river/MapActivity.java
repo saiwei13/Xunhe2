@@ -44,9 +44,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.Field;
+import saiwei.com.river.entity.RspCloseTousu;
+import saiwei.com.river.entity.RspMonitorInfo;
 import saiwei.com.river.logic.AccoutLogic;
 import saiwei.com.river.logic.DrivingRecordLogic;
 import saiwei.com.river.logic.LocationLogic;
+import saiwei.com.river.logic.RetrofitLogic;
 import saiwei.com.river.model.River;
 import saiwei.com.river.model.XunheRecord;
 import saiwei.com.river.service.WhiteService;
@@ -181,6 +188,7 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
             Toast.makeText(this, "请先登陆", Toast.LENGTH_SHORT).show();
         } else {
             River continueRiver = AccoutLogic.getInstance().getRiver(continue_reportRiverId);
+            mRiverBaseinfoId = continueRiver.getRiverBaseinfoId();
             continueXunHe(continueRiver);
         }
     }
@@ -194,6 +202,9 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
             Toast.makeText(this, "startXunHe 异常", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        mRiverBaseinfoId = river.getRiverBaseinfoId();
+
 
         Toast.makeText(this, "开始巡河", Toast.LENGTH_SHORT).show();
         DrivingRecordLogic.getInstance().startRecord(river);
@@ -245,10 +256,6 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
         mBtStop.setVisibility(View.VISIBLE);
         mBtReport.setVisibility(View.VISIBLE);
 
-
-
-
-
         if (aMap != null) {
             aMap.setMyLocationStyle(myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW));
         }
@@ -288,6 +295,9 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
     @OnClick({R.id.map_stop})
     public void doStop(View v) {
 
+//        startActivity(new Intent(MapActivity.this, CompleteXunheActivity.class));
+
+
         XunheRecord xunheRecord = DrivingRecordLogic.getInstance().getCurXunheRecord();
 
         long record_id = xunheRecord.getRecordId();
@@ -317,6 +327,9 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
     public void doBack(View v) {
         showSimpleDialog(v);
     }
+
+    String userid ="";
+    String mRiverBaseinfoId;
 
     /**
      * 初始化
@@ -362,7 +375,10 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
 
                     XunheRecord curXunheRecord = new XunheRecord();
                     curXunheRecord.setRecordId((Long) jsonObject.get("recordId"));
-                    curXunheRecord.setUserid((String) jsonObject.get("userid"));
+
+                    userid = (String) jsonObject.get("userid");
+
+                    curXunheRecord.setUserid(userid);
                     curXunheRecord.setReportRiver((String) jsonObject.get("reportRiver"));
 
                     continue_reportRiverId = (String) jsonObject.get("reportRiverId");
@@ -476,21 +492,9 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
                 // 定位类型，可能为GPS WIFI等，具体可以参考官网的定位SDK介绍
                 int locationType = bundle.getInt(MyLocationStyle.LOCATION_TYPE);
 
-                /*
-                errorCode
-                errorInfo
-                locationType
-                */
                 Log.e("amap", "定位信息， code: " + errorCode + " errorInfo: " + errorInfo + " locationType: " + locationType );
 
-//                09-21 11:51:36.066 5636-5636/river.saiwei.com.myapplication E/amap: 定位信息， code: 0 errorInfo: success locationType: 1
-//                09-21 11:51:38.056 5636-5636/river.saiwei.com.myapplication E/amap: onMyLocationChange 定位成功， lat: 24.434693 lon: 118.11721
-//                09-21 11:51:38.056 5636-5636/river.saiwei.com.myapplication E/amap: 定位信息， code: 0 errorInfo: success locationType: 1
-
                 if(errorCode == 0){
-                    //定位成功后，5s一个点保存到sdcard上
-
-                    //只记录gps点   http://lbs.amap.com/api/android-location-sdk/guide/utilities/location-type/?
                     if(locationType == 1){
 
                         String yuanshi_gps = location.getTime()+","+location.getLatitude()+", "+location.getLongitude()+","+location.getAltitude()+","+location.getBearing()+" , "+location.getAccuracy()+" ,"+location.getSpeed()+","+location.getProvider();
@@ -529,6 +533,8 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
 
                                 LatLng latLng = new LatLng(lat,lon);
                                 drawLine(latLng);
+
+                                doMonitor(userid,lon+"",lat+"",mRiverBaseinfoId);
                             }
                             i++;
                             if(i>5){
@@ -731,11 +737,10 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
 
         return false;
     }
+
     private void updateTimerView(String str){
         mTimer.setText(str);
     }
-
-
 
     private PowerManager.WakeLock wakeLock = null;
     /** * 获取电源锁，保持该服务在屏幕熄灭时仍然获取CPU时，保持运行 */
@@ -753,7 +758,6 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
         }
     }
 
-
     // 释放设备电源锁
     private void releaseWakeLock() {
         if (null != wakeLock && wakeLock.isHeld()) {
@@ -761,6 +765,35 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
             wakeLock.release();
             wakeLock = null;
         }
+    }
+
+    public  void doMonitor(String userId, String longitude, String latitude, String riverBaseinfoId){
+
+        Call<RspMonitorInfo> call = RetrofitLogic.getInstance().getService().doMonitorInfo(
+                userId, longitude, latitude, riverBaseinfoId
+        );
+        call.enqueue(new Callback<RspMonitorInfo>() {
+
+            @Override
+            public void onResponse(Call<RspMonitorInfo> call, Response<RspMonitorInfo> response) {
+                Log.d(TAG,"onResponse()  "+response.body());
+                RspMonitorInfo bean = response.body();
+                Log.d(TAG,"onResponse() bean.getRtnCode()="+bean.getRtnCode());
+
+//                if(bean.getRtnCode().equals("000000")){
+//                    Toast.makeText(TousuCloseActivity.this,"关闭投诉成功",Toast.LENGTH_SHORT).show();
+//                    finish();
+//                } else {
+//                    Toast.makeText(TousuCloseActivity.this,"提交失败 "+bean.getRtnMsg(),Toast.LENGTH_SHORT).show();
+//                }
+            }
+
+            @Override
+            public void onFailure(Call<RspMonitorInfo> call, Throwable t) {
+                Log.d(TAG,"onFailure() "+t.toString());
+//                Toast.makeText(TousuCloseActivity.this,"提交失败",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

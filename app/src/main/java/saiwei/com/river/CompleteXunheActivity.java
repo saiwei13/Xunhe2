@@ -6,16 +6,25 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +32,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,7 +54,9 @@ import saiwei.com.river.logic.DrivingRecordLogic;
 import saiwei.com.river.logic.RetrofitLogic;
 import saiwei.com.river.model.GpsInfo;
 import saiwei.com.river.model.XunheRecord;
+import saiwei.com.river.util.BitmapTool;
 import saiwei.com.river.util.DrivingRecordTool;
+import saiwei.com.river.util.HttpAssist;
 import saiwei.com.river.view.MyListView;
 
 /**
@@ -51,6 +67,12 @@ import saiwei.com.river.view.MyListView;
 public class CompleteXunheActivity extends Activity implements View.OnClickListener{
 
     private static final String TAG= "chenwei.CompleteXunheA";
+
+    /** 图片URI **/
+    private Uri mImageUri;
+
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+    private static final int ALBUM_IMAGE_ACTIVITY_REQUEST_CODE = 200;
 
     @BindView(R.id.xunhe_end_item_1)
     View view1;
@@ -125,6 +147,16 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
 
     private MyListView mReportListView ;
     private ReportAdapter mReportAdapter;
+
+    private GridView gridView1;
+    private Bitmap bmp;
+    private ArrayList<HashMap<String, Object>> imageItem;
+    private SimpleAdapter simpleAdapter;
+
+    String mImagePath = "";
+    private static final String IMAGE_NAME = "image.jpg";
+
+    List<String> imglist = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -223,6 +255,47 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
         tv10_result.setText(item10_array[0]);
         tv11_result.setText(item11_array[0]);
         tv12_result.setText(item12_array[0]);
+
+
+        gridView1 = (GridView) findViewById(R.id.feedback_gridView1);
+
+        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.loadimg); //???
+        imageItem = new ArrayList<HashMap<String, Object>>();
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("itemImage", bmp);
+        imageItem.add(map);
+        simpleAdapter = new SimpleAdapter(this,
+                imageItem, R.layout.griditem_addpic,
+                new String[] { "itemImage"}, new int[] { R.id.imageView1});
+        simpleAdapter.setViewBinder(new SimpleAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Object data,
+                                        String textRepresentation) {
+
+                if(view instanceof ImageView && data instanceof Bitmap){
+                    ImageView i = (ImageView)view;
+                    i.setImageBitmap((Bitmap) data);
+                    return true;
+                }
+                return false;
+            }
+        });
+        gridView1.setAdapter(simpleAdapter);
+
+        gridView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+            {
+                if( imageItem.size() == 10) {
+                    Toast.makeText(CompleteXunheActivity.this, "最多上传9张", Toast.LENGTH_SHORT).show();
+                }
+                else if(position == 0) {
+                    doAddPic(null);
+                } else {
+                    dialog(position);
+                }
+            }
+        });
     }
 
     private void initData(){
@@ -247,6 +320,11 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
 
         createXyJsonInfos();
 
+        mImagePath = "/sdcard/hechang/feedback/";
+        File image = new File(mImagePath);
+        if (!image.exists()) {
+            image.mkdirs();
+        }
     }
 
 
@@ -351,8 +429,26 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
     @OnClick({R.id.xunhe_end_bt})
     public  void doCommit(View v){
 
+        if(!(imglist!=null && imglist.size()>0)){
+
+            Toast.makeText(CompleteXunheActivity.this,"必须上传至少一张照片",Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         showWaitingDialog();
+
+        String reportimg = "";
+
+        for(int i=0;i<imglist.size();i++){
+            if(i== imglist.size()-1){
+                reportimg += imglist.get(i);
+            }else {
+                reportimg += imglist.get(i)+",";
+            }
+        }
+
+        Log.d(TAG,"reportimg = "+reportimg);
+
 
         String xyJsonInfos= createXyJsonInfos();
         String complaintInfos= createComplaintInfos();
@@ -374,6 +470,7 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
                 xunheRecord.getReportRiverId(),
                 xunheRecord.getTourTime(),
                 xunheRecord.getTotalTime(),
+                reportimg,      //new
                 xunheRecord.getIsHDZZ(),
                 xunheRecord.getIsHDBJ(),
                 xunheRecord.getIsWSPK(),
@@ -552,6 +649,48 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
             if(requestCode == Constant.REQ_CODE_ADD_REPORT_FROM_COMPLETE_XUNHE){
                 updateListView();
             }
+            else if(requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE){
+                mImageUri = getCaptureUri();
+
+                scaleImage(mImageUri);
+                updateImage();
+//                uploadImage();
+
+            } else if(requestCode == ALBUM_IMAGE_ACTIVITY_REQUEST_CODE){
+                mImageUri = data.getData();
+                scaleImage(mImageUri);
+                updateImage();
+//                uploadImage();
+
+            }
+        }
+    }
+
+    public void updateImage(){
+        if(mImageUri != null){
+//            mCapBitmap = BitmapTool.getBitmapFormUri(getApplicationContext(), mImageUri, false);
+            Bitmap addbmp= BitmapTool.getBitmapFormUri(getApplicationContext(), mImageUri, false);
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            map.put("itemImage", addbmp);
+            imageItem.add(1,map);
+//            imageItem.add(map);
+            simpleAdapter = new SimpleAdapter(this,
+                    imageItem, R.layout.griditem_addpic,
+                    new String[] { "itemImage"}, new int[] { R.id.imageView1});
+            simpleAdapter.setViewBinder(new SimpleAdapter.ViewBinder() {
+                @Override
+                public boolean setViewValue(View view, Object data,
+                                            String textRepresentation) {
+                    if(view instanceof ImageView && data instanceof Bitmap){
+                        ImageView i = (ImageView)view;
+                        i.setImageBitmap((Bitmap) data);
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            gridView1.setAdapter(simpleAdapter);
+            simpleAdapter.notifyDataSetChanged();
         }
     }
 
@@ -580,6 +719,160 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
         if(waitingDialog!= null && waitingDialog.isShowing()){
             waitingDialog.dismiss();
         }
+    }
+
+    public  void doAddPic(View v){
+        dialogList();
+    }
+
+    private void scaleImage(Uri uri) {
+        Bitmap bitmap = null;
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+            int width = bitmap.getWidth();
+            int height = bitmap.getHeight();
+            if (width > 800 || height > 800) {
+                if (width > height) {
+                    float scaleRate = (float) (800.0 / width);
+                    width = 800;
+                    height = (int) (height * scaleRate);
+                    Bitmap map = Bitmap.createScaledBitmap(bitmap, width, height, true);
+                    saveBitmap(map);
+                } else {
+                    float scaleRate = (float) (800.0 / height);
+                    height = 800;
+                    width = (int) (width * scaleRate);
+                    Bitmap map = Bitmap.createScaledBitmap(bitmap, width, height, true);
+                    saveBitmap(map);
+                }
+            } else {
+                saveBitmap(bitmap);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void uploadImage(final File file){
+
+        Log.d(TAG,"uploadImage()");
+
+//        final File file = new File("/sdcard/hechang/feedback/image.jpg");
+        if(!file.exists()){
+            Toast.makeText(CompleteXunheActivity.this,"文件不存在",Toast.LENGTH_SHORT);
+            return ;
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String str = HttpAssist.uploadSpotFile(file);
+//                reportimg += str+",";
+                imglist.add(0,str);
+                Log.d(TAG,"uploadImage()  str="+str);
+            }
+        }).start();
+    }
+
+    private void saveBitmap(Bitmap map) {
+//        File file = new File(getExternalCacheDir(), System.currentTimeMillis() + ".jpg");
+
+        File file = new File("/sdcard/hechang/feedback/image.jpg");
+
+        try {
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+//            map.compress(Bitmap.CompressFormat.JPEG, 80, bos);
+            map.compress(Bitmap.CompressFormat.JPEG, 50, bos);
+            bos.flush();
+            bos.close();
+//            updateImg(file);//上传图片接口
+            uploadImage(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 相机拍照后输出照片的路径
+     *
+     * @return
+     */
+    public Uri getCaptureUri() {
+        return Uri.fromFile(new File(mImagePath + IMAGE_NAME));
+    }
+
+    protected void dialog(final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(CompleteXunheActivity.this);
+        builder.setMessage("提示");
+        builder.setTitle("删除该图片");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+
+                if(position>0){
+                    imageItem.remove(position);
+                    simpleAdapter.notifyDataSetChanged();
+
+                    Log.d(TAG,"remove img position="+position);
+                    imglist.remove(position-1);
+                }
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+    /**
+     * 列表
+     */
+    private void dialogList() {
+        final String items[] = {"拍照", "相册"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this,3);
+        builder.setTitle("提示");
+        // builder.setMessage("是否确认退出?"); //设置内容
+        builder.setIcon(R.drawable.bulb);
+        // 设置列表显示，注意设置了列表显示就不要设置builder.setMessage()了，否则列表不起作用。
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Toast.makeText(CompleteXunheActivity.this, items[which],
+                        Toast.LENGTH_SHORT).show();
+
+                switch (which) {
+                    case 0:
+                        Uri cameraUri = getCaptureUri();
+                        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri);
+                        cameraIntent.putExtra(MediaStore.EXTRA_SIZE_LIMIT, 2 * 1024);
+                        cameraIntent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION,
+                                ActivityInfo.SCREEN_ORIENTATION_USER);
+                        startActivityForResult(cameraIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                        break;
+
+                    case 1:
+                        Intent albumIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                        albumIntent.setType("image/*");
+                        startActivityForResult(albumIntent, ALBUM_IMAGE_ACTIVITY_REQUEST_CODE);
+                        break;
+                }
+
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
     }
 
     /**

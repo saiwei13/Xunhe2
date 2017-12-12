@@ -104,7 +104,7 @@ public class FeedBackActivity extends Activity {
 
     String userid ;
     String reportContent ;
-    String reportPhone= "13720823605";
+    String reportPhone= "";
     String reportName ;
 //    String reportRiverId ;
 //    String reportRiver ;
@@ -276,7 +276,8 @@ public class FeedBackActivity extends Activity {
         reportContent = mEDTousuContent.getText().toString();
         realAddr = mEDAddrDesc.getText().toString();
 
-
+        reportPhone = AccoutLogic.getInstance().getUserPhone();
+        
         if(TextUtils.isEmpty(mTVRiverName.getText().toString())){
             Toast.makeText(this,"请选择河道名称",Toast.LENGTH_SHORT).show();
         } else if(TextUtils.isEmpty(mTVAddress.getText().toString())){

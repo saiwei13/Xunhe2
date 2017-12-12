@@ -43,6 +43,7 @@ public class SharePreferenceUtil {
     public static final String SHARE_PREFERENCE_TOWN = "town";
     public static final String SHARE_PREFERENCE_TOWNCODE = "towncode";
     public static final String SHARE_PREFERENCE_COUNTYCODE = "countycode";
+    public static final String SHARE_PREFERENCE_MOBIEL = "mobile";
 
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
