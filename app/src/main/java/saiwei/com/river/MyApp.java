@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.os.Environment;
 import android.util.Log;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
@@ -17,12 +18,16 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
-import com.tencent.bugly.Bugly;
-import com.tencent.bugly.crashreport.CrashReport;
+//import com.tencent.bugly.Bugly;
+//import com.tencent.bugly.crashreport.CrashReport;
 import com.zxy.tiny.Tiny;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 
+import de.mindpipe.android.logging.log4j.LogConfigurator;
 import saiwei.com.river.db.DaoMaster;
 import saiwei.com.river.db.DaoSession;
 import timber.log.Timber;
@@ -65,7 +70,7 @@ public class MyApp extends Application {
         app = this;
 
 //        CrashReport.initCrashReport(getApplicationContext(), "d1eb097298", true);
-        Bugly.init(getApplicationContext(), "d1eb097298", true);
+//        Bugly.init(getApplicationContext(), "d1eb097298", true);
         Tiny.getInstance().init(this);
 
 //        if(BuildConfig.DEBUG){
@@ -79,6 +84,7 @@ public class MyApp extends Application {
         } else {
             Timber.plant(new ReleaseTree());
         }
+//        configLog();
     }
 
     private void initGreenDao(){
@@ -221,5 +227,29 @@ public class MyApp extends Application {
             super.log(priority, tag, message, t);
         }
     }
+
+//    private Logger gLogger;
+//
+//    public void configLog()
+//    {
+//        final LogConfigurator logConfigurator = new LogConfigurator();
+//
+//        File tmp  = getExternalFilesDir(null);
+////        Log.d(TAG,"createFile2()  path = "+tmp.getPath());
+//        String dir  =tmp.getPath()+File.separator+"hechang/log";
+//        logConfigurator.setFileName(dir);
+//        // Set the root log level
+//        logConfigurator.setRootLevel(Level.DEBUG);
+//        // Set log level of a specific logger
+//        logConfigurator.setLevel("org.apache", Level.ERROR);
+//        logConfigurator.configure();
+//
+//        //gLogger = Logger.getLogger(this.getClass());
+//        gLogger = Logger.getLogger("MyTest");
+//    }
+//
+//    public Logger getgLogger(){
+//        return gLogger;
+//    }
 
 }

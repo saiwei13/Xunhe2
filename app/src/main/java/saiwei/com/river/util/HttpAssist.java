@@ -22,6 +22,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
 
+import saiwei.com.river.logic.DrivingRecordLogic;
+
 public class HttpAssist {
     private static final String TAG = "chenwei.uploadFile";
     private static final int TIME_OUT = 15 * 1000; // 超时时间
@@ -238,6 +240,10 @@ public class HttpAssist {
                 }
 
                 Log.i(TAG, "server: " + sb_in);
+
+                LogUtil.d("chenwei" , " server="+sb_in);
+
+
             }
         } catch (MalformedURLException e) {
             Log.e(TAG,""+e.toString());

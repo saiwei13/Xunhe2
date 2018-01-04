@@ -191,6 +191,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                         String town = hzOrgCode.getTown();
                         String towncode = hzOrgCode.getTowncode();
                         String countycode  = hzOrgCode.getCountycode();
+                        String phone = bean.getResponseData().getMobile();
 
 
                         SharePreferenceUtil.getInstance().putStr(
@@ -210,7 +211,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
                         SharePreferenceUtil.getInstance().putStr(
                                 SharePreferenceUtil.SHARE_PREFERENCE_MOBIEL,
-                                countycode
+                                phone
                         );
                     }
 

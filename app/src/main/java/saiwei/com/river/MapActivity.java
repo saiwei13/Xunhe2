@@ -146,7 +146,6 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
 
 //        LocationLogic.getInstance().startLocation();
         acquireWakeLock();
-
     }
 
     List<River> mRivers;
@@ -204,6 +203,7 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
         }
 
         mRiverBaseinfoId = river.getRiverBaseinfoId();
+
 
 
         Toast.makeText(this, "开始巡河", Toast.LENGTH_SHORT).show();
@@ -359,6 +359,8 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
         aMap.setMyLocationStyle(myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW));
         mBtStart.setVisibility(View.VISIBLE);
         mBtStop.setVisibility(View.GONE);
+
+        userid = AccoutLogic.getInstance().getUserId();
 
 
         last_filename  = SharePreferenceUtil.getInstance().getStr(SharePreferenceUtil.SHARE_PREFERENCE_LASTXUNHE);
@@ -767,7 +769,9 @@ public class MapActivity extends Activity implements AMap.OnMyLocationChangeList
         }
     }
 
-    public  void doMonitor(String userId, String longitude, String latitude, String riverBaseinfoId){
+    public void doMonitor(String userId, String longitude, String latitude, String riverBaseinfoId){
+
+        Timber.d("doMonitor()");
 
         Call<RspMonitorInfo> call = RetrofitLogic.getInstance().getService().doMonitorInfo(
                 userId, longitude, latitude, riverBaseinfoId

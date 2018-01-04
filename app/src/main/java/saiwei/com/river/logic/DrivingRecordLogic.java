@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.amap.api.maps2d.model.LatLng;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,6 +21,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import de.mindpipe.android.logging.log4j.LogConfigurator;
 import saiwei.com.river.MyApp;
 import saiwei.com.river.util.DrivingRecordTool;
 import saiwei.com.river.entity.ReqFeedbackBean;

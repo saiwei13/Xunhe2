@@ -1,11 +1,15 @@
 package saiwei.com.river;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -20,8 +24,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tencent.bugly.beta.Beta;
-import com.tencent.bugly.crashreport.CrashReport;
+//import com.tencent.bugly.beta.Beta;
+//import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.File;
 
@@ -71,7 +75,7 @@ public class MainActivity extends Activity {
         initBottomView();
         initData();
 
-        Beta.checkUpgrade(false,false);
+//        Beta.checkUpgrade(false,false);
 
 
 
@@ -214,7 +218,7 @@ public class MainActivity extends Activity {
     public void doUser(View v){
 
 //        CrashReport.testJavaCrash();
-
+//
         if(AccoutLogic.getInstance().isLogin()){
             Intent intent =new Intent(MainActivity.this,UserCenterActivity.class);
             startActivity(intent);
