@@ -1,5 +1,6 @@
 package saiwei.com.river;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -7,12 +8,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +64,7 @@ import saiwei.com.river.model.XunheRecord;
 import saiwei.com.river.util.BitmapTool;
 import saiwei.com.river.util.DrivingRecordTool;
 import saiwei.com.river.util.HttpAssist;
+import saiwei.com.river.util.LogUtil;
 import saiwei.com.river.view.MyListView;
 
 /**
@@ -154,7 +162,7 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
     private SimpleAdapter simpleAdapter;
 
     String mImagePath = "";
-    private static final String IMAGE_NAME = "image.jpg";
+    private static final String IMAGE_NAME = "image_yuanshi.jpg";
 
     List<String> imglist = new ArrayList<>();
 
@@ -289,14 +297,35 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
                 if( imageItem.size() == 10) {
                     Toast.makeText(CompleteXunheActivity.this, "最多上传9张", Toast.LENGTH_SHORT).show();
                 }
-                else if(position == 0) {
+                else if(position == imageItem.size()-1) {
+
+                    curPosition = position;
                     doAddPic(null);
                 } else {
                     dialog(position);
                 }
             }
         });
+
+        gridView1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+//                Toast.makeText(CompleteXunheActivity.this,"on long click position = "+position,Toast.LENGTH_SHORT).show();
+
+                if(position == imageItem.size()-1){
+
+                } else {
+                    reuploadImage(position);
+                }
+
+                return true;
+            }
+        });
     }
+
+    private int curPosition = -1;
 
     private void initData(){
         xunheRecord = DrivingRecordLogic.getInstance().getCurXunheRecord();
@@ -320,8 +349,16 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
 
         createXyJsonInfos();
 
-        mImagePath = "/sdcard/hechang/feedback/";
-        File image = new File(mImagePath);
+
+
+        File tmp  = MyApp.getApp().getExternalFilesDir(null);
+//        Log.d(TAG,"createFile2()  path = "+tmp.getPath());
+//         =tmp.getPath()+File.separator+"hechang/trace";
+        File image = new File(tmp.getPath()+File.separator+"hechang/feedback/");
+
+        mImagePath = tmp.getPath()+File.separator+"hechang/feedback/" ;// "/sdcard/hechang/feedback/";
+
+//        File image = new File(mImagePath);
         if (!image.exists()) {
             image.mkdirs();
         }
@@ -348,10 +385,8 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
 //
 //            }
 //        });
-
         updateListView();
     }
-
 
     /**
      * @return
@@ -362,22 +397,24 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
 
         JSONArray jsonArray = new JSONArray();
 
-        for (int i=0;i<gpsInfos.size();i++){
-            GpsInfo gpsInfo = gpsInfos.get(i);
-            JSONObject tmp = new JSONObject();
-            try {
-                tmp.put("coordinate_X",gpsInfo.getLatLng().latitude);
-                tmp.put("coordinate_Y",gpsInfo.getLatLng().longitude);
+        if(gpsInfos !=null){
+            for (int i=0;i<gpsInfos.size();i++){
+                GpsInfo gpsInfo = gpsInfos.get(i);
+                JSONObject tmp = new JSONObject();
+                try {
+                    tmp.put("coordinate_X",gpsInfo.getLatLng().latitude);
+                    tmp.put("coordinate_Y",gpsInfo.getLatLng().longitude);
 //                tmp.putStr("create_time","2017-09-15 15:04:42");
 
-                long tmp_time = Long.parseLong(gpsInfo.getTime());
-                String create_time=  DrivingRecordTool.conversionTime(tmp_time);
-                tmp.put("create_time",create_time);
-                jsonArray.put(tmp);
+                    long tmp_time = Long.parseLong(gpsInfo.getTime());
+                    String create_time=  DrivingRecordTool.conversionTime(tmp_time);
+                    tmp.put("create_time",create_time);
+                    jsonArray.put(tmp);
 
-            }
-            catch (JSONException e) {
-                e.printStackTrace();
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return jsonArray.toString();
@@ -429,26 +466,54 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
     @OnClick({R.id.xunhe_end_bt})
     public  void doCommit(View v){
 
-        if(!(imglist!=null && imglist.size()>0)){
+//        if(!(imglist!=null && imglist.size()>0)){
+//
+//            Toast.makeText(CompleteXunheActivity.this,"必须上传至少一张照片",Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+
+
+        if(imglist == null || imglist.size()==0){
+//            if(imageItem.size()>1){
+//                Toast.makeText(CompleteXunheActivity.this,"第 ["+(i+1)+"]张图片没有上传成功，请长按图片重新进行上传",Toast.LENGTH_SHORT).show();
+//            } else {
+//
+//            }
 
             Toast.makeText(CompleteXunheActivity.this,"必须上传至少一张照片",Toast.LENGTH_SHORT).show();
+
             return;
         }
 
-        showWaitingDialog();
+
+
 
         String reportimg = "";
 
         for(int i=0;i<imglist.size();i++){
             if(i== imglist.size()-1){
                 reportimg += imglist.get(i);
+
+
+                if(imglist.get(i).equals("0")){
+
+                    Toast.makeText(CompleteXunheActivity.this,"第["+(i+1)+"]张图片没有上传成功，请长按图片重新进行上传",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
             }else {
+                if(imglist.get(i).equals("0")){
+                    Toast.makeText(CompleteXunheActivity.this,"第["+(i+1)+"]张图片没有上传成功，请长按图片重新进行上传",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 reportimg += imglist.get(i)+",";
             }
         }
 
         Log.d(TAG,"reportimg = "+reportimg);
 
+
+        showWaitingDialog();
 
         String xyJsonInfos= createXyJsonInfos();
         String complaintInfos= createComplaintInfos();
@@ -651,7 +716,6 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
             }
             else if(requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE){
                 mImageUri = getCaptureUri();
-
                 scaleImage(mImageUri);
                 updateImage();
 //                uploadImage();
@@ -672,7 +736,10 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
             Bitmap addbmp= BitmapTool.getBitmapFormUri(getApplicationContext(), mImageUri, false);
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("itemImage", addbmp);
-            imageItem.add(1,map);
+
+//            imageItem.size()-1
+            imageItem.add(imageItem.size()-1,map);
+//            imageItem.add(1,map);
 //            imageItem.add(map);
             simpleAdapter = new SimpleAdapter(this,
                     imageItem, R.layout.griditem_addpic,
@@ -753,7 +820,7 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
         }
     }
 
-    private void uploadImage(final File file){
+    private void uploadImage(final File file, final int position){
 
         Log.d(TAG,"uploadImage()");
 
@@ -762,13 +829,27 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
             Toast.makeText(CompleteXunheActivity.this,"文件不存在",Toast.LENGTH_SHORT);
             return ;
         }
+
+        imglist.add(HttpAssist.FAILURE);
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 String str = HttpAssist.uploadSpotFile(file);
 //                reportimg += str+",";
-                imglist.add(0,str);
-                Log.d(TAG,"uploadImage()  str="+str);
+
+//                if(imglist.size()>position){
+//
+//                } else {
+//                    imglist.add(str);  //添加
+//                }
+
+                imglist.set(position,str) ; //更新
+//                imglist.add(0,str);
+
+                Log.d(TAG,"uploadImage()  str="+str+ ", imglist.size()="+imglist.size());
+
+                LogUtil.d("chenwei" , "uploadImage()  str="+str);
             }
         }).start();
     }
@@ -776,7 +857,19 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
     private void saveBitmap(Bitmap map) {
 //        File file = new File(getExternalCacheDir(), System.currentTimeMillis() + ".jpg");
 
-        File file = new File("/sdcard/hechang/feedback/image.jpg");
+        File tmp  = MyApp.getApp().getExternalFilesDir(null);
+//        Log.d(TAG,"createFile2()  path = "+tmp.getPath());
+//         =tmp.getPath()+File.separator+"hechang/trace";
+
+        File file = new File(tmp.getPath()+File.separator+"hechang/feedback/image.jpg");
+        File cachefile = new File(tmp.getPath()+File.separator+"hechang/feedback/image"+curPosition+".jpg");
+
+//        Toast.makeText(this,""+cachefile.getPath(),Toast.LENGTH_SHORT).show();
+        Log.d(TAG,"saveBitmap()  file = "+file.getPath()+" , cachefile="+cachefile.getPath());
+
+//        File file = new File("/sdcard/hechang/feedback/image.jpg");
+//        Bitmap cachebitmap = map;
+//        File cachefile = new File("/sdcard/hechang/feedback/image"+curPosition+".jpg");
 
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
@@ -784,12 +877,57 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
             map.compress(Bitmap.CompressFormat.JPEG, 50, bos);
             bos.flush();
             bos.close();
+
+
+            BufferedOutputStream cachebos = new BufferedOutputStream(new FileOutputStream(cachefile));
+//            map.compress(Bitmap.CompressFormat.JPEG, 80, bos);
+            map.compress(Bitmap.CompressFormat.JPEG, 50, cachebos);
+            cachebos.flush();
+            cachebos.close();
+
 //            updateImg(file);//上传图片接口
-            uploadImage(file);
+            uploadImage(file,curPosition);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
+    private void reuploadImage(final int position){
+        Log.d(TAG,"reuploadImage()");
+
+        Toast.makeText(this,"重新上传图片",Toast.LENGTH_SHORT).show();
+
+
+        File tmp  = MyApp.getApp().getExternalFilesDir(null);
+
+        final File file = new File(tmp.getPath()+File.separator+"hechang/feedback/image"+position+".jpg");
+//        final File file = new File("/sdcard/hechang/feedback/image"+position+".jpg");
+
+//        final File file = new File("/sdcard/hechang/feedback/image.jpg");
+        if(!file.exists()){
+            Toast.makeText(CompleteXunheActivity.this,"文件不存在",Toast.LENGTH_SHORT);
+            return ;
+        }
+
+//        imglist.add(HttpAssist.FAILURE);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String str = HttpAssist.uploadSpotFile(file);
+                imglist.set(position,str) ; //更新
+                Log.d(TAG,"reuploadImage()  str="+str+ ", imglist.size()="+imglist.size());
+                LogUtil.d("chenwei" , "reuploadImage()  str="+str);
+                Looper.prepare();
+                Toast.makeText(CompleteXunheActivity.this,"返回地址 : "+str,Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
+        }).start();
+
+
+    }
+
 
     /**
      * 相机拍照后输出照片的路径
@@ -809,14 +947,13 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
 
+                Log.d(TAG,""+imageItem.size()+" , "+imglist.size());
+                imageItem.remove(position);
+                simpleAdapter.notifyDataSetChanged();
 
-                if(position>0){
-                    imageItem.remove(position);
-                    simpleAdapter.notifyDataSetChanged();
-
-                    Log.d(TAG,"remove img position="+position);
-                    imglist.remove(position-1);
-                }
+                Log.d(TAG,"remove img position="+position);
+//                    imglist.remove(position-1);
+                imglist.remove(position);
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -832,47 +969,64 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
      * 列表
      */
     private void dialogList() {
-        final String items[] = {"拍照", "相册"};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this,3);
-        builder.setTitle("提示");
-        // builder.setMessage("是否确认退出?"); //设置内容
-        builder.setIcon(R.drawable.bulb);
-        // 设置列表显示，注意设置了列表显示就不要设置builder.setMessage()了，否则列表不起作用。
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                Toast.makeText(CompleteXunheActivity.this, items[which],
-                        Toast.LENGTH_SHORT).show();
+        if (ContextCompat.checkSelfPermission(CompleteXunheActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
 
-                switch (which) {
-                    case 0:
-                        Uri cameraUri = getCaptureUri();
-                        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri);
-                        cameraIntent.putExtra(MediaStore.EXTRA_SIZE_LIMIT, 2 * 1024);
-                        cameraIntent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION,
-                                ActivityInfo.SCREEN_ORIENTATION_USER);
-                        startActivityForResult(cameraIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-                        break;
+//            Toast.makeText(CompleteXunheActivity.this,"mei shou quan ",Toast.LENGTH_SHORT).show();
 
-                    case 1:
-                        Intent albumIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                        albumIntent.setType("image/*");
-                        startActivityForResult(albumIntent, ALBUM_IMAGE_ACTIVITY_REQUEST_CODE);
-                        break;
+            ActivityCompat.requestPermissions(CompleteXunheActivity.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    11);
+        }else{
+            //
+//            Toast.makeText(CompleteXunheActivity.this," shou quan ",Toast.LENGTH_SHORT).show();
+
+            final String items[] = {"拍照", "相册"};
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this,3);
+            builder.setTitle("提示");
+            // builder.setMessage("是否确认退出?"); //设置内容
+            builder.setIcon(R.drawable.bulb);
+            // 设置列表显示，注意设置了列表显示就不要设置builder.setMessage()了，否则列表不起作用。
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    Toast.makeText(CompleteXunheActivity.this, items[which],
+                            Toast.LENGTH_SHORT).show();
+
+                    switch (which) {
+                        case 0:
+                            Uri cameraUri = getCaptureUri();
+                            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri);
+                            cameraIntent.putExtra(MediaStore.EXTRA_SIZE_LIMIT, 2 * 1024);
+                            cameraIntent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION,
+                                    ActivityInfo.SCREEN_ORIENTATION_USER);
+                            startActivityForResult(cameraIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                            break;
+
+                        case 1:
+                            Intent albumIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                            albumIntent.setType("image/*");
+                            startActivityForResult(albumIntent, ALBUM_IMAGE_ACTIVITY_REQUEST_CODE);
+                            break;
+                    }
+
                 }
+            });
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
 
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+                }
+            });
+            builder.create().show();
 
-            }
-        });
-        builder.create().show();
+        }
+
     }
 
     /**
