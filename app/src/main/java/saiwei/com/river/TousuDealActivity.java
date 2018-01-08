@@ -586,7 +586,9 @@ public class TousuDealActivity extends Activity {
 //                            .placeholder(R.drawable.zanwu_img)//图片加载出来前，显示的图片
 //                            .error(R.drawable.zanwu_img)//图片加载失败后，显示的图片
 //                            .into(holder.img);
-
+                    if(imgs[0].trim().startsWith("http")){
+                        url = imgs[0].trim();
+                    }
                     Log.d(TAG,"getView() load img url ="+url);
 
                     ImageLoader.getInstance().displayImage(url,holder.img,targetSize);
@@ -702,7 +704,9 @@ public class TousuDealActivity extends Activity {
 //                    String url = myUrls.getStr(position);
 
                     String url = RetrofitLogic.IMAGE_BASE_GET_URL+imgs[0].trim();
-
+                    if(imgs[0].trim().startsWith("http")){
+                        url = imgs[0].trim();
+                    }
                     Log.d(TAG,"getView() load img url ="+url);
 
 

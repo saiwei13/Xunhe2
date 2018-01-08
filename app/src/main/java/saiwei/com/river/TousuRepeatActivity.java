@@ -439,6 +439,9 @@ public class TousuRepeatActivity extends Activity {
                 if(imgs.length>0){
 
                     String url = RetrofitLogic.IMAGE_BASE_GET_URL+imgs[0].trim();
+                    if(imgs[0].trim().startsWith("http")){
+                        url = imgs[0].trim();
+                    }
                     Log.d(TAG,"getView() load img url ="+url);
 
                     ImageLoader.getInstance().displayImage(url,holder.img,targetSize);

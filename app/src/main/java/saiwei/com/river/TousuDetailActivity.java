@@ -203,8 +203,9 @@ public class TousuDetailActivity extends Activity {
 
         if(curQueryType == Constant.QUERY_TYPE_UNCOMPLETED){
             mBtTousuRenling.setVisibility(View.VISIBLE);
-            mBtTousuChongfu.setVisibility(View.VISIBLE);
-            mBtTousuClose.setVisibility(View.VISIBLE);
+            //根据需求暂时不显示
+            //mBtTousuChongfu.setVisibility(View.VISIBLE);
+            //mBtTousuClose.setVisibility(View.VISIBLE);
         } else {
             mBtTousuRenling.setVisibility(View.GONE);
             mBtTousuChongfu.setVisibility(View.GONE);
@@ -742,6 +743,9 @@ public class TousuDetailActivity extends Activity {
 //            Log.d(TAG,"getView() img_url="+img_url);
             if(!TextUtils.isEmpty(img_url)){
                 String url = RetrofitLogic.IMAGE_BASE_GET_URL+img_url;
+                if(img_url.startsWith("http")){
+                    url = img_url;
+                }
 
                 Log.d(TAG,"getView() load img url ="+url);
                 ImageLoader.getInstance().displayImage(url,holder.img,targetSize);

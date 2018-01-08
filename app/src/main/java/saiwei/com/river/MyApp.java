@@ -18,8 +18,8 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
-//import com.tencent.bugly.Bugly;
-//import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.zxy.tiny.Tiny;
 
 import org.apache.log4j.Level;
@@ -70,7 +70,7 @@ public class MyApp extends Application {
         app = this;
 
 //        CrashReport.initCrashReport(getApplicationContext(), "d1eb097298", true);
-//        Bugly.init(getApplicationContext(), "d1eb097298", true);
+        Bugly.init(getApplicationContext(), "d1eb097298", true);
         Tiny.getInstance().init(this);
 
 //        if(BuildConfig.DEBUG){

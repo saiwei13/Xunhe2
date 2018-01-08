@@ -24,8 +24,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.tencent.bugly.beta.Beta;
-//import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.bugly.beta.Beta;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.File;
 
@@ -75,7 +75,7 @@ public class MainActivity extends Activity {
         initBottomView();
         initData();
 
-//        Beta.checkUpgrade(false,false);
+        Beta.checkUpgrade(false,false);
 
 
 
