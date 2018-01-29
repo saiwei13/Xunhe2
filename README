@@ -1,4 +1,5 @@
 
+./gradlew assembleRelease
 
 日志查看：bugly.qq.com
 

@@ -330,37 +330,37 @@ public class CompleteXunheActivity extends Activity implements View.OnClickListe
     private void initData(){
         xunheRecord = DrivingRecordLogic.getInstance().getCurXunheRecord();
 
-        xunheRecord.setTotalTime("0: 5:0");
+        if(xunheRecord!=null){
+            xunheRecord.setTotalTime("0: 5:0");
 
-        xunheRecord.setIsHDBJ("1");
-        xunheRecord.setIsHDWN("1");
+            xunheRecord.setIsHDBJ("1");
+            xunheRecord.setIsHDWN("1");
 
-        xunheRecord.setIsWSPK("1");
-        xunheRecord.setIsSSWF("1");
-        xunheRecord.setIsHALJ("1");
-        xunheRecord.setIsHDSZ("1");
-        xunheRecord.setIsHDWN("1");
-        xunheRecord.setIsRHWK("1");
-        xunheRecord.setIsPHSS("1");
-        xunheRecord.setIsFFBY("1");
-        xunheRecord.setIsHZTS("1");
-        xunheRecord.setIsYXSZ("1");
-        xunheRecord.setIsHDZZ("1");
+            xunheRecord.setIsWSPK("1");
+            xunheRecord.setIsSSWF("1");
+            xunheRecord.setIsHALJ("1");
+            xunheRecord.setIsHDSZ("1");
+            xunheRecord.setIsHDWN("1");
+            xunheRecord.setIsRHWK("1");
+            xunheRecord.setIsPHSS("1");
+            xunheRecord.setIsFFBY("1");
+            xunheRecord.setIsHZTS("1");
+            xunheRecord.setIsYXSZ("1");
+            xunheRecord.setIsHDZZ("1");
 
-        createXyJsonInfos();
+            createXyJsonInfos();
 
-
-
-        File tmp  = MyApp.getApp().getExternalFilesDir(null);
+            File tmp  = MyApp.getApp().getExternalFilesDir(null);
 //        Log.d(TAG,"createFile2()  path = "+tmp.getPath());
 //         =tmp.getPath()+File.separator+"hechang/trace";
-        File image = new File(tmp.getPath()+File.separator+"hechang/feedback/");
+            File image = new File(tmp.getPath()+File.separator+"hechang/feedback/");
 
-        mImagePath = tmp.getPath()+File.separator+"hechang/feedback/" ;// "/sdcard/hechang/feedback/";
+            mImagePath = tmp.getPath()+File.separator+"hechang/feedback/" ;// "/sdcard/hechang/feedback/";
 
 //        File image = new File(mImagePath);
-        if (!image.exists()) {
-            image.mkdirs();
+            if (!image.exists()) {
+                image.mkdirs();
+            }
         }
     }
 
